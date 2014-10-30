@@ -44,9 +44,8 @@ Layout
 		Speed (time between objects)
 		Flash time (% of time window in which the object is visible)
 
-To do:
-X Display a settings page
-X user sets the setting for "n"
+Display a settings page
+user sets the setting
 call getSettings method
 store the inputs in global variables
 call a generateObjects function which will populate my global array of objects
