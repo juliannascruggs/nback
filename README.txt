@@ -46,7 +46,7 @@ Layout
 
 To do:
 Display a settings page
-user sets the setting
+user sets the setting for "n"
 call getSettings method
 store the inputs in global variables
 call a generateObjects function which will populate my global array of objects
