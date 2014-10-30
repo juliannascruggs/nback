@@ -48,7 +48,7 @@ To do:
 X Display a settings page
 X user sets the setting for "n"
 call getSettings method
-store the inputs in global variables
+X store the inputs in global variables
 call a generateObjects function which will populate my global array of objects
 call startGame function
 
