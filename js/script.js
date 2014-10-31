@@ -89,6 +89,8 @@ function drawObject(){
 // Create an endGame function, which shows the values of correct and incorrect
 function endGame(){
 
+  $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
+
 };
 
 // When the user clicks 'Play', get the settings, generate the objects and start the game.

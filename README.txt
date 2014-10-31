@@ -50,17 +50,17 @@ X user sets the setting for "n"
 X call getSettings function
 X store the inputs in global variables
 X call a generateObjects function which will populate my global array of objects
-call startGame function
+X call startGame function
 
 X set correct and incorrect counters, both at 0
 X set counter, number of nbackIndex, which starts at 0 and is the section of the array to look at
 X call nextStep method, which decides if it should keep showing stuff
-draw the first object
+X draw the first object
 X check and see if: nbackIndex is < nbacks.length, then show an nback and + 1 to the nbackIndex counter
 (nbacksToShow is game length, ex. 20)
-else: call endGame method, which shows correct and incorrect values
+X else: call endGame method, which shows correct and incorrect values
 
-use a button to call nextStep, and display your nbackIndex value
+X use a button to call nextStep, and display your nbackIndex value
 
 then focus on gettin renderNback to
 have a timer and have a submit button that will check logic to do the comparison to figure out if you're right or wrong
