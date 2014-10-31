@@ -62,19 +62,19 @@ function startGame(){
   // recall, objectIndex specifies which section of the souvenirs array to look at
   objectIndex = 0;
 
-  if ( objectIndex < souvenirs.length ){
-    nextStep();
-  }else{
-    endGame();
-  };
+  nextStep();
 
 };
 
 // Create nextStep method, which decides if it should keep showing stuff
 function nextStep(){
 
-  drawObject();
-  objectIndex += 1;
+  if ( objectIndex < souvenirs.length ){
+    drawObject();
+    objectIndex += 1;
+  }else{
+    endGame();
+  };
 
 };
 
@@ -100,4 +100,19 @@ $( 'form.settings' ).on('submit', function(e){
   startGame();
 
 });
+
+$( 'form.controls' ).on('submit', function(e){
+  e.preventDefault();
+
+  nextStep();
+
+});
+
+
+
+
+
+
+
+
 
