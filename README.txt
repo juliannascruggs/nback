@@ -45,15 +45,15 @@ Layout
 		Flash time (% of time window in which the object is visible)
 
 To do:
-X Display a settings page
+X display a settings page
 X user sets the setting for "n"
-call getSettings method
+X call getSettings function
 X store the inputs in global variables
-call a generateObjects function which will populate my global array of objects
+X call a generateObjects function which will populate my global array of objects
 call startGame function
 
-set correct and incorrect counters, both at 0
-set counter, number of nbackIndex, which starts at 0 and is the section of the array to look at
+X set correct and incorrect counters, both at 0
+X set counter, number of nbackIndex, which starts at 0 and is the section of the array to look at
 call nextStep method, which decides if it should keep showing stuff
 draw the first object
 check and see if: nbackIndex is < nbacks.length, then show an nback and + 1 to the nbackIndex counter
