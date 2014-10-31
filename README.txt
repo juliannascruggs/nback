@@ -69,5 +69,5 @@ var nbacks = []
 var nbackIndex = 0
 nbacks[nbackIndex]
 
-
+the generateObjects function should be populated programatically from other arrays
 
