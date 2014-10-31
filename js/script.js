@@ -82,7 +82,7 @@ function nextStep(){
 function drawObject(){
 
   console.log(souvenirs[objectIndex]);
-  $()
+  $( '.souvenir' ).css( 'background-color', souvenirs[objectIndex].color )
 
 };
 
