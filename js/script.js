@@ -5,6 +5,13 @@ var n;
 // souvenirs is the global array of objects whose properties the user must try to remember
 var souvenirs;
 
+// keep track of the user's score
+var correct;
+var incorrect;
+
+// specifies which section of the souvenirs array to look at in the nextStep function
+var objectIndex;
+
 // Function that saves the game variables
 function getSettings(){
   n = $( '.nequals' ).val();
@@ -15,52 +22,71 @@ function generateObjects(){
 
   souvenirs = [
     {
-      color: red
+      color: 'red'
     },
     {
-      color: yellow
+      color: 'yellow'
     },
     {
-      color: blue
+      color: 'blue'
     },
     {
-      color: purple
+      color: 'purple'
     },
     {
-      color: green
+      color: 'green'
     },
     {
-      color: aqua
+      color: 'aqua'
     },
     {
-      color: orange
+      color: 'orange'
     },
     {
-      color: brown
+      color: 'brown'
     }
   ];
+
+  console.log(souvenirs);
 
 };
 
 // Create a startGame function 
 function startGame(){
 
-  //set correct and incorrect counters, both at 0
-  var correct = 0;
-  var incorrect = 0;
+  // set both the correct and incorrect counters to 0
+  correct = 0;
+  incorrect = 0;
 
+  // set another counter, number of objectIndex, to start at 0 
+  // recall, objectIndex specifies which section of the souvenirs array to look at
+  objectIndex = 0;
+
+  if ( objectIndex < souvenirs.length ){
     nextStep();
+  }else{
+    endGame();
+  };
 
 };
 
 // Create nextStep method, which decides if it should keep showing stuff
 function nextStep(){
 
-  //set counter, number of objectIndex, which starts at 0 and specifies which section of the souvenirs array to look at
-  var objectIndex = 0;
+  objectIndex += 1;
+  drawObject();
 
 };
 
+// Create a drawObject function, which draws the object of a particular index on the page.
+function drawObject(){
+
+};
+
+// Create an endGame function, which shows the values of correct and incorrect
+function endGame(){
+
+};
 
 // When the user clicks 'Play', get the settings, generate the objects and start the game.
 $( 'form.settings' ).on('submit', function(e){
