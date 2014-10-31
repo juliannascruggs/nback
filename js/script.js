@@ -14,7 +14,7 @@ var objectIndex;
 
 // Function that saves the game variables
 function getSettings(){
-  n = $( '.nequals' ).val();
+  n = $( '.nback' ).val();
 }
 
 // Create a generateObjects function which will populate my global array of objects
@@ -73,13 +73,16 @@ function startGame(){
 // Create nextStep method, which decides if it should keep showing stuff
 function nextStep(){
 
-  objectIndex += 1;
   drawObject();
+  objectIndex += 1;
 
 };
 
 // Create a drawObject function, which draws the object of a particular index on the page.
 function drawObject(){
+
+  console.log(souvenirs[objectIndex]);
+  $()
 
 };
 

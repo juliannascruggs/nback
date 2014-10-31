@@ -54,9 +54,9 @@ call startGame function
 
 X set correct and incorrect counters, both at 0
 X set counter, number of nbackIndex, which starts at 0 and is the section of the array to look at
-call nextStep method, which decides if it should keep showing stuff
+X call nextStep method, which decides if it should keep showing stuff
 draw the first object
-check and see if: nbackIndex is < nbacks.length, then show an nback and + 1 to the nbackIndex counter
+X check and see if: nbackIndex is < nbacks.length, then show an nback and + 1 to the nbackIndex counter
 (nbacksToShow is game length, ex. 20)
 else: call endGame method, which shows correct and incorrect values
 
