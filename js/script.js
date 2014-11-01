@@ -20,6 +20,7 @@ var objectIndex;
 // Function that saves the game variables
 function getSettings(){
   n = $( '.nback' ).val();
+  trials += parseInt(n);
 }
 
 // Create a color array
@@ -39,7 +40,7 @@ function souvenir(color) {
     this.color = color;
 }
 
-// Create a generateObjects function which will populate my global array of souvenirs
+// Create a generateObjects function which will populate my global array of souvenirs with 'trials' number of objects
 function generateObjects(){
 
   for ( var i = 0; i < trials; i++ ){

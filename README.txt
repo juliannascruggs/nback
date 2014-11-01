@@ -1,30 +1,32 @@
 Logic behind an n-back game
 
 Game:
-	display x # of objects, sequentially
+	display x # of objects sequentially
 	randomize the value of the object properties
 	user selects which properties they believe they saw n # of intances ago
 	compare user selection to object property n # instances ago
 	deem it right or wrong, message that immediately
-	calculate a percentage of how much the user got correctly vs. not for each property type
+	calculate a percentage of how much the user remembered correctly vs. not for each property type
 
-Round settings:
-	Number of objects to play: setting?
-	Object properties: object
-	n for 'n-back': number
-	score: boolean
+Game settings:
+	Number of objects to play: trials
+	Object properties: object constructor
+	n-back: n
+	score: boolean?
 
 Properties:
-	[color]
-	[shape]
-	[sound]
-	[position]
+	color
+	shape
+	sound
+	position[0,0]
 
 Sequence
-	create an object with random properties
-	store the object properties
-	show the random object
-	compare the object's properties to the properties of object n
+	create objects with random properties
+		later, create matches, lures and fillers
+	store the objects
+	show the objects
+	* compare the object's properties to the properties of object n
+		does this work differently if we generate properties as matches, lures and fillers?
 	listen to the user's input on	
 	compare the user's property guesses to the object's properties
 	store
@@ -62,17 +64,19 @@ X else: call endGame method, which shows correct and incorrect values
 
 X use a button to call nextStep, and display your nbackIndex value
 
-then focus on gettin renderNback to
-have a timer and have a submit button that will check logic to do the comparison to figure out if you're right or wrong
+To do:
+then focus on gettin renderNback to:
+have a timer 
+have a submit button that will check logic to do the comparison to figure out if you're right or wrong
 
 var nbacks = []
 var nbackIndex = 0
 nbacks[nbackIndex]
 
 To do:
-the generateObjects function should be populated programatically from other arrays
-create an array of colors
-choose a random color by getting a random position in the array
+X the generateObjects function should be populated programatically from other arrays
+X create an array of colors
+X choose a random color by getting a random position in the array
 
 ------------
 After the whole thing works, end to end...
