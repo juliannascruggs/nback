@@ -1,9 +1,14 @@
 // Global variables 
+
+// Settings variables
 // n is the number of steps back for the n-back game
 var n;
 
+// the number of objects displayed per game
+var trials = 20;
+
 // souvenirs is the global array of objects whose properties the user must try to remember
-var souvenirs;
+var souvenirs = [];
 
 // keep track of the user's score
 var correct;
@@ -17,37 +22,32 @@ function getSettings(){
   n = $( '.nback' ).val();
 }
 
-// Create a generateObjects function which will populate my global array of objects
+// Create a color array
+var colors = [
+  'red',
+  'yellow',
+  'blue',
+  'purple',
+  'green',
+  'aqua',
+  'orange',
+  'brown'
+];
+
+// Create a souvenir constructor
+function souvenir(color) {
+    this.color = color;
+}
+
+// Create a generateObjects function which will populate my global array of souvenirs
 function generateObjects(){
 
-  souvenirs = [
-    {
-      color: 'red'
-    },
-    {
-      color: 'yellow'
-    },
-    {
-      color: 'blue'
-    },
-    {
-      color: 'purple'
-    },
-    {
-      color: 'green'
-    },
-    {
-      color: 'aqua'
-    },
-    {
-      color: 'orange'
-    },
-    {
-      color: 'brown'
-    }
-  ];
+  for ( var i = 0; i < trials; i++ ){
 
-  console.log(souvenirs);
+    var newSouvenir = new souvenir( colors[Math.floor(Math.random()*colors.length)] );
+    souvenirs.push(newSouvenir);
+
+  }
 
 };
 
