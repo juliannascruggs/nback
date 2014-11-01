@@ -19,8 +19,10 @@ var objectIndex;
 
 // Function that saves the game variables
 function getSettings(){
+
   n = $( '.nback' ).val();
-  trials += parseInt(n);
+  trials += parseInt( n );
+
 }
 
 // Create a color array
