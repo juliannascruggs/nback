@@ -47,27 +47,34 @@ function souvenir(color) {
 // Create a generateObjects function which will populate my global array of souvenirs with 'trials' number of objects
 function generateObjects(){
 
-  for ( var i = 1; i < trials+1; i++ ){
-
-    var nBackSouvenir;
+  for ( var i = 0; i < trials; i++ ){
 
     var newSouvenir = new souvenir( colors[Math.floor(Math.random()*colors.length)] );
-    console.log( 'new souvenir color is: ' + newSouvenir.color );
 
+    // Check if we have an object at index [i - n]
+    // Later we'll add 1/5 matches to our array here
     if ( i >= n ){
-      console.log( souvenirs[ i - n ].color )      
 
-      // var nBackSouvenir = souvenirs[ i - n ].color;
-      // if ( newSouvenir.color == nBackSouvenir.color ){
-      //   console.log( 'n-back souvenir color is: ' + nBackSouvenir.color )
-      // }
-    }else{
+      var nBackSouvenir = souvenirs[ i - n ];
+      // Check if it's a match
+      if ( newSouvenir.color == nBackSouvenir.color ){
+        // if so add a match property
+        newSouvenir.match = true;
+        console.log('newSouvenir is now: ' + newSouvenir)
+      };
+
       souvenirs.push(newSouvenir);
+
+    }else{
+
+      souvenirs.push(newSouvenir);
+
     }
 
 
   }
 
+  console.log('souvenirs are: ' + souvenirs)
   // Make 20% of the objects color matches
   // Add a match property to match objects, with the value of color
 
@@ -114,23 +121,23 @@ function startCountdown(){
 };
 
 
-// Progresses the game at an interval or ends the game
+// Progress the game at an interval or ends the game
 function startTrials( start, end, interval ) {
 
-  // draw the first object
+  // Draw the first object
   drawObject();
-  objectIndex++;
   $( '.counter' ).html( 'GOH!!' )
 
-  // enable the match button when we're ready to start
+  // Todo: enable the match button when we're ready to start
 
   // Start the trials timer
   var timer = setInterval( function(){
-
+    // Increment my object index here, so objectIndex is always the index of the object on screen;
+    objectIndex++;
     $( '.counter' ).html( objectIndex );
+
     if ( objectIndex < trials ){
       drawObject();
-      objectIndex++;
     }else{
       endGame();
       clearInterval(timer);
@@ -148,42 +155,41 @@ function drawObject(){
 
 };
 
-// Shows the values of correct and incorrect
+// Show the values of correct and incorrect
 function endGame(){
 
   $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
 
 };
   
-// When the user clicks 'Play', get the settings, generate the objects and start the game.
+// Listen for a 'Play' button click
+// To do: move settings into it's own module
 $( 'form.settings' ).on('submit', function(e){
   e.preventDefault();
 
+  // Get the settings, generate the objects and start the game.
   getSettings();
   generateObjects();
   startGame();
 
 });
 
+// To do: move the play functionality over to it's own button
+  // Add 'Pause' functionality
+
+// Listen for user's match guess
 $( 'form.controls' ).on('submit', function(e){
   e.preventDefault();
-
-// To do: Add logic to listen for user's match guess here
+  // Check if the object is a match, and update the score
+  if ( 'match' in souvenirs[objectIndex] ){
+    console.log('CORRECT');
+    correct++;
+  }else{
+    console.log('INCORRECT');
+    incorrect++;
+  }
 
 });
-
-//----------------
-// Might use this later for match logic 
-// function nextStep(){
-
-//   if ( objectIndex < souvenirs.length ){
-//     drawObject();
-//     objectIndex += 1;
-//   }else{
-//     endGame();
-//   };
-
-// };
 
 
 
