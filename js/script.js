@@ -5,7 +5,7 @@
 var n;
 
 // the number times we display an object per game
-var trials = 5;
+var trials = 25;
 
 // the the duration of each trial in ms, defines tmer duration in startTrials function
 var trialDuration = 3000;
@@ -29,14 +29,20 @@ function getSettings(){
 
 // Create a color array
 var colors = [
-  'red',
-  'yellow',
-  'blue',
-  'purple',
-  'green',
-  'aqua',
-  'orange',
-  'brown'
+  '#B2CDC4',
+  '#D8B847',
+  '#E94E54',
+  '#7D5242',
+  '#8FFAFF',
+  '#14A2F6',
+  '#866389',
+  '#2B9EB3',
+  '#2B2C30',
+  '#FC7B44',
+  '#B60040',
+  '#D7EF08',
+  '#BD7B8A',
+  '#341709'
 ];
 
 // Create a souvenir constructor
@@ -68,11 +74,8 @@ function generateObjects(){
       souvenirs.push(newSouvenir);
 
     }else{
-
       souvenirs.push(newSouvenir);
-
     }
-
 
   }
 

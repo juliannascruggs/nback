@@ -93,11 +93,9 @@ lvl2 lure is located at either n+1 or n-1
 http://mindmodeling.org/cogsci2012/papers/0290/paper0290.pdf
 
 To do:
-
-
-disable play button during the game, reenable on endGame
+X disable play button during the game, reenable on endGame
 add logic to calculate incorrect "misses"
-disable match button on click, renable match button at the start of each interval
+X disable match button on click, renable match button at the start of each interval
 make object fade away between intervals
 design logic for 1/5 matches
 message correct/incorrect on match button click
