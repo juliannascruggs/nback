@@ -94,10 +94,29 @@ http://mindmodeling.org/cogsci2012/papers/0290/paper0290.pdf
 
 To do:
 X disable play button during the game, reenable on endGame
-add logic to calculate incorrect "misses"
 X disable match button on click, renable match button at the start of each interval
+
+
+To do: add logic to calculate incorrect "misses"
+write a function that checks if the current objectIndex.property is equal to nBackObject.property
+
+if it is, and 
+     the user clicks match button, increment score correct
+     the user doesn’t click match button, increment score incorrect
+
+if it isn’t, and 
+     the user clicks match button, increment score incorrect
+     the user doesn’t click match button, increment score correct
+
+
+
 make object fade away between intervals
+
 design logic for 1/5 matches
+To do:
+take my souvenirs array and replace 5 of them with their n-back
+
+
 message correct/incorrect on match button click
 
 Design my responsive game board
