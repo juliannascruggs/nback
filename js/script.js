@@ -46,6 +46,8 @@ function souvenir(color) {
 
 // Create a generateObjects function which will populate my global array of souvenirs with 'trials' number of objects
 function generateObjects(){
+  // reset souvenirs array
+  souvenirs = [];
 
   for ( var i = 0; i < trials; i++ ){
 
@@ -85,17 +87,19 @@ function generateObjects(){
 
 // Create a startGame function 
 function startGame(){
-
   // set both the correct and incorrect counters to 0
   correct = 0;
   incorrect = 0;
-
   // set another counter, number of objectIndex, to start at 0 
   // recall, objectIndex specifies which section of the souvenirs array to look at
   objectIndex = 0;
 
   // call startTrials, passing game settings in as arguments
   startCountdown();
+  // disable the start button
+  $( 'input.settings').attr('disabled', 'disabled');
+  // reset the scoreboard
+  $( '.scoreboard' ).empty();
 
 };
 
@@ -106,7 +110,7 @@ function startCountdown(){
   $( '.counter' ).html( 'Ready?' );
 
   var countdown = setInterval(function(){
-
+    // display the countdown timer
     $( '.counter' ).html( counter );
     if ( counter > 0 ){
       counter--;
@@ -159,6 +163,8 @@ function drawObject(){
 function endGame(){
 
   $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
+  $( 'input.settings').removeAttr('disabled');
+
 
 };
   

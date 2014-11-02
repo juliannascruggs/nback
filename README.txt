@@ -60,19 +60,18 @@ X call nextStep method, which decides if it should keep showing stuff
 X draw the first object
 X check and see if: nbackIndex is < nbacks.length
 X then, show an nback and + 1 to the nbackIndex counter
-(nbacksToShow is game length, ex. 20)
+	(nbacksToShow is game length, ex. 20)
 X else: call endGame method, which shows correct and incorrect values
 
 X use a button to call nextStep, and display your nbackIndex value
 
-To do:
 then focus on gettin renderNback to:
-have a timer 
-have a submit button that will check logic to do the comparison to figure out if you're right or wrong
+X have a timer 
+X have a submit button that will check logic to do the comparison to figure out if you're right or wrong
 
-var nbacks = []
-var nbackIndex = 0
-nbacks[nbackIndex]
+	var nbacks = []
+	var nbackIndex = 0
+	nbacks[nbackIndex]
 
 To do:
 X the generateObjects function should be populated programatically from other arrays
@@ -82,13 +81,42 @@ X choose a random color by getting a random position in the array
 ------------
 After the whole thing works, end to end...
 
-To do:
-the generateObjects function should be comprised of matches fillers and lures
-20% of the objects should be matches
-the other 80% should be fillers and lures
-lures are objects with any property within the context vector,
-the context vector is the vector between the current object and the n-back object
+the generateObjects function should be comprised of matches, fillers and lures
+
+1/5 of the objects must be matches; the rest are fillers or lures
+
+lvl0 0 lures
+lvl1 5 lures; 'lure.property' = 'n.property'; lure is located at n+1
+lvl2 lure is located at either n+1 or n-1
+'filler.property' != previous 10 'n.property's
+
 http://mindmodeling.org/cogsci2012/papers/0290/paper0290.pdf
+
+To do:
+
+
+disable play button during the game, reenable on endGame
+add logic to calculate incorrect "misses"
+disable match button on click, renable match button at the start of each interval
+make object fade away between intervals
+design logic for 1/5 matches
+message correct/incorrect on match button click
+
+Design my responsive game board
+Build a responsive gameboard
+Add position
+
+Add shapes
+Add sounds
+
+Move settings into their own module
+Split out the play button from the save settings button
+Add pause functionality
+Add a tutorial
+
+
+
+----------
 
 If I decide to use chance.js:
 add chance.js to my js folder
