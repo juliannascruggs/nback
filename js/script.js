@@ -8,7 +8,7 @@ var n;
 var trials = 25;
 
 // the the duration of each trial in ms, defines tmer duration in startTrials function
-var trialDuration = 100;
+var trialDuration = 3000;
 
 // souvenirs is the global array of objects whose properties the user must try to remember
 var souvenirs = [];
@@ -67,28 +67,24 @@ function startGame(){
   // recall, objectIndex specifies which section of the souvenirs array to look at
   objectIndex = 0;
 
-  nextStep();
+  startTrials(n, trials, trialDuration)
 
 };
 
-// Create
+// Create an interval timer that takes the game settings as arguments and changes out the objects
 function startTrials(start, end, interval) {
 
-  // var counter 0;
-  var counter = start; 
-
   var timer = setInterval(function(){
-    $(".counter").html(counter);
-    if (start > end) {
-        counter -= 1;
-        if(counter <= end - 1) {
-          clearInterval(timer);
-        }
+    $(".counter").html(objectIndex);
+
+    if ( objectIndex < souvenirs.length ){
+
+      drawObject();
+      objectIndex++;
+
     }else{
-      counter += 1;
-      if(counter >= end + 1) {
-        clearInterval(timer);
-      }
+      endGame();
+      clearInterval(timer);
     };
 
   }, interval);
@@ -96,16 +92,23 @@ function startTrials(start, end, interval) {
 };
 
 // Create nextStep method, which decides if it should keep showing stuff
-function nextStep(){
+// function nextStep(){
 
-  if ( objectIndex < souvenirs.length ){
-    drawObject();
-    objectIndex += 1;
-  }else{
-    endGame();
-  };
+//     drawObject();
+//     objectIndex += 1;
 
-};
+// };
+
+// function nextStep(){
+
+//   if ( objectIndex < souvenirs.length ){
+//     drawObject();
+//     objectIndex += 1;
+//   }else{
+//     endGame();
+//   };
+
+// };
 
 // Create a drawObject function, which draws the object of a particular index on the page.
 function drawObject(){
@@ -133,14 +136,13 @@ $( 'form.settings' ).on('submit', function(e){
   getSettings();
   generateObjects();
   startGame();
-  startTrials(300, 200, trialDuration)
 
 });
 
 $( 'form.controls' ).on('submit', function(e){
   e.preventDefault();
 
-  nextStep();
+  // nextStep();
 
 });
 
