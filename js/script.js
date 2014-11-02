@@ -96,7 +96,7 @@ function startGame(){
 
   // call startTrials, passing game settings in as arguments
   startCountdown();
-  // disable the start button
+  // disable the play button
   $( 'input.settings').attr('disabled', 'disabled');
   // reset the scoreboard
   $( '.scoreboard' ).empty();
@@ -128,20 +128,21 @@ function startCountdown(){
 // Progress the game at an interval or ends the game
 function startTrials( start, end, interval ) {
 
+  $( '.counter' ).html( 'GOH!!' )
   // Draw the first object
   drawObject();
-  $( '.counter' ).html( 'GOH!!' )
-
-  // Todo: enable the match button when we're ready to start
-
   // Start the trials timer
   var timer = setInterval( function(){
-    // Increment my object index here, so objectIndex is always the index of the object on screen;
+    // increment the objectIndex here, so objectIndex is always the index of the object on screen;
     objectIndex++;
     $( '.counter' ).html( objectIndex );
 
     if ( objectIndex < trials ){
       drawObject();
+      // enable the match button if we've reached n
+      if ( objectIndex >= n ){
+        $( 'input.color').removeAttr('disabled');
+      }
     }else{
       endGame();
       clearInterval(timer);
@@ -163,13 +164,16 @@ function drawObject(){
 function endGame(){
 
   $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
+  //reset the buttons
   $( 'input.settings').removeAttr('disabled');
-
+  $( 'input.color').attr('disabled', 'disabled');
 
 };
-  
+
 // Listen for a 'Play' button click
 // To do: move settings into it's own module
+// To do: move the play functionality over to it's own button
+  // Add 'Pause' functionality
 $( 'form.settings' ).on('submit', function(e){
   e.preventDefault();
 
@@ -180,13 +184,12 @@ $( 'form.settings' ).on('submit', function(e){
 
 });
 
-// To do: move the play functionality over to it's own button
-  // Add 'Pause' functionality
-
 // Listen for user's match guess
 $( 'form.controls' ).on('submit', function(e){
   e.preventDefault();
   // Check if the object is a match, and update the score
+    // To do: move the match comparison into a function
+  $( 'input.color').attr('disabled', 'disabled');
   if ( 'match' in souvenirs[objectIndex] ){
     console.log('CORRECT');
     correct++;
