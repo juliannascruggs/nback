@@ -4,8 +4,11 @@
 // n is the number of steps back for the n-back game
 var n;
 
-// the number of objects displayed per game
-var trials = 20;
+// the number times we display an object per game
+var trials = 25;
+
+// the the duration of each trial in ms, defines tmer duration in startTrials function
+var trialDuration = 100;
 
 // souvenirs is the global array of objects whose properties the user must try to remember
 var souvenirs = [];
@@ -21,7 +24,6 @@ var objectIndex;
 function getSettings(){
 
   n = $( '.nback' ).val();
-  trials += parseInt( n );
 
 }
 
@@ -69,6 +71,30 @@ function startGame(){
 
 };
 
+// Create
+function startTrials(start, end, interval) {
+
+  // var counter 0;
+  var counter = start; 
+
+  var timer = setInterval(function(){
+    $(".counter").html(counter);
+    if (start > end) {
+        counter -= 1;
+        if(counter <= end - 1) {
+          clearInterval(timer);
+        }
+    }else{
+      counter += 1;
+      if(counter >= end + 1) {
+        clearInterval(timer);
+      }
+    };
+
+  }, interval);
+
+};
+
 // Create nextStep method, which decides if it should keep showing stuff
 function nextStep(){
 
@@ -95,6 +121,10 @@ function endGame(){
   $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
 
 };
+  
+// $("main").on("click", "button", function(){
+//   startTrials(n, trials, trialDuration);
+// });
 
 // When the user clicks 'Play', get the settings, generate the objects and start the game.
 $( 'form.settings' ).on('submit', function(e){
@@ -103,6 +133,7 @@ $( 'form.settings' ).on('submit', function(e){
   getSettings();
   generateObjects();
   startGame();
+  startTrials(300, 200, trialDuration)
 
 });
 
