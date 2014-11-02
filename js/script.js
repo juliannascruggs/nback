@@ -5,7 +5,7 @@
 var n;
 
 // the number times we display an object per game
-var trials = 25;
+var trials = 5;
 
 // the the duration of each trial in ms, defines tmer duration in startTrials function
 var trialDuration = 3000;
@@ -47,12 +47,32 @@ function souvenir(color) {
 // Create a generateObjects function which will populate my global array of souvenirs with 'trials' number of objects
 function generateObjects(){
 
-  for ( var i = 0; i < trials; i++ ){
+  for ( var i = 1; i < trials+1; i++ ){
+
+    var nBackSouvenir;
 
     var newSouvenir = new souvenir( colors[Math.floor(Math.random()*colors.length)] );
-    souvenirs.push(newSouvenir);
+    console.log( 'new souvenir color is: ' + newSouvenir.color );
+
+    if ( i >= n ){
+      console.log( souvenirs[ i - n ].color )      
+
+      // var nBackSouvenir = souvenirs[ i - n ].color;
+      // if ( newSouvenir.color == nBackSouvenir.color ){
+      //   console.log( 'n-back souvenir color is: ' + nBackSouvenir.color )
+      // }
+    }else{
+      souvenirs.push(newSouvenir);
+    }
+
 
   }
+
+  // Make 20% of the objects color matches
+  // Add a match property to match objects, with the value of color
+
+  // Later, add lures to objectIndex nBack +1
+  // Then, add lures to obJectIndex nBack -1 
 
 };
 
@@ -67,50 +87,60 @@ function startGame(){
   // recall, objectIndex specifies which section of the souvenirs array to look at
   objectIndex = 0;
 
-  startTrials(n, trials, trialDuration)
+  // call startTrials, passing game settings in as arguments
+  startCountdown();
 
 };
 
-// Create an interval timer that takes the game settings as arguments and changes out the objects
-function startTrials(start, end, interval) {
+// show a countdown before the timer starts
+function startCountdown(){
 
-  var timer = setInterval(function(){
-    $(".counter").html(objectIndex);
+  var counter = 3;
+  $( '.counter' ).html( 'Ready?' );
 
-    if ( objectIndex < souvenirs.length ){
+  var countdown = setInterval(function(){
 
+    $( '.counter' ).html( counter );
+    if ( counter > 0 ){
+      counter--;
+    }else{
+      // when the countdown ends, start the trials
+      startTrials( n, trials, trialDuration )
+      clearInterval( countdown );
+    };
+
+  }, 1000);
+
+};
+
+
+// Progresses the game at an interval or ends the game
+function startTrials( start, end, interval ) {
+
+  // draw the first object
+  drawObject();
+  objectIndex++;
+  $( '.counter' ).html( 'GOH!!' )
+
+  // enable the match button when we're ready to start
+
+  // Start the trials timer
+  var timer = setInterval( function(){
+
+    $( '.counter' ).html( objectIndex );
+    if ( objectIndex < trials ){
       drawObject();
       objectIndex++;
-
     }else{
       endGame();
       clearInterval(timer);
     };
 
-  }, interval);
+  }, interval );
 
 };
 
-// Create nextStep method, which decides if it should keep showing stuff
-// function nextStep(){
-
-//     drawObject();
-//     objectIndex += 1;
-
-// };
-
-// function nextStep(){
-
-//   if ( objectIndex < souvenirs.length ){
-//     drawObject();
-//     objectIndex += 1;
-//   }else{
-//     endGame();
-//   };
-
-// };
-
-// Create a drawObject function, which draws the object of a particular index on the page.
+// Draw souvenirs of a particular objectIndex on the gameboard
 function drawObject(){
 
   console.log(souvenirs[objectIndex]);
@@ -118,17 +148,13 @@ function drawObject(){
 
 };
 
-// Create an endGame function, which shows the values of correct and incorrect
+// Shows the values of correct and incorrect
 function endGame(){
 
   $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
 
 };
   
-// $("main").on("click", "button", function(){
-//   startTrials(n, trials, trialDuration);
-// });
-
 // When the user clicks 'Play', get the settings, generate the objects and start the game.
 $( 'form.settings' ).on('submit', function(e){
   e.preventDefault();
@@ -142,13 +168,22 @@ $( 'form.settings' ).on('submit', function(e){
 $( 'form.controls' ).on('submit', function(e){
   e.preventDefault();
 
-  // nextStep();
+// To do: Add logic to listen for user's match guess here
 
 });
 
+//----------------
+// Might use this later for match logic 
+// function nextStep(){
 
+//   if ( objectIndex < souvenirs.length ){
+//     drawObject();
+//     objectIndex += 1;
+//   }else{
+//     endGame();
+//   };
 
-
+// };
 
 
 
