@@ -1,34 +1,29 @@
-// Global variables 
+// * * * * * * * * * * * * * * * * * * * *
+// * * *  Global Variables
+// * * * * * * * * * * * * * * * * * * * *
 
-// Settings variables
+// * * *  Game Settings  * * *
+
 // n is the number of steps back for the n-back game
 var n;
-
-// the number times we display an object per game
+// the number times the user needs to guess, per game
 var trials = 25;
-
-// the the duration of each trial in ms, defines tmer duration in startTrials function
+// the the duration of each trial in ms, defines timer duration in runTrials function
 var trialDuration = 1000;
 
-// souvenirs is the global array of objects whose properties the user must try to remember
+// * * *  Game Components  * * *
+
+// the global array of objects whose properties the user must try to remember
 var souvenirs = [];
-
-// keep track of the user's score
-var correct;
-var incorrect;
-var results = []
-
-// specifies which section of the souvenirs array to look at in the nextStep function
+// specifies which object in the souvenirs array is being displayed at any given time
 var currentObject;
 
-// Function that saves the game variables
-function getSettings(){
+// the user's score
+var results = [];
+var correct;
+var incorrect;
 
-  n = $( '.nback' ).val();
-
-}
-
-// Create a color array
+// a color array
 var colors = [
   '#B2CDC4',
   '#D8B847',
@@ -46,93 +41,114 @@ var colors = [
   '#341709'
 ];
 
-// Create a souvenir constructor
+// * * * * * * * * * * * * * * * * * * * *
+// * * *  Setup Functions
+// * * * * * * * * * * * * * * * * * * * *
+
+// * * *  Game Settings  * * *
+
+// apply the user's game settings
+function getSettings(){
+
+  n = $( '.nback' ).val();
+  trials += parseInt(n);
+
+};
+// a souvenir object constructor, which will later have it's own settings 
 function souvenir(color) {
     this.color = color;
-}
+};
 
-// Create a generateObjects function which will populate my global array of souvenirs with 'trials' number of objects
-function generateObjects(){
-  // reset souvenirs array
+// * * *  Game Components  * * *
+
+// generate the souvenirs array
+function generateSouvenirs(){
+  // reset souvenirs
   souvenirs = [];
-
+  // iterate over the number of 'trials'
   for ( var i = 0; i < trials; i++ ){
-
+    // generate an souvenir with a random color
     var newSouvenir = new souvenir( colors[Math.floor(Math.random()*colors.length)] );
 
-    // Check if we have an object at index [i - n]
-    // Later we'll add 1/5 matches to our array here
+    // Later add 1/5 matches to our array here
+    // Check if we have an nBack object
     if ( i >= n ){
-
-      var nBackSouvenir = souvenirs[ i - n ];
-      // Check if it's a match
-      if ( newSouvenir.color == nBackSouvenir.color ){
-        // if so add a match property
-        newSouvenir.match = true;
-        console.log('newSouvenir is now: ' + newSouvenir)
+      // Check if we have a match
+      if ( newSouvenir.color == souvenirs[i - n].color ){
+        // if so, add a 'match' property
+        newSouvenir.match = 'color';
+        console.log(newSouvenir)
       };
-
+      // populate the souvenirs array 
       souvenirs.push(newSouvenir);
-
     }else{
       souvenirs.push(newSouvenir);
-    }
+    };
 
-  }
-
-  console.log('souvenirs are: ' + souvenirs)
-  // Make 20% of the objects color matches
-  // Add a match property to match objects, with the value of color
+  };
 
   // Later, add lures to currentObject nBack +1
   // Then, add lures to currentObject nBack -1 
 
 };
 
-// Create a startGame function 
+// * * * * * * * * * * * * * * * * * * * *
+// * * *  Game Logic
+// * * * * * * * * * * * * * * * * * * * *
+
+// * * *  Game Ready  * * *
+
+// reset all the variables and setup the game
 function startGame(){
-  // set both the correct and incorrect counters to 0
+  // reset the counters
+  results = [];
   correct = 0;
   incorrect = 0;
-  // set another counter, number of currentObject, to start at 0 
-  // recall, 'currentObject' specifies which section of the souvenirs array to look at
   currentObject = 0;
-  results = [];
-  // call startTrials, passing game settings in as arguments
-  startCountdown();
-  // disable the play button
-  $( 'input.settings').attr('disabled', 'disabled');
+
   // reset the scoreboard
   $( '.scoreboard' ).empty();
+  // disable the play button
+  $( 'input.settings').attr('disabled', 'disabled');
+
+  // Get the settings, generate the objects and start the countdown
+  getSettings();
+  generateSouvenirs();
+  startCountdown();
+  console.log('Game Ready')
 
 };
 
-// show a countdown before the timer starts
+// show a countdown before the timer starts 
 function startCountdown(){
 
   var counter = 3;
   $( '.counter' ).html( 'Ready?' );
 
-  var countdown = setInterval(function(){
-    // display the countdown timer
+  var countdown = setInterval( function(){
+    // show the countdown
     $( '.counter' ).html( counter );
+
     if ( counter > 0 ){
       counter--;
     }else{
-      // when the countdown ends, start the trials
-      startTrials( n, trials, trialDuration )
+      // when the countdown ends, call runTrials, passing game settings in as arguments
+      runTrials( n, trials, trialDuration )
       clearInterval( countdown );
     };
 // TODO: set this back to 1000 later
-  }, 10);
+  }, 10 );
 
 };
 
+// * * *  Game Active  * * * 
 
-// progress the game at an interval or ends the game
-function startTrials( start, end, interval ) {
+// progress the game at an interval or end the game
+function runTrials( start, end, interval ) {
 
   $( '.counter' ).html( 'GOH!!' )
+  console.log('Game Active');
+
   // draw the first object
   drawObject();
   // start the trials timer
@@ -150,7 +166,7 @@ function startTrials( start, end, interval ) {
       if ( currentObject >= n ){
         $( 'input.color').removeAttr('disabled');
       };
-      
+
     }else{
       endGame();
       clearInterval(timer);
@@ -160,20 +176,9 @@ function startTrials( start, end, interval ) {
 
 };
 
-// draw the current souvenir on the gameboard
+// draw the currentObject on the gameboard
 function drawObject(){
   $( '.souvenir' ).css( 'background-color', souvenirs[currentObject].color )
-};
-
-// Show the values of correct and incorrect
-function endGame(){
-
-  getResults();
-  $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
-  //reset the buttons
-  $( 'input.settings').removeAttr('disabled');
-  $( 'input.color').attr('disabled', 'disabled');
-
 };
 
 // check if the currentObject.property is equal to nBackObject.property
@@ -181,22 +186,9 @@ function compareNback( property ){
   return souvenirs[currentObject][property] == souvenirs[currentObject - n][property];
 };
 
-// iterate over the results array to get the final results
-function getResults(){
-
-  for ( var i = 0; i < results.length; i++ ){
-    if ( results[i] == true ){
-      correct++
-    }else if ( results[i] == false ){
-      incorrect++
-    };
-  };
-
-};
-
-// calculate whether or not the user's input (or lack thereof) was correct and update the results array
+// check if the user's input (or lack thereof) was correct and update the results array
 function updateScore( property, action ){
-  // if the user already provided an input, or if there is no object at the n-back index, don't continue
+  // if the user already provided an input, or if there's no object at the n-back index, don't continue
   if( results[currentObject] != null || currentObject < n ){
     return false;  
   };
@@ -218,24 +210,51 @@ function updateScore( property, action ){
 
 };
 
-// Listen for a 'Play' button click
-// To do: move settings into it's own module
-// To do: move the play functionality over to it's own button
-  // Add 'Pause' functionality
-$( 'form.settings' ).on('submit', function(e){
-  e.preventDefault();
+// * * *  Game Complete  * * *
 
-  // Get the settings, generate the objects and start the game.
-  getSettings();
-  generateObjects();
+// show the values of correct and incorrect
+function endGame(){
+
+  console.log('Game Complete')
+  getResults();
+  $( '.scoreboard' ).append( '<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>' )
+  //reset the buttons
+  $( 'input.settings').removeAttr('disabled');
+  $( 'input.color').attr('disabled', 'disabled');
+
+};
+
+// iterate over the results array to get the final results
+function getResults(){
+
+  for ( var i = 0; i < results.length; i++ ){
+    if ( results[i] == true ){
+      correct++
+    }else if ( results[i] == false ){
+      incorrect++
+    };
+  };
+
+};
+
+// * * * * * * * * * * * * * * * * * * * *
+// * * *  Interactivity
+// * * * * * * * * * * * * * * * * * * * *
+
+// * * *  User Inputs  * * *
+
+// Listen for a 'Play' button click
+$( 'form.settings' ).on('submit', function(e){
+
+  e.preventDefault();
   startGame();
 
 });
 
 // Listen for user's match guess
 $( 'input.color' ).on('click', function(e){
-  e.preventDefault();
 
+  e.preventDefault();
   $( this ).attr('disabled', 'disabled');
 
   var inputClass = $( this ).attr( 'class' );
@@ -243,7 +262,9 @@ $( 'input.color' ).on('click', function(e){
 
 });
 
-
+// To do: move the play functionality over to it's own button
+  // move settings into it's own module
+  // add 'Pause' functionality
 
 
 
