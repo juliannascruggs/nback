@@ -16,6 +16,7 @@ var souvenirs = [];
 // keep track of the user's score
 var correct;
 var incorrect;
+var results = []
 
 // specifies which section of the souvenirs array to look at in the nextStep function
 var currentObject;
@@ -96,7 +97,7 @@ function startGame(){
   // set another counter, number of currentObject, to start at 0 
   // recall, 'currentObject' specifies which section of the souvenirs array to look at
   currentObject = 0;
-
+  results = [];
   // call startTrials, passing game settings in as arguments
   startCountdown();
   // disable the play button
@@ -137,9 +138,12 @@ function startTrials( start, end, interval ) {
   // Start the trials timer
   var timer = setInterval( function(){
     // increment the currentObject here, so currentObject is always the index of the object on screen;
+    updateScore( 'color', 'time' );
+    
     currentObject++;
     $( '.counter' ).html( currentObject );
 
+    
     if ( currentObject < trials ){
       drawObject();
       // enable the color match button if we've reached n
@@ -176,23 +180,39 @@ function compareNback( property ){
 
   // console.log('property to compare is: ' + property)
   // console.log(souvenirs[currentObject - n][property] + ' is a ' + property)
-  if (souvenirs[currentObject][property] == souvenirs[currentObject - n][property]){
-    console.log('Correct, ' + souvenirs[currentObject - n][property] + ' is a ' + property + ' match!')
-  }else{
-    console.log('Fay-yullll, we do not have a ' + property + ' match.')
+  if(currentObject < n){
+    return false;
   }
+  // if (souvenirs[currentObject][property] == souvenirs[currentObject - n][property]){
+  //   console.log('Correct, ' + souvenirs[currentObject - n][property] + ' is a ' + property + ' match!')
+  // }else{
+  //   console.log('Fay-yullll, we do not have a ' + property + ' match.')
+  // }
 
   return souvenirs[currentObject][property] == souvenirs[currentObject - n][property];
 
 
 };
 
-function updateScore( property ){
+function updateScore( property, action ){
 //  console.log( 'updatescore called for: ' + button.attr( 'class' ) )
+  
   console.log( compareNback( property ));
-  if ( compareNback( property ) == true ){
+  if(results[currentObject] != null){
+    return false;  
+  } 
+
+  if ( compareNback( property ) == true && action == 'click' ){
+    console.log('Correct click');
+    results[currentObject] = true;
+    correct++;
+  }else if(compareNback( property ) == false && action == 'time'){
+    console.log('Correct time');
+    results[currentObject] = true;
     correct++;
   }else{
+    console.log('Incorrect ' + action);
+    results[currentObject] = false;
     incorrect++;
   };
 
@@ -227,7 +247,7 @@ $( 'input.color' ).on('click', function(e){
   $( this ).attr('disabled', 'disabled');
 
   var inputClass = $( this ).attr( 'class' );
-  updateScore( inputClass );
+  updateScore( inputClass, 'click' );
 
 
   // if ( 'match' in souvenirs[currentObject] ){
