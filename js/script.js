@@ -70,10 +70,11 @@ function generateSouvenirs(){
     // generate an souvenir with a random color
     var newSouvenir = new souvenir( colors[Math.floor(Math.random()*colors.length)] );
 
-    // Later add 1/5 matches to our array here
+    // Later add 1/5 matches to our array
     // Check if we have an nBack object
     if ( i >= n ){
-      // Check if we have a match
+      generateMatches();
+//     // Check if we have a match
       if ( newSouvenir.color == souvenirs[i - n].color ){
         // if so, add a 'match' property
         newSouvenir.match = 'color';
@@ -89,6 +90,29 @@ function generateSouvenirs(){
 
   // Later, add lures to currentObject nBack +1
   // Then, add lures to currentObject nBack -1 
+
+};
+
+// Messing with a new function to add matches intot he souvenir array
+function generateMatches(){
+
+  var matches = 0;
+  while ( matches < 5 ){
+    
+    var usableArray = souvenirs.length - n - 1;
+//    var usableArray = 5 - n - 1;
+    console.log(''+ usableArray)
+
+    var nBackPosition = (Math.floor(Math.random()*usableArray)) + 1;
+    console.log('nback' + nBackPosition);
+
+//    souvenirs.splice(nBackPosition, )
+
+    var nBack = souvenirs[Math.floor(Math.random()*souvenirs.length)];
+    console.log(nBack);
+    matches = 5;
+
+  }
 
 };
 
