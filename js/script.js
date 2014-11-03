@@ -145,7 +145,8 @@ function startTrials( start, end, interval ) {
       // enable the color match button if we've reached n
       if ( currentObject >= n ){
         $( 'input.color').removeAttr('disabled');
-      }
+    }
+
     }else{
       endGame();
       clearInterval(timer);
@@ -170,28 +171,29 @@ function endGame(){
 
 };
 
-// write a function that checks if the currentObject.property is equal to nBackObject.property
-function compareNback(property){
+// checks if the currentObject.property is equal to nBackObject.property
+function compareNback( property ){
 
-  console.log('property to compare is: ' + property)
+  // console.log('property to compare is: ' + property)
+  // console.log(souvenirs[currentObject - n][property] + ' is a ' + property)
+  if (souvenirs[currentObject][property] == souvenirs[currentObject - n][property]){
+    console.log('Correct, ' + souvenirs[currentObject - n][property] + ' is a ' + property + ' match!')
+  }else{
+    console.log('Fay-yullll, we do not have a ' + property + ' match.')
+  }
+
   return souvenirs[currentObject][property] == souvenirs[currentObject - n][property];
 
-  // if (souvenirs[currentObject][property] == souvenirs[currentObject - n][property]){
-  //   console.log('Correct, ' + souvenirs[currentObject - n][property] + ' is a ' + property + ' match!')
-  // }else{
-  //   console.log('Fay-yullll, we do not have a ' + property + ' match.')
-  // }
 
 };
 
-function updateScore(property){
-
+function updateScore( property ){
 //  console.log( 'updatescore called for: ' + button.attr( 'class' ) )
   console.log( compareNback( property ));
   if ( compareNback( property ) == true ){
-    incorrect++;
-  }else{
     correct++;
+  }else{
+    incorrect++;
   };
 
 };
@@ -222,20 +224,19 @@ $( 'form.settings' ).on('submit', function(e){
 // Listen for user's match guess
 $( 'input.color' ).on('click', function(e){
   e.preventDefault();
-  // Check if the object is a match, and update the score
-    // To do: move the match comparison into a function
   $( this ).attr('disabled', 'disabled');
 
   var inputClass = $( this ).attr( 'class' );
   updateScore( inputClass );
 
-  if ( 'match' in souvenirs[currentObject] ){
-    console.log('CORRECT');
-    correct++;
-  }else{
-    console.log('INCORRECT');
-    incorrect++;
-  }
+
+  // if ( 'match' in souvenirs[currentObject] ){
+  //   console.log('CORRECT');
+  //   correct++;
+  // }else{
+  //   console.log('INCORRECT');
+  //   incorrect++;
+  // }
 
 });
 
