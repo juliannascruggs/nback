@@ -129,28 +129,28 @@ function startCountdown(){
 };
 
 
-// Progress the game at an interval or ends the game
+// progress the game at an interval or ends the game
 function startTrials( start, end, interval ) {
 
   $( '.counter' ).html( 'GOH!!' )
-  // Draw the first object
+  // draw the first object
   drawObject();
-  // Start the trials timer
+  // start the trials timer
   var timer = setInterval( function(){
-    // increment the currentObject here, so currentObject is always the index of the object on screen;
+    // updateScore here, so we can calculate the current results before moving on to the next object 
     updateScore( 'color', 'time' );
-    
+    // increment currentObject here, so currentObject is always the index of the object on screen
     currentObject++;
+
     $( '.counter' ).html( currentObject );
 
-    
     if ( currentObject < trials ){
       drawObject();
       // enable the color match button if we've reached n
       if ( currentObject >= n ){
         $( 'input.color').removeAttr('disabled');
-    }
-
+      };
+      
     }else{
       endGame();
       clearInterval(timer);
@@ -168,6 +168,7 @@ function drawObject(){
 // Show the values of correct and incorrect
 function endGame(){
 
+  getResults();
   $( '.scoreboard' ).append('<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>')
   //reset the buttons
   $( 'input.settings').removeAttr('disabled');
@@ -175,57 +176,47 @@ function endGame(){
 
 };
 
-// checks if the currentObject.property is equal to nBackObject.property
+// check if the currentObject.property is equal to nBackObject.property
 function compareNback( property ){
-
-  // console.log('property to compare is: ' + property)
-  // console.log(souvenirs[currentObject - n][property] + ' is a ' + property)
-  if(currentObject < n){
-    return false;
-  }
-  // if (souvenirs[currentObject][property] == souvenirs[currentObject - n][property]){
-  //   console.log('Correct, ' + souvenirs[currentObject - n][property] + ' is a ' + property + ' match!')
-  // }else{
-  //   console.log('Fay-yullll, we do not have a ' + property + ' match.')
-  // }
-
   return souvenirs[currentObject][property] == souvenirs[currentObject - n][property];
-
-
 };
 
-function updateScore( property, action ){
-//  console.log( 'updatescore called for: ' + button.attr( 'class' ) )
-  
-  console.log( compareNback( property ));
-  if(results[currentObject] != null){
-    return false;  
-  } 
+// iterate over the results array to get the final results
+function getResults(){
 
-  if ( compareNback( property ) == true && action == 'click' ){
-    console.log('Correct click');
-    results[currentObject] = true;
-    correct++;
-  }else if(compareNback( property ) == false && action == 'time'){
-    console.log('Correct time');
-    results[currentObject] = true;
-    correct++;
-  }else{
-    console.log('Incorrect ' + action);
-    results[currentObject] = false;
-    incorrect++;
+  for ( var i = 0; i < results.length; i++ ){
+    if ( results[i] == true ){
+      correct++
+    }else if ( results[i] == false ){
+      incorrect++
+    };
   };
 
 };
 
-  // if it is, and 
-  //      the user clicks match button, increment score correct
-  //      the user doesn’t click match button, increment score incorrect
+// calculate whether or not the user's input (or lack thereof) was correct and update the results array
+function updateScore( property, action ){
+  // if the user already provided an input, or if there is no object at the n-back index, don't continue
+  if( results[currentObject] != null || currentObject < n ){
+    return false;  
+  };
 
-  // if it isn’t, and 
-  //      the user clicks match button, increment score incorrect
-  //      the user doesn’t click match button, increment score correct
+  if ( compareNback( property ) == true && action == 'click' ){
+    // if it's a match, and the user clicked match button, increment score correct
+    console.log( 'Correct click' );
+    results[currentObject] = true;
+  }else if( compareNback( property ) == false && action == 'time'){
+    // if it isn’t a match, and the user did’t click match button, increment score correct
+    console.log( 'Correct time' );
+    results[currentObject] = true;
+  }else{
+    // if it is a match and the user didn’t click match button, increment score incorrect
+    // or if it isn’t a match, and the user clicks match button, increment score incorrect
+    console.log( 'Incorrect ' + action );
+    results[currentObject] = false;
+  };
 
+};
 
 // Listen for a 'Play' button click
 // To do: move settings into it's own module
@@ -244,19 +235,11 @@ $( 'form.settings' ).on('submit', function(e){
 // Listen for user's match guess
 $( 'input.color' ).on('click', function(e){
   e.preventDefault();
+
   $( this ).attr('disabled', 'disabled');
 
   var inputClass = $( this ).attr( 'class' );
   updateScore( inputClass, 'click' );
-
-
-  // if ( 'match' in souvenirs[currentObject] ){
-  //   console.log('CORRECT');
-  //   correct++;
-  // }else{
-  //   console.log('INCORRECT');
-  //   incorrect++;
-  // }
 
 });
 
