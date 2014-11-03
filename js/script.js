@@ -8,7 +8,7 @@ var n;
 var trials = 25;
 
 // the the duration of each trial in ms, defines tmer duration in startTrials function
-var trialDuration = 3000;
+var trialDuration = 1000;
 
 // souvenirs is the global array of objects whose properties the user must try to remember
 var souvenirs = [];
@@ -18,7 +18,7 @@ var correct;
 var incorrect;
 
 // specifies which section of the souvenirs array to look at in the nextStep function
-var objectIndex;
+var currentObject;
 
 // Function that saves the game variables
 function getSettings(){
@@ -83,8 +83,8 @@ function generateObjects(){
   // Make 20% of the objects color matches
   // Add a match property to match objects, with the value of color
 
-  // Later, add lures to objectIndex nBack +1
-  // Then, add lures to obJectIndex nBack -1 
+  // Later, add lures to currentObject nBack +1
+  // Then, add lures to currentObject nBack -1 
 
 };
 
@@ -93,9 +93,9 @@ function startGame(){
   // set both the correct and incorrect counters to 0
   correct = 0;
   incorrect = 0;
-  // set another counter, number of objectIndex, to start at 0 
-  // recall, objectIndex specifies which section of the souvenirs array to look at
-  objectIndex = 0;
+  // set another counter, number of currentObject, to start at 0 
+  // recall, 'currentObject' specifies which section of the souvenirs array to look at
+  currentObject = 0;
 
   // call startTrials, passing game settings in as arguments
   startCountdown();
@@ -122,8 +122,8 @@ function startCountdown(){
       startTrials( n, trials, trialDuration )
       clearInterval( countdown );
     };
-
-  }, 1000);
+// TODO: set this back to 1000 later
+  }, 10);
 
 };
 
@@ -136,14 +136,14 @@ function startTrials( start, end, interval ) {
   drawObject();
   // Start the trials timer
   var timer = setInterval( function(){
-    // increment the objectIndex here, so objectIndex is always the index of the object on screen;
-    objectIndex++;
-    $( '.counter' ).html( objectIndex );
+    // increment the currentObject here, so currentObject is always the index of the object on screen;
+    currentObject++;
+    $( '.counter' ).html( currentObject );
 
-    if ( objectIndex < trials ){
+    if ( currentObject < trials ){
       drawObject();
-      // enable the match button if we've reached n
-      if ( objectIndex >= n ){
+      // enable the color match button if we've reached n
+      if ( currentObject >= n ){
         $( 'input.color').removeAttr('disabled');
       }
     }else{
@@ -155,12 +155,9 @@ function startTrials( start, end, interval ) {
 
 };
 
-// Draw souvenirs of a particular objectIndex on the gameboard
+// draw the current souvenir on the gameboard
 function drawObject(){
-
-  console.log(souvenirs[objectIndex]);
-  $( '.souvenir' ).css( 'background-color', souvenirs[objectIndex].color )
-
+  $( '.souvenir' ).css( 'background-color', souvenirs[currentObject].color )
 };
 
 // Show the values of correct and incorrect
@@ -172,6 +169,41 @@ function endGame(){
   $( 'input.color').attr('disabled', 'disabled');
 
 };
+
+// write a function that checks if the currentObject.property is equal to nBackObject.property
+function compareNback(property){
+
+  console.log('property to compare is: ' + property)
+  return souvenirs[currentObject][property] == souvenirs[currentObject - n][property];
+
+  // if (souvenirs[currentObject][property] == souvenirs[currentObject - n][property]){
+  //   console.log('Correct, ' + souvenirs[currentObject - n][property] + ' is a ' + property + ' match!')
+  // }else{
+  //   console.log('Fay-yullll, we do not have a ' + property + ' match.')
+  // }
+
+};
+
+function updateScore(property){
+
+//  console.log( 'updatescore called for: ' + button.attr( 'class' ) )
+  console.log( compareNback( property ));
+  if ( compareNback( property ) == true ){
+    incorrect++;
+  }else{
+    correct++;
+  };
+
+};
+
+  // if it is, and 
+  //      the user clicks match button, increment score correct
+  //      the user doesn’t click match button, increment score incorrect
+
+  // if it isn’t, and 
+  //      the user clicks match button, increment score incorrect
+  //      the user doesn’t click match button, increment score correct
+
 
 // Listen for a 'Play' button click
 // To do: move settings into it's own module
@@ -188,12 +220,16 @@ $( 'form.settings' ).on('submit', function(e){
 });
 
 // Listen for user's match guess
-$( 'form.controls' ).on('submit', function(e){
+$( 'input.color' ).on('click', function(e){
   e.preventDefault();
   // Check if the object is a match, and update the score
     // To do: move the match comparison into a function
-  $( 'input.color').attr('disabled', 'disabled');
-  if ( 'match' in souvenirs[objectIndex] ){
+  $( this ).attr('disabled', 'disabled');
+
+  var inputClass = $( this ).attr( 'class' );
+  updateScore( inputClass );
+
+  if ( 'match' in souvenirs[currentObject] ){
     console.log('CORRECT');
     correct++;
   }else{
