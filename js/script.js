@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 1000;
+var trialDuration = 100;
 
 // * * *  Game Components  * * *
 
@@ -25,6 +25,7 @@ var incorrect;
 
 // a color array
 var colors = [
+
   '#B2CDC4',
   '#D8B847',
   '#E94E54',
@@ -34,11 +35,8 @@ var colors = [
   '#866389',
   '#2B9EB3',
   '#2B2C30',
-  '#FC7B44',
-  '#B60040',
-  '#D7EF08',
-  '#BD7B8A',
-  '#341709'
+  '#FC7B44'
+
 ];
 
 // * * * * * * * * * * * * * * * * * * * *
@@ -63,28 +61,63 @@ function Souvenir(color) {
 
 // generate the souvenirs array
 function generateSouvenirs(){
-  // iterate over the number of 'trials'
-  for ( var i = 0; i < trials; i++ ){
+
+  // seed the souvenir pool with one object of each color
+  for ( var i = 0; i < colors.length; i++ ){
+    var newSouvenir = new Souvenir( colors[i] );
+    souvenirs.push(newSouvenir);
+  };
+
+  while( souvenirs.length < trials + n ){
+
+    var dupeFound = false;
     // generate an souvenir with a random color
     var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)] );
 
-    // Later add 1/5 matches to our array
-    // Check if we have an nBack object
-    if ( i >= n ){
-      generateMatches();
-//     // Check if we have a match
-      if ( newSouvenir.color == souvenirs[i - n].color ){
-        // if so, add a 'match' property
-        newSouvenir.match = 'color';
-        console.log(newSouvenir)
+    for ( var i = souvenirs.length - 1; i > souvenirs.length - 9; i-- ){
+
+      if ( newSouvenir.color == souvenirs[i].color ){
+
+        dupeFound = true;
+        break;
+
       };
+
+    };
+
+    if ( dupeFound !== true ){
+
       // populate the souvenirs array 
-      souvenirs.push(newSouvenir);
-    }else{
-      souvenirs.push(newSouvenir);
+      souvenirs.push( newSouvenir );
+
     };
 
   };
+
+  console.log( 'We broke of the while loop!! ' + souvenirs );
+
+  // iterate over the number of 'trials'
+//  for ( var i = 0; i < trials; i++ ){
+    // generate an souvenir with a random color
+//    var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)] );
+
+    // Later add 1/5 matches to our array
+    // Check if we have an nBack object
+//    if ( i >= n ){
+//      generateMatches();
+//     // Check if we have a match
+//      if ( newSouvenir.color == souvenirs[i - n].color ){
+        // if so, add a 'match' property
+//        newSouvenir.match = 'color';
+//        console.log(newSouvenir)
+//      };
+      // populate the souvenirs array 
+//      souvenirs.push(newSouvenir);
+//    }else{
+//      souvenirs.push(newSouvenir);
+//    };
+
+//  };
 
   // Later, add lures to currentObject nBack +1
   // Then, add lures to currentObject nBack -1 
@@ -129,6 +162,7 @@ function resetGame(){
   correct = 0;
   incorrect = 0;
   currentObject = 0;
+  trials = 25;
 
   // reset souvenirs
   souvenirs = [];
