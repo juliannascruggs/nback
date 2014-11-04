@@ -49,7 +49,8 @@ var colors = [
 function setSettings(){
 
   n = $( '.nback' ).val();
-  trials += parseInt(n);
+  n = parseInt(n);
+  trials += n;
 
 };
 // a souvenir object constructor, which will later have it's own settings 
@@ -68,7 +69,7 @@ function generateSouvenirs(){
     souvenirs.push(newSouvenir);
   };
 
-  while( souvenirs.length < trials + n ){
+  while( souvenirs.length < trials ){
 
     var dupeFound = false;
     // generate an souvenir with a random color
