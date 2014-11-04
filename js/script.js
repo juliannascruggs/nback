@@ -48,7 +48,7 @@ var colors = [
 // * * *  Game Settings  * * *
 
 // apply the user's game settings
-function getSettings(){
+function setSettings(){
 
   n = $( '.nback' ).val();
   trials += parseInt(n);
@@ -63,8 +63,6 @@ function Souvenir(color) {
 
 // generate the souvenirs array
 function generateSouvenirs(){
-  // reset souvenirs
-  souvenirs = [];
   // iterate over the number of 'trials'
   for ( var i = 0; i < trials; i++ ){
     // generate an souvenir with a random color
@@ -123,20 +121,31 @@ function generateMatches(){
 // * * *  Game Ready  * * *
 
 // reset all the variables and setup the game
-function startGame(){
+
+function resetGame(){
+
   // reset the counters
   results = [];
   correct = 0;
   incorrect = 0;
   currentObject = 0;
 
+  // reset souvenirs
+  souvenirs = [];
+
   // reset the scoreboard
   $( '.scoreboard' ).empty();
   // disable the play button
   $( 'input.settings').attr('disabled', 'disabled');
 
+}
+
+function startGame(){
+
+  resetGame();
+
   // Get the settings, generate the objects and start the countdown
-  getSettings();
+  setSettings();
   generateSouvenirs();
   startCountdown();
   console.log('Game Ready')
