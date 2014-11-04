@@ -55,7 +55,7 @@ function getSettings(){
 
 };
 // a souvenir object constructor, which will later have it's own settings 
-function souvenir(color) {
+function Souvenir(color) {
     this.color = color;
 };
 
@@ -68,7 +68,7 @@ function generateSouvenirs(){
   // iterate over the number of 'trials'
   for ( var i = 0; i < trials; i++ ){
     // generate an souvenir with a random color
-    var newSouvenir = new souvenir( colors[Math.floor(Math.random()*colors.length)] );
+    var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)] );
 
     // Later add 1/5 matches to our array
     // Check if we have an nBack object
@@ -93,7 +93,7 @@ function generateSouvenirs(){
 
 };
 
-// Messing with a new function to add matches intot he souvenir array
+// Messing with a new function to add matches into the souvenir array
 function generateMatches(){
 
   var matches = 0;
@@ -101,7 +101,7 @@ function generateMatches(){
     
     var usableArray = souvenirs.length - n - 1;
 //    var usableArray = 5 - n - 1;
-    console.log(''+ usableArray)
+    console.log('' + usableArray)
 
     var nBackPosition = (Math.floor(Math.random()*usableArray)) + 1;
     console.log('nback' + nBackPosition);
