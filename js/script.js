@@ -58,6 +58,27 @@ function Souvenir(color) {
     this.color = color;
 };
 
+// a function used to shuffle the colors array
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  };
+
+  return array;
+};
+
+
 // * * *  Game Components  * * *
 
 // generate the souvenirs array
@@ -155,7 +176,6 @@ function generateMatches(){
 // * * *  Game Ready  * * *
 
 // reset all the variables and setup the game
-
 function resetGame(){
 
   // reset the counters
@@ -168,12 +188,16 @@ function resetGame(){
   // reset souvenirs
   souvenirs = [];
 
+  // shuffle the colors array
+  shuffle(colors);
+  console.log(colors);
+
   // reset the scoreboard
   $( '.scoreboard' ).empty();
   // disable the play button
   $( 'input.settings').attr('disabled', 'disabled');
 
-}
+};
 
 function startGame(){
 
