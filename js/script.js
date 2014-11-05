@@ -76,6 +76,7 @@ function shuffle(array) {
   };
 
   return array;
+
 };
 
 
@@ -99,24 +100,24 @@ function generateSouvenirs(){
     for ( var i = souvenirs.length - 1; i > souvenirs.length - 9; i-- ){
 
       if ( newSouvenir.color == souvenirs[i].color ){
-
         dupeFound = true;
         break;
-
       };
 
     };
 
     if ( dupeFound !== true ){
-
       // populate the souvenirs array 
       souvenirs.push( newSouvenir );
-
     };
 
   };
-
   console.log( 'We broke of the while loop!! ' + souvenirs );
+  addMatches();
+
+};
+
+
 
   // iterate over the number of 'trials'
 //  for ( var i = 0; i < trials; i++ ){
@@ -144,7 +145,32 @@ function generateSouvenirs(){
   // Later, add lures to currentObject nBack +1
   // Then, add lures to currentObject nBack -1 
 
+function addMatches(){
+  var matchCount = 0;
+
+  while ( matchCount < 5 ){
+
+    for ( var i = 0; i < souvenirs.length; i++ ){
+
+      if ( i >= n ){
+
+        if ( Math.random() >= 0.8 ){
+
+          if ( 'match' in souvenirs[i] !== true ){
+
+            souvenirs[i].match = 'color';
+            souvenirs[i - n].match = 'color';
+            souvenirs[i - n].color = souvenirs[i].color;
+            matchCount++;
+
+          };
+        };
+      };
+    };
+  };
 };
+
+
 
 // Messing with a new function to add matches into the souvenir array
 function generateMatches(){
