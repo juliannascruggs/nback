@@ -19,9 +19,12 @@ var souvenirs = [];
 var currentObject;
 
 // the user's score
-var results = [];
-var correct;
-var incorrect;
+var colorResults = [];
+var shapeResults = []
+var colorCorrect;
+var colorIncorrect;
+var shapeCorrect;
+var shapeIncorrect;
 
 // my property arrays
 var colors = [
@@ -69,13 +72,13 @@ function setSettings(){
   n = parseInt(n);
   trials += n;
 
-};
+}
 
 // a souvenir object constructor, which will later have it's own settings 
 function Souvenir( color, shape ) {
     this.color = color;
     this.shape = shape;
-};
+}
 
 // a function used to shuffle the colors array
 function shuffle(array) {
@@ -92,11 +95,11 @@ function shuffle(array) {
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
-  };
+  }
 
   return array;
 
-};
+}
 
 // * * *  Game Components  * * *
 
@@ -107,7 +110,7 @@ function generateSouvenirs(){
   for ( var i = 0; i < colors.length; i++ ){
     var seedSouvenir = new Souvenir( colors[i], shapes[i] );
     souvenirs.push( seedSouvenir );
-  };
+  }
 
   while( souvenirs.length < trials ){
 
@@ -119,20 +122,20 @@ function generateSouvenirs(){
       if ( newSouvenir.color == souvenirs[k].color || newSouvenir.shape == souvenirs[k].shape ){
         dupeFound = true;
         break;
-      };
+      }
 
-    };
+    }
 
     if ( dupeFound !== true ){
       // populate the souvenirs array 
       souvenirs.push( newSouvenir );
-    };
+    }
 
-  };
+  }
   console.log( 'We broke of the while loop!! ' + souvenirs );
   addColorMatches();
 
-};
+}
 
 function addColorMatches(){
   var colorMatchCount = 0;
@@ -141,22 +144,47 @@ function addColorMatches(){
 
     for ( var j = 0; j < souvenirs.length; j++ ){
       if ( j >= n && colorMatchCount < 5 ){
-      console.log(colorMatchCount)
+      console.log(colorMatchCount);
 
         if ( Math.random() >= 0.8 ){
 
           if ( 'match' in souvenirs[j] !== true ){
+//            console.log( souvenirs[j].match );
             souvenirs[j].match = 'color';
             souvenirs[j - n].match = 'color';
             souvenirs[j].color = souvenirs[j - n].color;
             colorMatchCount++;
 
-          };
-        };
-      };
-    };
-  };
-};
+          }
+        }
+      }
+    }
+  }
+}
+
+function addShapeMatches(){
+  var shapeMatchCount = 0;
+
+  while ( shapeMatchCount < 5 ){
+
+    for ( var l = 0; l < souvenirs.length; l++ ){
+      if ( l >= n && shapeMatchCount < 5 ){
+      console.log(shapeMatchCount);
+
+        if ( Math.random() >= 0.8 ){
+
+          if ( 'match' in souvenirs[l] !== true ){
+            souvenirs[l].match = 'shape';
+            souvenirs[l - n].match = 'shape';
+            souvenirs[l].shape = souvenirs[l - n].shape;
+            shapeMatchCount++;
+
+          }
+        }
+      }
+    }
+  }
+}
 
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Game Logic
@@ -168,25 +196,30 @@ function addColorMatches(){
 function resetGame(){
 
   // reset the counters
-  results = [];
-  correct = 0;
-  incorrect = 0;
+  colorResults = [];
+  colorCorrect = 0;
+  colorIncorrect = 0;
+
+  shapeResults = [];
+  shapeCorrect = 0;
+  shapeIncorrect = 0;
+
   currentObject = 0;
   trials = 25;
 
-  // reset souvenirs
+  // empty souvenirs
   souvenirs = [];
 
-  // shuffle the colors array
+  // shuffle the colors and shapes arrays
   shuffle(colors);
-  console.log(colors);
+  shuffle(shapes);
 
   // reset the scoreboard
   $( '.scoreboard' ).empty();
   // disable the play button
   $( 'input.settings').attr('disabled', 'disabled');
 
-};
+}
 
 function startGame(){
 
@@ -196,9 +229,9 @@ function startGame(){
   setSettings();
   generateSouvenirs();
   startCountdown();
-  console.log('Game Ready')
+  console.log('Game Ready');
 
-};
+}
 
 // show a countdown before the timer starts 
 function startCountdown(){
@@ -214,20 +247,20 @@ function startCountdown(){
       counter--;
     }else{
       // when the countdown ends, call runTrials, passing game settings in as arguments
-      runTrials( n, trials, trialDuration )
+      runTrials( n, trials, trialDuration );
       clearInterval( countdown );
-    };
+    }
 // TODO: set this back to 1000 later
   }, 10 );
 
-};
+}
 
 // * * *  Game Active  * * * 
 
 // progress the game at an interval or end the game
 function runTrials( start, end, interval ) {
 
-  $( '.counter' ).html( 'GOH!!' )
+  $( '.counter' ).html( 'GOH!!' );
   console.log('Game Active');
 
   // draw the first object
@@ -236,6 +269,8 @@ function runTrials( start, end, interval ) {
   var timer = setInterval( function(){
     // updateScore here, so we can calculate the current results before moving on to the next object 
     updateScore( 'color', 'time' );
+    updateScore( 'shape', 'time' );
+
     // increment currentObject here, so currentObject is always the index of the object on screen
     currentObject++;
 
@@ -243,81 +278,115 @@ function runTrials( start, end, interval ) {
 
     if ( currentObject < trials ){
       drawObject();
-      // enable the color match button if we've reached n
+      // enable the match buttons if we've reached n
       if ( currentObject >= n ){
         $( 'input.color').removeAttr('disabled');
-      };
+        $( 'input.shape').removeAttr('disabled');
+      }
 
     }else{
       endGame();
       clearInterval(timer);
-    };
+    }
 
   }, interval );
 
-};
+}
 
 // draw the currentObject on the gameboard
 function drawObject(){
-  $( '.souvenir' ).css( 'color', souvenirs[currentObject].color )
+  $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
   $( '.fa' ).removeClass().addClass('fa fa-5x fa-' + souvenirs[currentObject].shape );
-};
+}
 
 // check if the currentObject.property is equal to nBackObject.property
 function compareNback( property ){
   return souvenirs[currentObject][property] == souvenirs[currentObject - n][property];
-};
+}
 
 // check if the user's input (or lack thereof) was correct and update the results array
 function updateScore( property, action ){
-  // if the user already provided an input, or if there's no object at the n-back index, don't continue
-  if( results[currentObject] != null || currentObject < n ){
-    return false;  
-  };
 
-  if ( compareNback( property ) == true && action == 'click' ){
-    // if it's a match, and the user clicked match button, increment score correct
-    console.log( 'Correct click' );
-    results[currentObject] = true;
-  }else if( compareNback( property ) == false && action == 'time'){
-    // if it isn’t a match, and the user did’t click match button, increment score correct
-    console.log( 'Correct time' );
-    results[currentObject] = true;
-  }else{
-    // if it is a match and the user didn’t click match button, increment score incorrect
-    // or if it isn’t a match, and the user clicks match button, increment score incorrect
-    console.log( 'Incorrect ' + action );
-    results[currentObject] = false;
-  };
+  if (property == 'color'){
+    // if the user already provided an input, or if there's no object at the n-back index, don't continue
+    if( colorResults[currentObject] != null || currentObject < n ){
+      return false;  
+    }
 
-};
+    if ( compareNback( property ) == true && action == 'click' ){
+      // if it's a match, and the user clicked match button, increment score correct
+      console.log( 'Correct click' );
+      colorResults[currentObject] = true;
+
+    }else if( compareNback( property ) == false && action == 'time'){
+      // if it isn’t a match, and the user did’t click match button, increment score correct
+      console.log( 'Correct time' );
+      colorResults[currentObject] = true;
+    }else{
+      // if it is a match and the user didn’t click match button, increment score incorrect
+      // or if it isn’t a match, and the user clicks match button, increment score incorrect
+      console.log( 'Incorrect ' + action );
+      colorResults[currentObject] = false;
+    }
+  }else if( property == 'shape' ){
+    // if the user already provided an input, or if there's no object at the n-back index, don't continue
+    if( currentObject < n || shapeResults[currentObject] != null ){
+      return false;  
+    }
+
+    if ( compareNback( property ) == true && action == 'click' ){
+      // if it's a match, and the user clicked match button, increment score correct
+      console.log( 'Correct click' );
+      shapeResults[currentObject] = true;
+
+    }else if( compareNback( property ) == false && action == 'time'){
+      // if it isn’t a match, and the user did’t click match button, increment score correct
+      console.log( 'Correct time' );
+      shapeResults[currentObject] = true;
+    }else{
+      // if it is a match and the user didn’t click match button, increment score incorrect
+      // or if it isn’t a match, and the user clicks match button, increment score incorrect
+      console.log( 'Incorrect ' + action );
+      shapeResults[currentObject] = false;
+    }
+  }
+}
 
 // * * *  Game Complete  * * *
 
 // show the values of correct and incorrect
 function endGame(){
 
-  console.log('Game Complete')
+  console.log('Game Complete');
   getResults();
-  $( '.scoreboard' ).append( '<p> Correct: ' + correct + '<br>Incorrect: ' + incorrect + '</p>' )
+  $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
   //reset the buttons
   $( 'input.settings').removeAttr('disabled');
   $( 'input.color').attr('disabled', 'disabled');
+  $( 'input.shape').attr('disabled', 'disabled');
 
-};
+}
 
 // iterate over the results array to get the final results
 function getResults(){
 
-  for ( var i = 0; i < results.length; i++ ){
-    if ( results[i] == true ){
-      correct++
-    }else if ( results[i] == false ){
-      incorrect++
-    };
-  };
+  for ( var i = 0; i < colorResults.length; i++ ){
+    if ( colorResults[i] == true ){
+      colorCorrect++;
+    }else if ( colorResults[i] == false ){
+      colorIncorrect++;
+    }
+  }
 
-};
+  for ( var m = 0; m < shapeResults.length; m++ ){
+    if ( shapeResults[m] == true ){
+      shapeCorrect++;
+    }else if ( shapeResults[m] == false ){
+      shapeIncorrect++;
+    }
+  }
+
+}
 
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Interactivity
@@ -335,6 +404,16 @@ $( 'form.settings' ).on('submit', function(e){
 
 // Listen for user's match guess
 $( 'input.color' ).on('click', function(e){
+
+  e.preventDefault();
+  $( this ).attr('disabled', 'disabled');
+
+  var inputClass = $( this ).attr( 'class' );
+  updateScore( inputClass, 'click' );
+
+});
+
+$( 'input.shape' ).on('click', function(e){
 
   e.preventDefault();
   $( this ).attr('disabled', 'disabled');
