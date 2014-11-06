@@ -117,23 +117,24 @@ function generateSouvenirs(){
 
 };
 
-function addMatches(){
-  var matchCount = 0;
+function addColorMatches(){
+  var colorMatchCount = 0;
 
-  while ( matchCount < 5 ){
+  while ( colorMatchCount < 5 ){
 
     for ( var j = 0; j < souvenirs.length; j++ ){
-      if ( j >= n && matchCount < 5 ){
-      console.log(matchCount)
+      if ( j >= n && colorMatchCount < 5 ){
+      console.log(colorMatchCount)
 
         if ( Math.random() >= 0.8 ){
 
           if ( 'match' in souvenirs[j] !== true ){
-            console.log (souvenirs[j]);
+            console.log( souvenirs[j] );
             souvenirs[j].match = 'color';
             souvenirs[j - n].match = 'color';
             souvenirs[j].color = souvenirs[j - n].color;
             matchCount++;
+            console.log( souvenirs[j].match )
 
           };
         };

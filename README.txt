@@ -1,48 +1,50 @@
 Logic behind an n-back game
 
 Game:
-	display x # of objects sequentially
-	randomize the value of the object properties
-	user selects which properties they believe they saw n # of intances ago
-	compare user selection to object property n # instances ago
-	deem it right or wrong, message that immediately
+	X display x # of objects sequentially
+	X randomize the value of the object properties
+	X user selects which properties they believe they saw n # of intances ago
+	X compare user selection to object property n # instances ago
+	X deem it right or wrong
+	message that immediately
 	calculate a percentage of how much the user remembered correctly vs. not for each property type
 
 Game settings:
-	Number of objects to play: trials
-	Object properties: object constructor
-	n-back: n
-	score: boolean?
+	X Number of objects to play: trials
+	X Object properties: object constructor
+	X n-back: n
+	X score: incorrect/correct counts
 
 Properties:
-	color
+	X color
+	position[0,0]
 	shape
 	sound
-	position[0,0]
 
 Sequence
-	create objects with random properties
-		later, create matches, lures and fillers
-	store the objects
-	show the objects
-	* compare the object's properties to the properties of object n
-		does this work differently if we generate properties as matches, lures and fillers?
-	listen to the user's input on	
-	compare the user's property guesses to the object's properties
-	store
+	X create objects with random properties
+		X create matches
+		X create fillers
+		  create lures
+	X store the objects
+	X show the objects
+	X compare the object's properties to the properties of object n
+	X listen to the user's input on click
+	X compare the user's property guesses to the object's properties for incorrect/correctness
+	X store the correct and incorrect values
 
 Layout
-	Status
-		Game ready
-		Game active
-		Game paused
-		Game complete	
+	X Status
+		X Game ready
+		X Game active
+		X Game paused
+		X Game complete	
 	Gameboard
 		Stage
 		Controls
 	Settings
 		Object property toggle
-		N value
+		X N value
 		Speed (time between objects)
 		Flash time (% of time window in which the object is visible)
 
@@ -95,8 +97,9 @@ X      the user doesn’t click match button, increment score correct
 
 make object fade away between intervals
 
-To do: design logic for 1/5 matches
-take my souvenirs array and replace 5 of them with their n-back
+To do: 
+X design logic for 1/5 matches
+X take my souvenirs array and replace 5 of them with their n-back
 
 message correct/incorrect on match button click
 
@@ -116,14 +119,14 @@ Add a tutorial
 
 After the whole thing works, end to end...
 
-the generateObjects function should be comprised of matches, fillers and lures
+X the generateObjects function should be comprised of matches, fillers and lures
 
-1/5 of the objects must be matches; the rest are fillers or lures
+X 1/5 of the objects must be matches; the rest are fillers or lures
 
-lvl0 0 lures
+X lvl0 0 lures
 lvl1 5 lures; 'lure.property' = 'n.property'; lure is located at n+1
 lvl2 lure is located at either n+1 or n-1
-'filler.property' != previous 10 'n.property's
+X 'filler.property' != previous 10 'n.property's
 
 http://mindmodeling.org/cogsci2012/papers/0290/paper0290.pdf
 
@@ -137,38 +140,6 @@ Add this to my script.js:
 	console.log(my_chance.bool());
 
 ----------
-
-// generate the souvenirs array
-function generateSouvenirs(){
-
-  // iterate over the number of 'trials'
-  for ( var i = 0; i < trials; i++ ){
-    // generate an souvenir with a random color
-    var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)] );
-
-    // Later add 1/5 matches to our array
-    // Check if we have an nBack object
-    if ( i >= n ){
-      generateMatches();
-//     // Check if we have a match
-      if ( newSouvenir.color == souvenirs[i - n].color ){
-        // if so, add a 'match' property
-        newSouvenir.match = 'color';
-        console.log(newSouvenir)
-      };
-      // populate the souvenirs array 
-      souvenirs.push(newSouvenir);
-    }else{
-      souvenirs.push(newSouvenir);
-    };
-
-  };
-
-  // Later, add lures to currentObject nBack +1
-  // Then, add lures to currentObject nBack -1 
-
-};
-
 
 
 
