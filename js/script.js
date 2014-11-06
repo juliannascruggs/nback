@@ -35,7 +35,8 @@ var colors = [
   '#866389',
   '#2B9EB3',
   '#2B2C30',
-  '#FC7B44'
+  '#FC7B44',
+  '#F65469'
 
 ];
 
@@ -87,19 +88,18 @@ function generateSouvenirs(){
 
   // seed the souvenir pool with one object of each color
   for ( var i = 0; i < colors.length; i++ ){
-    var newSouvenir = new Souvenir( colors[i] );
-    souvenirs.push(newSouvenir);
+    var seedSouvenir = new Souvenir( colors[i] );
+    souvenirs.push( seedSouvenir );
   };
 
   while( souvenirs.length < trials ){
 
     var dupeFound = false;
-    // generate an souvenir with a random color
+    // generate a souvenir with a random color
     var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)] );
+    for ( var k = souvenirs.length - 1; k > souvenirs.length - 11; k-- ){
 
-    for ( var i = souvenirs.length - 1; i > souvenirs.length - 9; i-- ){
-
-      if ( newSouvenir.color == souvenirs[i].color ){
+      if ( newSouvenir.color == souvenirs[k].color ){
         dupeFound = true;
         break;
       };
@@ -150,17 +150,17 @@ function addMatches(){
 
   while ( matchCount < 5 ){
 
-    for ( var i = 0; i < souvenirs.length; i++ ){
-
-      if ( i >= n ){
+    for ( var j = 0; j < souvenirs.length; j++ ){
+      if ( j >= n && matchCount < 5 ){
+      console.log(matchCount)
 
         if ( Math.random() >= 0.8 ){
 
-          if ( 'match' in souvenirs[i] !== true ){
-
-            souvenirs[i].match = 'color';
-            souvenirs[i - n].match = 'color';
-            souvenirs[i - n].color = souvenirs[i].color;
+          if ( 'match' in souvenirs[j] !== true ){
+            console.log (souvenirs[j]);
+            souvenirs[j].match = 'color';
+            souvenirs[j - n].match = 'color';
+            souvenirs[j].color = souvenirs[j - n].color;
             matchCount++;
 
           };
@@ -168,31 +168,6 @@ function addMatches(){
       };
     };
   };
-};
-
-
-
-// Messing with a new function to add matches into the souvenir array
-function generateMatches(){
-
-  var matches = 0;
-  while ( matches < 5 ){
-    
-    var usableArray = souvenirs.length - n - 1;
-//    var usableArray = 5 - n - 1;
-    console.log('' + usableArray)
-
-    var nBackPosition = (Math.floor(Math.random()*usableArray)) + 1;
-    console.log('nback' + nBackPosition);
-
-//    souvenirs.splice(nBackPosition, )
-
-    var nBack = souvenirs[Math.floor(Math.random()*souvenirs.length)];
-    console.log(nBack);
-    matches = 5;
-
-  }
-
 };
 
 // * * * * * * * * * * * * * * * * * * * *
@@ -383,6 +358,3 @@ $( 'input.color' ).on('click', function(e){
 // To do: move the play functionality over to it's own button
   // move settings into it's own module
   // add 'Pause' functionality
-
-
-
