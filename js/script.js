@@ -54,6 +54,7 @@ function setSettings(){
   trials += n;
 
 };
+
 // a souvenir object constructor, which will later have it's own settings 
 function Souvenir(color) {
     this.color = color;
@@ -79,7 +80,6 @@ function shuffle(array) {
   return array;
 
 };
-
 
 // * * *  Game Components  * * *
 
@@ -116,34 +116,6 @@ function generateSouvenirs(){
   addMatches();
 
 };
-
-
-
-  // iterate over the number of 'trials'
-//  for ( var i = 0; i < trials; i++ ){
-    // generate an souvenir with a random color
-//    var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)] );
-
-    // Later add 1/5 matches to our array
-    // Check if we have an nBack object
-//    if ( i >= n ){
-//      generateMatches();
-//     // Check if we have a match
-//      if ( newSouvenir.color == souvenirs[i - n].color ){
-        // if so, add a 'match' property
-//        newSouvenir.match = 'color';
-//        console.log(newSouvenir)
-//      };
-      // populate the souvenirs array 
-//      souvenirs.push(newSouvenir);
-//    }else{
-//      souvenirs.push(newSouvenir);
-//    };
-
-//  };
-
-  // Later, add lures to currentObject nBack +1
-  // Then, add lures to currentObject nBack -1 
 
 function addMatches(){
   var matchCount = 0;
