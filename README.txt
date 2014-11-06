@@ -48,7 +48,7 @@ Layout
 		Speed (time between objects)
 		Flash time (% of time window in which the object is visible)
 
-To do:
+
 X display a settings page
 X user sets the setting for "n"
 X call getSettings function
@@ -94,14 +94,22 @@ X if it isn’t, and
 X      the user clicks match button, increment score incorrect
 X      the user doesn’t click match button, increment score correct
 
+---------------
 
-make object fade away between intervals
+Adding shapes
+
+get some shapes by adding font.awesome to my index.html file
+how would I get a shape to occupy the entirety of my gameboard div?
+
+
+
 
 To do: 
 X design logic for 1/5 matches
 X take my souvenirs array and replace 5 of them with their n-back
 
 message correct/incorrect on match button click
+make object fade away between intervals
 
 Design my responsive game board
 Build a responsive gameboard

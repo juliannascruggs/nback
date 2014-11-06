@@ -23,7 +23,7 @@ var results = [];
 var correct;
 var incorrect;
 
-// a color array
+// my property arrays
 var colors = [
 
   '#B2CDC4',
@@ -42,7 +42,17 @@ var colors = [
 
 var shapes = [
 
-  
+  'circle',
+  'star',
+  'square',
+  'flash',
+  'heart',
+  'remove',
+  'comment',
+  'cloud',
+  'bell',
+  'asterisk',
+  'tree'
 
 ];
 
@@ -62,8 +72,9 @@ function setSettings(){
 };
 
 // a souvenir object constructor, which will later have it's own settings 
-function Souvenir(color) {
+function Souvenir( color, shape ) {
     this.color = color;
+    this.shape = shape;
 };
 
 // a function used to shuffle the colors array
@@ -94,7 +105,7 @@ function generateSouvenirs(){
 
   // seed the souvenir pool with one object of each color
   for ( var i = 0; i < colors.length; i++ ){
-    var seedSouvenir = new Souvenir( colors[i] );
+    var seedSouvenir = new Souvenir( colors[i], shapes[i] );
     souvenirs.push( seedSouvenir );
   };
 
@@ -102,10 +113,10 @@ function generateSouvenirs(){
 
     var dupeFound = false;
     // generate a souvenir with a random color
-    var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)] );
+    var newSouvenir = new Souvenir( colors[Math.floor(Math.random()*colors.length)], shapes[Math.floor(Math.random()*shapes.length)] );
     for ( var k = souvenirs.length - 1; k > souvenirs.length - 11; k-- ){
 
-      if ( newSouvenir.color == souvenirs[k].color ){
+      if ( newSouvenir.color == souvenirs[k].color || newSouvenir.shape == souvenirs[k].shape ){
         dupeFound = true;
         break;
       };
@@ -248,7 +259,8 @@ function runTrials( start, end, interval ) {
 
 // draw the currentObject on the gameboard
 function drawObject(){
-  $( '.souvenir' ).css( 'background-color', souvenirs[currentObject].color )
+  $( '.souvenir' ).css( 'color', souvenirs[currentObject].color )
+  $( '.fa' ).removeClass().addClass('fa fa-5x fa-' + souvenirs[currentObject].shape );
 };
 
 // check if the currentObject.property is equal to nBackObject.property
