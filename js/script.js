@@ -134,6 +134,7 @@ function generateSouvenirs(){
   }
   console.log( 'We broke of the while loop!! ' + souvenirs );
   addColorMatches();
+  addShapeMatches();
 
 }
 
