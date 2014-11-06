@@ -40,6 +40,12 @@ var colors = [
 
 ];
 
+var shapes = [
+
+  
+
+];
+
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Setup Functions
 // * * * * * * * * * * * * * * * * * * * *
@@ -113,7 +119,7 @@ function generateSouvenirs(){
 
   };
   console.log( 'We broke of the while loop!! ' + souvenirs );
-  addMatches();
+  addColorMatches();
 
 };
 
@@ -129,12 +135,10 @@ function addColorMatches(){
         if ( Math.random() >= 0.8 ){
 
           if ( 'match' in souvenirs[j] !== true ){
-            console.log( souvenirs[j] );
             souvenirs[j].match = 'color';
             souvenirs[j - n].match = 'color';
             souvenirs[j].color = souvenirs[j - n].color;
-            matchCount++;
-            console.log( souvenirs[j].match )
+            colorMatchCount++;
 
           };
         };
