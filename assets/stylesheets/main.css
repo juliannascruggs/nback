@@ -91,19 +91,23 @@ body {
 }
 
 h1 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1.5rem;
   font-weight: 600;
+  color: #51170c;
   text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  margin-bottom: 3rem;
+  letter-spacing: 0.05rem;
+  margin-bottom: .2rem;
 }
 h2 {
   font-family: 'Roboto Slab', serif;
-  font-weight: 100;
-  letter-spacing: .25rem; 
+  font-size: .9rem;
+  font-weight: 600;
+  color: #51170c;
+  letter-spacing: .05rem; 
 }
 h2, h3, h4, h5, p {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 /*
@@ -153,10 +157,11 @@ h2, h3, h4, h5, p {
 
 .logo {
   font-family: 'Roboto Slab', serif;
-  font-size: 4.8rem;
+  font-size: 5rem;
   font-weight: 100;
-  letter-spacing: .2rem;
-  padding: 3.2rem 0 .6rem 0;
+  color: ;
+  letter-spacing: .3rem;
+  padding: 3rem 0 0.5rem 0;
 }
 
 header {
