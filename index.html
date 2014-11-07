@@ -1,52 +1,81 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>nback.co</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <!-- Google Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic' rel='stylesheet' type='text/css'>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>nback.co</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--  CSS  -->
+    <link rel="stylesheet" href="assets/stylesheets/main.css">
+    <link rel="stylesheet" href="assets/stylesheets/menu.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300|Open+Sans:400italic,400,700,300,600|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
+    <script src="assets/js/modernizr.custom.js"></script>
+  </head>
+  <body>
+      <!-- Header -->
+    <header class="container group">
+      <nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
 
-        <!--  CSS  -->
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+        <div class="cbp-hsinner">
+          <div class="logo">
+      Nback.Co
+    </div>
+    <h1>
+      Improve Your Working Memory
+    </h1>
+    <h2>
+      And maybe become a genius.
+    </h2>
 
-    </head>
-    <body>
-
-        <!-- Settings page -->
-        <h1>
-            Setup
-        </h1>
-
-        <!-- User input for value of n -->
-        <p class="counter">Hi</p>
-        <form class="settings">
-            <label>N equals: </label>
-            <input type="number" class="nback" value="2"/>
-            <br>
-            <br>
-            <input type="submit" class="settings" value="Play"/>
-        </form>
-        <div class="gameboard">
-
-            <div class="scoreboard">
-                
-            </div>
-            <div class="stage">
-                <div class="souvenir"><i class="fa fa-5x"></i></div>
-            </div>
-            <form class="controls">
-                <input type="submit" class="color" value="Color Match" disabled="diabled"/>
-                <input type="submit" class="shape" value="Shape Match" disabled="diabled"/>
-            </form>
+          <ul class="cbp-hsmenu">
+            <li>
+              <a href="#">Fine Liquors</a>
+              <ul class="cbp-hssubmenu">
+                <li><a href="#"><img src="assets/images/10.png" alt="img10"/><span>Fresh Juice</span></a></li>
+                <li><a href="#"><img src="assets/images/6.png" alt="img06"/><span>Sweet Rum</span></a></li>
+                <li><a href="#"><img src="assets/images/9.png" alt="img09"/><span>Eggy Liquor</span></a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
+      </nav>
+    </header>
+      <!-- Settings page -->
 
-        <!-- JavaScripts -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
-        
-    </body>
+
+
+    <!-- User input for value of n -->
+    <p class="counter">Hi</p>
+    <form class="settings">
+      <label>N equals: </label>
+      <input type="number" class="nback" value="2"/>
+      <br>
+      <br>
+      <input type="submit" class="settings" value="Play"/>
+    </form>
+    <div class="gameboard">
+
+      <div class="scoreboard">
+          
+      </div>
+      <div class="stage">
+        <div class="souvenir"><i class="fa fa-5x"></i></div>
+      </div>
+      <form class="controls">
+        <input type="submit" class="color" value="Color Match" disabled="diabled"/>
+        <input type="submit" class="shape" value="Shape Match" disabled="diabled"/>
+      </form>
+    </div>
+
+    <!-- JavaScripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+<!--    <script type="text/javascript" src="assets/js/menu.js"></script> -->
+    <script type="text/javascript" src="assets/js/menu.js"></script>
+    <script src="assets/js/cbpHorizontalSlideOutMenu.min.js"></script>
+    <script>
+      var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
+    </script>
+  </body>
 </html>
