@@ -98,11 +98,13 @@ X      the user doesn’t click match button, increment score correct
 
 Adding shapes
 
-get some shapes by adding font.awesome to my index.html file
+X get some shapes by adding font.awesome to my index.html file
 how would I get a shape to occupy the entirety of my gameboard div?
 
-
-
+Code refactor:
+I'm storing a match property on the objects in my souvenirs array
+I'm also storing a seperate arrays of results vs. matches of each property type
+There are patterns in how the properties are stored that should be matched in how I evaluate and store my results. Much deleting is in order.
 
 To do: 
 X design logic for 1/5 matches

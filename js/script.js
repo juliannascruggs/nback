@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 100;
+var trialDuration = 3000;
 
 // * * *  Game Components  * * *
 
@@ -45,17 +45,17 @@ var colors = [
 
 var shapes = [
 
-  'circle',
-  'star',
-  'square',
-  'flash',
-  'heart',
-  'remove',
-  'comment',
-  'cloud',
-  'bell',
-  'asterisk',
-  'tree'
+  'bug',
+  'rocket',
+  'bomb',
+  'send',
+  'puzzle-piece',
+  'quote-right',
+  'leaf',
+  'paw',
+  'tint',
+  'truck',
+  'flash'
 
 ];
 
@@ -187,6 +187,9 @@ function addShapeMatches(){
   }
 }
 
+
+
+
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Game Logic
 // * * * * * * * * * * * * * * * * * * * *
@@ -252,7 +255,7 @@ function startCountdown(){
       clearInterval( countdown );
     }
 // TODO: set this back to 1000 later
-  }, 10 );
+  }, 1000 );
 
 }
 
