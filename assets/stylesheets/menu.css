@@ -78,7 +78,7 @@
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     content: "\f107";
-    font-size: 150%;
+    font-size: 200%;
     margin-right: 0.3rem;
     opacity: 0.5;
     vertical-align: middle;
@@ -166,8 +166,8 @@
 }
 /* TODO: delete the img tag when you're done*/
 .cbp-hssubmenu > li a img,
-.cbp-hssubmenu > li a h3 {
-    font-size: 13rem;
+a h3 {
+    font-size: 12rem;
     font-weight: 100;
     border: none;
     outline: none;
@@ -229,6 +229,20 @@
 }
  
 @media screen and (max-width: 51.4375em){
+    .logo {
+        font-size: 4.3rem;
+        letter-spacing: .05rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: .9rem;
+        letter-spacing: .04rem;
+    }
+
     .cbp-hsmenu-wrapper {
         font-size: 100%;
     }
@@ -256,9 +270,9 @@
  
     .cbp-hsmenu > li > a:not(:only-child):before {
         line-height: 1.8;
-        right: 0;
+        right: .4em;
         position: absolute;
-        font-size: 200%;
+        font-size: 275%;
     }
  
     .cbp-hsmenubg {
@@ -279,6 +293,9 @@
     /* Let's only allow 3 item in a row now */
     .cbp-hssubmenu > li {
         width: 30%;
+    }
+    a h3 {
+        font-size: 11rem;
     }
  
     /* Reset box shadows for the 6 items in row case */
@@ -305,14 +322,27 @@
 }
  
 @media screen and (max-width: 25em){
+    .logo {
+        font-size: 4rem;
+        letter-spacing: .1rem;
+    }
+
+    h1 {
+        font-size: 1.15rem;
+    }
+
+    h2 {
+        font-size: .8rem;
+        letter-spacing: .04rem;
+    }
+
     /* Let's only allow 1 item in a row now */
     .cbp-hssubmenu > li {
         width: 100%;
         display: block;
     }
     .cbp-hsmenu-wrapper .cbp-hssubmenu > li {
-/*        box-shadow: -28px 0 0 -27px #ddd;
-*/        box-shadow: 0 1px #1e1e1e, 
+        box-shadow: 0 1px #1e1e1e, 
                     0 0 0 1px #0c0c0c;
         text-align: left;
     }
@@ -324,12 +354,12 @@
     }
 /* TODO: remove the img part of this */ 
     .cbp-hssubmenu > li a img,
-    .cbp-hssubmenu > li a h3 {
-        
+    a h3 {
+        font-size: 3rem;
         float: left;
+        margin-right: 1rem;
         max-height: 50px;
     }
- 
     .cbp-hssubmenu > li a span {
         min-height: 0;
         margin: 0;

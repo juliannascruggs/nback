@@ -113,7 +113,7 @@ h2 {
 }
 h3 {
   font-family: 'Roboto Slab', serif;
-  
+  text-align: center;
 }
 h2, h3, h4, h5, p {
   margin-bottom: 1rem;
