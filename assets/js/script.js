@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 3000;
+var trialDuration = 1000;
 
 // * * *  Game Components  * * *
 
@@ -29,17 +29,17 @@ var shapeIncorrect;
 // my property arrays
 var colors = [
 
-  '#B2CDC4',
-  '#D8B847',
-  '#E94E54',
-  '#7D5242',
-  '#8FFAFF',
-  '#14A2F6',
-  '#866389',
-  '#2B9EB3',
-  '#2B2C30',
-  '#FC7B44',
-  '#F65469'
+  '#e74538',
+  '#e88a25',
+  '#f9e14b',
+  '#efed89',
+  '#7abf66',
+  '#099fb0',
+  '#b87272',
+  '#6a4a3d',
+  '#273540',
+  '#d6f5ec',
+  '#ff8a84'
 
 ];
 
@@ -284,8 +284,8 @@ function runTrials( start, end, interval ) {
       drawObject();
       // enable the match buttons if we've reached n
       if ( currentObject >= n ){
-        $( 'input.color-button').removeAttr('disabled');
-        $( 'input.shape-button').removeAttr('disabled');
+        $( 'input.color').removeAttr('disabled');
+        $( 'input.shape').removeAttr('disabled');
       }
 
     }else{
@@ -366,8 +366,8 @@ function endGame(){
   $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
   //reset the buttons
   $( 'input.settings').removeAttr('disabled');
-  $( 'input.color-button').attr('disabled', 'disabled');
-  $( 'input.shape-button').attr('disabled', 'disabled');
+  $( 'input.color').attr('disabled', 'disabled');
+  $( 'input.shape').attr('disabled', 'disabled');
 
 }
 
@@ -407,7 +407,7 @@ $( 'form.settings' ).on('submit', function(e){
 });
 
 // Listen for user's match guess
-$( 'input.color-button' ).on('click', function(e){
+$( 'input.color' ).on('click', function(e){
 
   e.preventDefault();
   $( this ).attr('disabled', 'disabled');
@@ -417,7 +417,7 @@ $( 'input.color-button' ).on('click', function(e){
 
 });
 
-$( 'input.shape-button' ).on('click', function(e){
+$( 'input.shape' ).on('click', function(e){
 
   e.preventDefault();
   $( this ).attr('disabled', 'disabled');
