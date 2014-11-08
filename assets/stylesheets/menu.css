@@ -59,13 +59,7 @@
     z-index: 10000;
     outline: none;
 }
- 
-.no-touch .cbp-hsmenu > li > a:hover,
-.no-touch .cbp-hsmenu > li > a:focus,
-.cbp-hsmenu > li.cbp-hsitem-open > a {
-    color: #fff;
-}
- 
+ /*TODO: maybe add list color #fff back here*/
 /* Add an arrow to the main menu link if it has a submenu (not the only child) */
 .cbp-hsmenu > li > a:not(:only-child):before {
     display: inline-block;
@@ -159,13 +153,23 @@
     outline: none;
     padding: 2em 1em 1em 1em;
 }
- 
+
+.no-touch .cbp-hsmenu > li > a:hover,
+.no-touch .cbp-hsmenu > li > a:focus,
+.cbp-hsmenu > li.cbp-hsitem-open > a,
 .no-touch .cbp-hssubmenu > li a:hover,
-.no-touch .cbp-hssubmenu > li a:focus {
-    color: #a2a2a2;
+.no-touch .cbp-hssubmenu > li a:focus,
+li a.active {
+    color: #fff;
 }
-/* TODO: delete the img tag when you're done*/
-.cbp-hssubmenu > li a img,
+
+/*TODO: Delete this guy*/
+/*.no-touch .cbp-hssubmenu > li a:hover,
+.no-touch .cbp-hssubmenu > li a:focus {
+    color: #fff;
+}
+*//* TODO: delete the img tag when you're done*/
+/*.cbp-hssubmenu > li a img,*/
 a h3 {
     font-size: 12rem;
     font-weight: 100;
@@ -178,15 +182,20 @@ a h3 {
     -moz-transition: color 0.2s;
     transition: color 0.2s;
 }
+
 /*TODO: delete li a:hover imgs */
 .no-touch .cbp-hssubmenu > li a:hover img {
     color: #fff;
 }
-.no-touch .cbp-hssubmenu > li a:hover h3,
+/*TODO: Delete this*/
+/*.no-touch .cbp-hssubmenu > li a:hover h3,
 .no-touch .cbp-hssubmenu > li a:hover span {
     color: #fff;
 }
- 
+.no-touch .cbp-hssubmenu > li a:hover,
+.no-touch .cbp-hssubmenu > li a:focus {
+    color: #fff;
+} */
 .cbp-hssubmenu > li a span {
     display: block;
     min-height: 3em;

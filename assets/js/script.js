@@ -68,9 +68,10 @@ var shapes = [
 // apply the user's game settings
 function setSettings(){
 
-  n = $( '.nback' ).val();
-  n = parseInt(n);
-  trials += n;
+  n = $( '.n-equals-submenu li a.active' ).find('h3').html();
+  console.log('n equals ' + n);
+  n = parseInt( n );
+  trials += n
 
 }
 
@@ -397,6 +398,15 @@ function getResults(){
 // * * * * * * * * * * * * * * * * * * * *
 
 // * * *  User Inputs  * * *
+
+// Listen for nBack setting
+$( '.n-equals-submenu li a' ).on('click', function(e){
+  e.preventDefault();
+
+  $( '.n-equals-submenu li a' ).removeClass( 'active' );
+  $( this ).addClass( 'active' );
+
+});
 
 // Listen for a 'Play' button click
 $( 'form.settings' ).on('submit', function(e){
