@@ -169,7 +169,7 @@ li a.active {
     color: #fff;
 }
 *//* TODO: delete the img tag when you're done*/
-/*.cbp-hssubmenu > li a img,*/
+.cbp-hssubmenu > li a img,
 a h3 {
     font-size: 12rem;
     font-weight: 100;

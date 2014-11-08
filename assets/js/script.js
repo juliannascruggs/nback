@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 1000;
+var trialDuration = 2000;
 
 // * * *  Game Components  * * *
 
@@ -68,7 +68,7 @@ var shapes = [
 // apply the user's game settings
 function setSettings(){
 
-  n = $( '.n-equals-submenu li a.active' ).find('h3').html();
+  n = $( '#n-equals' ).html();
   console.log('n equals ' + n);
   n = parseInt( n );
   trials += n
@@ -405,6 +405,7 @@ $( '.n-equals-submenu li a' ).on('click', function(e){
 
   $( '.n-equals-submenu li a' ).removeClass( 'active' );
   $( this ).addClass( 'active' );
+  $( '#n-equals' ).empty().append( $( this ).find('h3').html() );
 
 });
 
