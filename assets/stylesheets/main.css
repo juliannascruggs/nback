@@ -99,7 +99,7 @@ h1 {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #51170c;
+  color: #610000;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
   margin-bottom: .2rem;
@@ -108,7 +108,7 @@ h2 {
   font-family: 'Roboto Slab', serif;
   font-size: .9rem;
   font-weight: 600;
-  color: #51170c;
+  color: #610000;
   letter-spacing: .05rem; 
 }
 h2, h3, h4, h5, p {
@@ -129,6 +129,11 @@ h2, h3, h4, h5, p {
   border: 1px solid #dfe2e5;
   padding: 10px 30px;
 }
+
+a {
+  text-decoration: none;
+}
+
 /*
   ========================================
   Home
@@ -161,7 +166,7 @@ h2, h3, h4, h5, p {
 */
 
 header {
-  background-color: #d85b49;
+  background-color: #e74538;
 }
 .title {
 
@@ -182,7 +187,6 @@ header {
   Controls
   ========================================
 */
-
 
 /*
   ========================================

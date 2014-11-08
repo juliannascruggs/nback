@@ -284,8 +284,8 @@ function runTrials( start, end, interval ) {
       drawObject();
       // enable the match buttons if we've reached n
       if ( currentObject >= n ){
-        $( 'input.color').removeAttr('disabled');
-        $( 'input.shape').removeAttr('disabled');
+        $( 'input.color-button').removeAttr('disabled');
+        $( 'input.shape-button').removeAttr('disabled');
       }
 
     }else{
@@ -300,7 +300,7 @@ function runTrials( start, end, interval ) {
 // draw the currentObject on the gameboard
 function drawObject(){
   $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
-  $( '.fa' ).removeClass().addClass('fa fa-5x fa-' + souvenirs[currentObject].shape );
+  $( '.fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
 }
 
 // check if the currentObject.property is equal to nBackObject.property
@@ -366,8 +366,8 @@ function endGame(){
   $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
   //reset the buttons
   $( 'input.settings').removeAttr('disabled');
-  $( 'input.color').attr('disabled', 'disabled');
-  $( 'input.shape').attr('disabled', 'disabled');
+  $( 'input.color-button').attr('disabled', 'disabled');
+  $( 'input.shape-button').attr('disabled', 'disabled');
 
 }
 
@@ -407,7 +407,7 @@ $( 'form.settings' ).on('submit', function(e){
 });
 
 // Listen for user's match guess
-$( 'input.color' ).on('click', function(e){
+$( 'input.color-button' ).on('click', function(e){
 
   e.preventDefault();
   $( this ).attr('disabled', 'disabled');
@@ -417,7 +417,7 @@ $( 'input.color' ).on('click', function(e){
 
 });
 
-$( 'input.shape' ).on('click', function(e){
+$( 'input.shape-button' ).on('click', function(e){
 
   e.preventDefault();
   $( this ).attr('disabled', 'disabled');
