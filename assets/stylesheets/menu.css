@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'bpmenu';
+    src:url('../fonts/bpmenu/bpmenu.eot');
+    src:url('../fonts/bpmenu/bpmenu.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/bpmenu/bpmenu.woff') format('woff'),
+        url('../fonts/bpmenu/bpmenu.ttf') format('truetype'),
+        url('../fonts/bpmenu/bpmenu.svg#bpmenu') format('svg');
+    font-weight: normal;
+    font-style: normal;
+} /* Made with http://icomoon.io/ */
+
 /* Main menu wrapper */
 .cbp-hsmenu-wrapper {
     position: relative;
@@ -67,9 +78,9 @@
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     content: "\f107";
-    font-size: 80%;
+    font-size: 150%;
     margin-right: 0.3rem;
-    opacity: 0.4;
+    opacity: 0.5;
     vertical-align: middle;
 }
  
@@ -155,19 +166,25 @@
 }
 /* TODO: delete the img tag when you're done*/
 .cbp-hssubmenu > li a img,
-.cbp-hssubmenu > li a p {
+.cbp-hssubmenu > li a h3 {
+    font-size: 13rem;
+    font-weight: 100;
     border: none;
     outline: none;
     display: inline-block;
     margin: 0;
     max-width: 100%;
-    -webkit-transition: opacity 0.2s;
-    -moz-transition: opacity 0.2s;
-    transition: opacity 0.2s;
+    -webkit-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    transition: color 0.2s;
 }
- 
+/*TODO: delete li a:hover imgs */
 .no-touch .cbp-hssubmenu > li a:hover img {
-    opacity: 0.5;
+    color: #fff;
+}
+.no-touch .cbp-hssubmenu > li a:hover h3,
+.no-touch .cbp-hssubmenu > li a:hover span {
+    color: #fff;
 }
  
 .cbp-hssubmenu > li a span {
@@ -267,19 +284,24 @@
     /* Reset box shadows for the 6 items in row case */
     .cbp-hssubmenu > li:nth-child(-n+6),
     .cbp-hssubmenu > li:nth-child(6n+1) {
-        box-shadow: -28px 0 0 -27px #ddd, 0 -28px 0 -27px #ddd;
+        box-shadow: -26px 0 1px -24px #1e1e1e, 
+                    -28px 0 1px -26px #000, 
+                    0 -26px 1px -24px #1e1e1e, 
+                    0 -28px 1px -26px #000;
     }
- 
+
     /* First 4 items don't have upper box shadow */
     .cbp-hssubmenu > li:nth-child(-n+3) {
-        box-shadow: -26px 0 1px -24px #1e1e1e, -28px 0 1px -26px #000;
+        box-shadow: -26px 0 1px -24px #1e1e1e, 
+                    -28px 0 1px -26px #000;
     } 
  
     /* Every 5th item does not have a left box shadow */
     .cbp-hssubmenu > li:nth-child(3n+1) {
-        box-shadow:  0 -28px 0 -27px #ddd;
+        box-shadow: 0 -26px 1px -24px #1e1e1e, 
+                    0 -28px 1px -26px #000;
     }
- 
+  
 }
  
 @media screen and (max-width: 25em){
@@ -289,8 +311,8 @@
         display: block;
     }
     .cbp-hsmenu-wrapper .cbp-hssubmenu > li {
-        box-shadow: -28px 0 0 -27px #ddd;
-        box-shadow: 0 1px #1e1e1e, 
+/*        box-shadow: -28px 0 0 -27px #ddd;
+*/        box-shadow: 0 1px #1e1e1e, 
                     0 0 0 1px #0c0c0c;
         text-align: left;
     }
@@ -302,8 +324,8 @@
     }
 /* TODO: remove the img part of this */ 
     .cbp-hssubmenu > li a img,
-    .cbp-hssubmenu > li a p {
-
+    .cbp-hssubmenu > li a h3 {
+        
         float: left;
         max-height: 50px;
     }

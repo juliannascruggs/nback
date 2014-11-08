@@ -111,6 +111,10 @@ h2 {
   color: #610000;
   letter-spacing: .05rem; 
 }
+h3 {
+  font-family: 'Roboto Slab', serif;
+  
+}
 h2, h3, h4, h5, p {
   margin-bottom: 1rem;
 }
