@@ -18,11 +18,13 @@
 }
  
 /* Main menu style */
-.cbp-hsmenu-wrapper .cbp-hsmenu {
+.cbp-hsmenu-wrapper .cbp-hsmenu,
+.cbp-hsmenu-wrapper .title {
     width: 90%;
     max-width: 69em;
     margin: 0 auto;
     padding: 0 1.875em;
+    text-align: center;
 }
  
 .cbp-hsmenu > li {
@@ -54,23 +56,23 @@
 /* Add an arrow to the main menu link if it has a submenu (not the only child) */
 .cbp-hsmenu > li > a:not(:only-child):before {
     display: inline-block;
-    font-family: 'bpmenu';
+/*    font-family: 'bpmenu';
     speak: none;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
-    text-transform: none;
+*/    text-transform: none;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
-    content: "\f107";
-    font-size: 80%;
+/*    content: "\f107";
+*/    font-size: 80%;
     margin-right: 0.3em;
     opacity: 0.4;
     vertical-align: middle;
 }
  
 .cbp-hsmenu > li.cbp-hsitem-open > a:not(:only-child):before {
-    content: "\f106";
+/*    content: "\f106";*/
 }
  
 /* Add a triangle to currently open menu item link */
