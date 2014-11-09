@@ -63,6 +63,10 @@ var shapes = [
 // * * *  Setup Functions
 // * * * * * * * * * * * * * * * * * * * *
 
+// $( '.start' ).hide();
+// $( '.active' ).hide();
+// $( '.complete' ).hide();
+
 // * * *  Game Settings  * * *
 
 // apply the user's game settings
@@ -223,9 +227,6 @@ function resetGame(){
   $( '.scoreboard' ).empty();
   // disable the play button
   $( 'button.play').attr('disabled', 'disabled');
-  // swap the game board
-  $( '.ready' ).hide();
-  $( '.start' ).show(); 
 
 }
 
@@ -246,9 +247,13 @@ function startCountdown(){
 
   var counter = 3;
 
+  // swap the game board
+  $( '.ready' ).hide();
+  $( '.start' ).show(); 
   $( '.counter' ).html( '<h3>Ready?</h3>' );
 
   var countdown = setInterval( function(){
+
     // show the countdown
     if ( counter > 0 ){
       $( '.counter' ).html( '<h3>' + counter + '</h3>' );
@@ -264,7 +269,7 @@ function startCountdown(){
       clearInterval( countdown );
 
     }
-// TODO: set this back to 1000 later
+
   }, 1000 );
 
 }

@@ -211,6 +211,7 @@ header {
 /*  width: 100%;
   color: #fff;
 */
+
   text-align: center;
   border: aqua dashed 3px;
   -webkit-transition: opacity 0.5s 0.1s;
@@ -218,10 +219,15 @@ header {
   transition: opacity 0.5s 0.1s;
 }
 
+.play,
+.counter,
+.souvenir {
+  line-height: 21rem;
+}
+
 .play {
   background-color: Transparent;
   font-size: 10rem;
-  line-height: 21rem;
   border: green solid 3px;
 /*  text-align: center;
   text-decoration: none;
@@ -239,13 +245,17 @@ header {
 }
 
 .play-button-label {
-  position: relative;
   top: -5.6rem;
   left: -1.4rem;
+  color: black;
+}
+
+.play-button-label,
+.result span {
+  position: relative;
   font-size: 1.25rem;
   font-family: 'Open Sans Condensed', sans-serif;
   line-height: 1rem;
-  color: black;
   font-weight: 600;
   letter-spacing: .07rem;
   text-transform: uppercase;
@@ -254,7 +264,6 @@ header {
 .counter {
   font-size: 12rem;
   font-weight: 100;
-  line-height: 21rem;
   border: purple solid 3px;
 /*  text-align: center;
   text-decoration: none;
@@ -269,7 +278,6 @@ header {
 
 .souvenir {
   font-size: 15rem;
-  line-height: 21rem;
   border: yellow solid 3px;
   padding-bottom: 2rem;
 }
@@ -284,6 +292,42 @@ header {
   padding-bottom: 2rem;
 }
 */
+
+.scoreboard {
+}
+/*.replay {
+  line-height: 10.5rem;  
+}*/
+.result {
+  line-height: 21rem;
+  display: inline-block;
+  border: orange 3px solid;
+  width: 48%;
+
+/*    vertical-align: top; 
+    box-shadow: -28px 0 0 -27px #ddd, 0 -28px 0 -27px #ddd;
+    opacity: 0;
+    -webkit-transition: opacity 0.1s 0s;
+    -moz-transition: opacity 0.1s 0s;
+    transition: opacity 0.1s 0s;*/
+}
+.result h3 {
+  font-size: 7rem;
+  font-weight: 100;
+  text-align: center;
+  letter-spacing: -.3rem;
+}
+.result h3 span {
+  font-size: 1.5rem;
+  font-weight: 100;
+  display: inline;
+  position: initial;
+}
+.result span {
+  display: block;
+  top: -7.6rem;
+  color: #a2a2a2;
+}
 
 /*
   ========================================
