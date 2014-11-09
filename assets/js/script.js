@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 2000;
+var trialDuration = 500;
 
 // * * *  Game Components  * * *
 

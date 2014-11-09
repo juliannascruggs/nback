@@ -197,7 +197,6 @@ header {
 .gameboard {
   width: 90%;
   margin: 0 auto;
-  border: yellow solid 3px;
 }
 
 .stage {
@@ -213,7 +212,6 @@ header {
 */
 
   text-align: center;
-  border: aqua dashed 3px;
   -webkit-transition: opacity 0.5s 0.1s;
   -moz-transition: opacity 0.5s 0.1s;
   transition: opacity 0.5s 0.1s;
@@ -226,9 +224,14 @@ header {
 }
 
 .play {
-  background-color: Transparent;
+  padding-top: 2rem;
   font-size: 10rem;
-  border: green solid 3px;
+}
+
+.play,
+.replay {
+  background-color: Transparent;
+  border: none;
 /*  text-align: center;
   text-decoration: none;
   width: 100%;*/
@@ -240,7 +243,8 @@ header {
   transition: opacity 0.5s 0.1s;
 }
 
-.play:hover {
+.play:hover,
+.replay:hover {
   opacity: 1;
 }
 
@@ -251,6 +255,7 @@ header {
 }
 
 .play-button-label,
+.replay-button-label,
 .result span {
   position: relative;
   font-size: 1.25rem;
@@ -264,7 +269,6 @@ header {
 .counter {
   font-size: 12rem;
   font-weight: 100;
-  border: purple solid 3px;
 /*  text-align: center;
   text-decoration: none;
   width: 100%;*/
@@ -278,7 +282,6 @@ header {
 
 .souvenir {
   font-size: 15rem;
-  border: yellow solid 3px;
   padding-bottom: 2rem;
 }
 
@@ -295,24 +298,24 @@ header {
 
 .scoreboard {
 }
-/*.replay {
-  line-height: 10.5rem;  
-}*/
-.result {
-  line-height: 21rem;
-  display: inline-block;
-  border: orange 3px solid;
-  width: 48%;
+.replay {
+  line-height: 16.5rem;
+  font-size: 9rem;
+  margin-bottom: -3rem;
+}
 
-/*    vertical-align: top; 
-    box-shadow: -28px 0 0 -27px #ddd, 0 -28px 0 -27px #ddd;
-    opacity: 0;
-    -webkit-transition: opacity 0.1s 0s;
-    -moz-transition: opacity 0.1s 0s;
-    transition: opacity 0.1s 0s;*/
+.replay-button-label {
+  top: -4.3rem;
+}
+.result {
+  line-height: 7.5rem;
+  display: inline-block;
+  /* border: orange 3px solid; */
+  width: 48%;
+  margin-bottom: 1rem;
 }
 .result h3 {
-  font-size: 7rem;
+  font-size: 5rem;
   font-weight: 100;
   text-align: center;
   letter-spacing: -.3rem;
@@ -324,9 +327,10 @@ header {
   position: initial;
 }
 .result span {
-  display: block;
-  top: -7.6rem;
-  color: #a2a2a2;
+display: block;
+top: -1rem;
+color: #fff;
+opacity: .85;
 }
 
 /*
