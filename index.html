@@ -29,6 +29,7 @@
             </h2>
           </div>
         </div>
+        <!-- Settings menu -->
         <div class="cbp-hsinner">
           <ul class="cbp-hsmenu">
             <li>
@@ -47,27 +48,36 @@
         </div>
       </nav>
     </header>
-      <!-- Settings page -->
 
 
 
     <!-- User input for value of n -->
-    <p class="counter">Hi</p>
-    <form class="settings">
-      <input type="submit" class="settings" value="Play"/>
-    </form>
-    <div class="gameboard">
-
-      <div class="scoreboard">
-          
-      </div>
-      <div class="stage">
-        <div class="souvenir"><span class="fa fa-lg"></span></div>
-      </div>
-      <form class="controls">
-        <input type="submit" class="color" value="Color Match" disabled="diabled"/>
-        <input type="submit" class="shape" value="Shape Match" disabled="diabled"/>
+    <div class="group gameboard">
+      <form class="settings">
+        <input type="submit" class="settings" value="Play"/>
       </form>
+      <div class="columns small-col-3-3 large-col-2-3">
+        <div class="play">
+          <div class="play-icon"><span class="fa fa-lg fa-play"></span></div>
+          <p class="button-name">Play</p>
+        </div>
+        <div class="counter"></div>
+        <p class="counter">Hi</p>
+        <div class="scoreboard"></div>
+        <div class="stage">
+          <div class="souvenir"><span class="fa fa-lg "></span></div>
+        </div>
+      </div>
+      <div class="columns small-col-3-3 large-col-1-3">
+        <ul class="controls">
+          <li><a href="#" class="color">Color Match</a></li>
+          <li><a href="#" class="shape">Shape Match</a></li>
+        </ul>
+        <form class="controls">
+          <input type="submit" class="color" value="Color Match" disabled="diabled"/>
+          <input type="submit" class="shape" value="Shape Match" disabled="diabled"/>
+        </form>
+      </div>
     </div>
 
     <!-- JavaScripts -->

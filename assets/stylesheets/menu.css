@@ -231,13 +231,13 @@ a h3 {
     transition: height 0.3s;
 }
  
-@media screen and (max-width: 65em){
+@media screen and (max-width: 65em;){
     .cbp-hsmenu-wrapper {
         font-size: 80%;
     }
 }
  
-@media screen and (max-width: 51.4375em){
+@media screen and (max-width: 51.4375em;){
     .logo {
         font-size: 4.3rem;
         letter-spacing: .05rem;
@@ -330,7 +330,7 @@ a h3 {
   
 }
  
-@media screen and (max-width: 25em){
+@media screen and (max-width: 25em;){
     .logo {
         font-size: 4rem;
         letter-spacing: .1rem;
