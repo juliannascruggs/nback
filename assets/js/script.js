@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 100;
+var trialDuration = 2000;
 
 // * * *  Game Components  * * *
 
@@ -21,10 +21,6 @@ var currentObject;
 // the user's score
 var colorResults = [];
 var shapeResults = []
-var colorCorrect;
-var colorIncorrect;
-var shapeCorrect;
-var shapeIncorrect;
 
 // my property arrays
 var colors = [
@@ -206,12 +202,7 @@ function resetGame(){
 
   // reset the counters
   colorResults = [];
-  colorCorrect = 0;
-  colorIncorrect = 0;
-
   shapeResults = [];
-  shapeCorrect = 0;
-  shapeIncorrect = 0;
 
   currentObject = 0;
   trials = 25;
@@ -223,10 +214,12 @@ function resetGame(){
   shuffle(colors);
   shuffle(shapes);
 
-  // reset the scoreboard
-  $( '.scoreboard' ).empty();
-  // disable the play button
+  // hide the scoreboard
+  $( '.complete' ).hide();
+
+  // disable the play and replay buttons
   $( 'button.play').attr('disabled', 'disabled');
+  $( 'button.replay').attr('disabled', 'disabled');
 
 }
 
@@ -378,12 +371,9 @@ function updateScore( property, action ){
 function endGame(){
 
   console.log('Game Complete');
-  // getResults();
-
-  // $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
   $( '.scoreboard' ).html('<li class="result"><h3>' + resultsPercentage( colorResults ) + '<span>%</span></h3><span>Color</span></li><li class="result"><h3>' + resultsPercentage( shapeResults ) + '<span>%</span></h3><span>Shape</span></li>');
   //reset the buttons
-  $( 'button.play').removeAttr('disabled');
+  $( 'button.replay').removeAttr('disabled');
   $( 'input.color').attr('disabled', 'disabled');
   $( 'input.shape').attr('disabled', 'disabled');
   $( '.active' ).hide();
@@ -392,26 +382,6 @@ function endGame(){
 }
 
 // iterate over the results array to get the final results
-function getResults(){
-
-  for ( var i = 0; i < colorResults.length; i++ ){
-    if ( colorResults[i] == true ){
-      colorCorrect++;
-    }else if ( colorResults[i] == false ){
-      colorIncorrect++;
-    }
-  }
-
-  for ( var m = 0; m < shapeResults.length; m++ ){
-    if ( shapeResults[m] == true ){
-      shapeCorrect++;
-    }else if ( shapeResults[m] == false ){
-      shapeIncorrect++;
-    }
-  }
-
-}
-
 function resultsPercentage( propertyResults ){
 
   var correct = 0;
@@ -455,6 +425,15 @@ $( 'button.play' ).on('click', function(e){
   startGame();
 
 });
+
+// Listen for a 'Replay' button click
+$( 'button.replay' ).on('click', function(e){
+
+  e.preventDefault();
+  startGame();
+
+});
+
 
 // * * * Game Active * * *
 
