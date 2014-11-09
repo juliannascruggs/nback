@@ -53,23 +53,24 @@
 
     <!-- User input for value of n -->
     <div class="group gameboard">
-      <form class="settings">
-        <input type="submit" class="settings" value="Play"/>
-      </form>
-      <div class="columns small-col-3-3 large-col-2-3">
-        <div class="play">
-          <div class="play-icon">
-            <a href="#">
-              <span class="fa fa-lg fa-play"><div class="play-button-label">Play</div></span>
-<!--           <p class="button-name">Play</p> -->
-            </a>
+      <div class="stage columns small-col-3-3 large-col-2-3">
+        <div class="ready">
+          <button type="button" class="play" value="play">
+              <span class="fa fa-lg fa-play">
+                <div class="play-button-label">Play</div>
+              </span>
+          </button>
+        </div>
+        <div class="start">
+          <div class="counter"></div>
+        </div>
+        <div class="active">
+          <div class="souvenir">
+            <span class="fa fa-lg "></span>
           </div>
         </div>
-        <div class="counter"></div>
-        <p class="counter">Hi</p>
-        <div class="scoreboard"></div>
-        <div class="stage">
-          <div class="souvenir"><span class="fa fa-lg "></span></div>
+        <div class="complete">
+          <div class="scoreboard"></div>
         </div>
       </div>
       <div class="columns small-col-3-3 large-col-1-3">

@@ -195,7 +195,7 @@ function addShapeMatches(){
 // * * *  Game Logic
 // * * * * * * * * * * * * * * * * * * * *
 
-// * * *  Game Ready  * * *
+// * * *  Game Start  * * *
 
 // reset all the variables and setup the game
 function resetGame(){
@@ -222,7 +222,9 @@ function resetGame(){
   // reset the scoreboard
   $( '.scoreboard' ).empty();
   // disable the play button
-  $( 'input.settings').attr('disabled', 'disabled');
+  $( 'button.play').attr('disabled', 'disabled');
+  // swap the game board
+   
 
 }
 
@@ -234,7 +236,7 @@ function startGame(){
   setSettings();
   generateSouvenirs();
   startCountdown();
-  console.log('Game Ready');
+  console.log('Game Start');
 
 }
 
@@ -301,7 +303,7 @@ function runTrials( start, end, interval ) {
 // draw the currentObject on the gameboard
 function drawObject(){
   $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
-  $( '.fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+  $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
 }
 
 // check if the currentObject.property is equal to nBackObject.property
@@ -367,6 +369,7 @@ function endGame(){
   $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
   //reset the buttons
   $( 'input.settings').removeAttr('disabled');
+  $( 'button.play').removeAttr('disabled');
   $( 'input.color').attr('disabled', 'disabled');
   $( 'input.shape').attr('disabled', 'disabled');
 
@@ -397,7 +400,7 @@ function getResults(){
 // * * *  Interactivity
 // * * * * * * * * * * * * * * * * * * * *
 
-// * * *  User Inputs  * * *
+// * * *  Game Ready  * * *
 
 // Listen for nBack setting
 $( '.n-equals-submenu li a' ).on('click', function(e){
@@ -410,12 +413,14 @@ $( '.n-equals-submenu li a' ).on('click', function(e){
 });
 
 // Listen for a 'Play' button click
-$( 'form.settings' ).on('submit', function(e){
+$( 'button.play' ).on('click', function(e){
 
   e.preventDefault();
   startGame();
 
 });
+
+// * * * Game Active * * *
 
 // Listen for user's match guess
 $( 'input.color' ).on('click', function(e){

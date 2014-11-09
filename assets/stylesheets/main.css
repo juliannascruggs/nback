@@ -194,25 +194,24 @@ header {
   ========================================
 */
 
-.gameboard{
+.gameboard {
   width: 90%;
   margin: 0 auto;
   border: yellow solid 3px;
 }
 
-.stage,
-.play,
-.scoreboard {
+.stage {
+
 }
 
-.play-icon {
+.play {
+  background-color: Transparent;
   font-size: 10rem;
   line-height: 21rem;
   border: green solid 3px;
   text-align: center;
-}
-
-.play-icon a {
+  width: 100%;
+  cursor:pointer;
   text-decoration: none;
   color: #fff;
   opacity: .5;
@@ -221,7 +220,7 @@ header {
   transition: opacity 0.5s 0.1s;
 }
 
-.play-icon a:hover {
+.play:hover {
   opacity: 1;
 }
 
@@ -238,14 +237,8 @@ letter-spacing: .07rem;
 text-transform: uppercase;
 }
 
-/*p.button-name {
-  font-size: 1rem;
-  line-height: 1rem;
-  text-align: center;
-  margin: 0 auto;
-  height: 2rem;
-}
-*/
+
+
 .souvenir {
   font-size: 15rem;
   line-height: 21rem;
