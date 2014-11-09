@@ -224,7 +224,8 @@ function resetGame(){
   // disable the play button
   $( 'button.play').attr('disabled', 'disabled');
   // swap the game board
-   
+  $( '.ready' ).hide();
+  $( '.start' ).show(); 
 
 }
 
@@ -244,18 +245,24 @@ function startGame(){
 function startCountdown(){
 
   var counter = 3;
-  $( '.counter' ).html( 'Ready?' );
+
+  $( '.counter' ).html( '<h3>Ready?</h3>' );
 
   var countdown = setInterval( function(){
     // show the countdown
-    $( '.counter' ).html( counter );
-
     if ( counter > 0 ){
+      $( '.counter' ).html( '<h3>' + counter + '</h3>' );
+    }else{
+      $( '.counter' ).html( '<h3>GOH!!</h3>' );
+    }
+
+    if ( counter > -1 ){
       counter--;
     }else{
       // when the countdown ends, call runTrials, passing game settings in as arguments
       runTrials( n, trials, trialDuration );
       clearInterval( countdown );
+
     }
 // TODO: set this back to 1000 later
   }, 1000 );
@@ -267,7 +274,8 @@ function startCountdown(){
 // progress the game at an interval or end the game
 function runTrials( start, end, interval ) {
 
-  $( '.counter' ).html( 'GOH!!' );
+  $( '.start' ).hide();
+  $( '.active' ).show(); 
   console.log('Game Active');
 
   // draw the first object
@@ -368,10 +376,11 @@ function endGame(){
   getResults();
   $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
   //reset the buttons
-  $( 'input.settings').removeAttr('disabled');
   $( 'button.play').removeAttr('disabled');
   $( 'input.color').attr('disabled', 'disabled');
   $( 'input.shape').attr('disabled', 'disabled');
+  $( '.active' ).hide();
+  $( '.complete' ).show();
 
 }
 

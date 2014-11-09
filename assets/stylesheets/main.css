@@ -204,15 +204,29 @@ header {
 
 }
 
+.ready,
+.start,
+.active,
+.complete {
+/*  width: 100%;
+  color: #fff;
+*/
+  text-align: center;
+  border: aqua dashed 3px;
+  -webkit-transition: opacity 0.5s 0.1s;
+  -moz-transition: opacity 0.5s 0.1s;
+  transition: opacity 0.5s 0.1s;
+}
+
 .play {
   background-color: Transparent;
   font-size: 10rem;
   line-height: 21rem;
   border: green solid 3px;
-  text-align: center;
-  width: 100%;
-  cursor:pointer;
+/*  text-align: center;
   text-decoration: none;
+  width: 100%;*/
+  cursor:pointer;
   color: #fff;
   opacity: .5;
   -webkit-transition: opacity 0.5s 0.1s;
@@ -225,18 +239,32 @@ header {
 }
 
 .play-button-label {
-position: relative;
-top: -5.6rem;
-left: -1.4rem;
-font-size: 1.25rem;
-font-family: 'Open Sans Condensed', sans-serif;
-line-height: 1rem;
-color: black;
-font-weight: 600;
-letter-spacing: .07rem;
-text-transform: uppercase;
+  position: relative;
+  top: -5.6rem;
+  left: -1.4rem;
+  font-size: 1.25rem;
+  font-family: 'Open Sans Condensed', sans-serif;
+  line-height: 1rem;
+  color: black;
+  font-weight: 600;
+  letter-spacing: .07rem;
+  text-transform: uppercase;
 }
 
+.counter {
+  font-size: 12rem;
+  font-weight: 100;
+  line-height: 21rem;
+  border: purple solid 3px;
+/*  text-align: center;
+  text-decoration: none;
+  width: 100%;*/
+  color: #fff;
+  opacity: .5;
+  -webkit-transition: opacity 0.5s 0.1s;
+  -moz-transition: opacity 0.5s 0.1s;
+  transition: opacity 0.5s 0.1s;
+}
 
 
 .souvenir {
