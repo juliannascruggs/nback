@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 2000;
+var trialDuration = 100;
 
 // * * *  Game Components  * * *
 
@@ -63,9 +63,9 @@ var shapes = [
 // * * *  Setup Functions
 // * * * * * * * * * * * * * * * * * * * *
 
-// $( '.start' ).hide();
-// $( '.active' ).hide();
-// $( '.complete' ).hide();
+$( '.start' ).hide();
+$( '.active' ).hide();
+$( '.complete' ).hide();
 
 // * * *  Game Settings  * * *
 
@@ -378,8 +378,10 @@ function updateScore( property, action ){
 function endGame(){
 
   console.log('Game Complete');
-  getResults();
-  $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
+  // getResults();
+
+  // $( '.scoreboard' ).append( '<p>Color Correct: ' + colorCorrect + ', Color Incorrect: ' + colorIncorrect + '</p><p>Shape Correct: ' + shapeCorrect + ', Shape Incorrect: ' + shapeIncorrect + '</p>' );
+  $( '.scoreboard' ).html('<li class="result"><h3>' + resultsPercentage( colorResults ) + '<span>%</span></h3><span>Color</span></li><li class="result"><h3>' + resultsPercentage( shapeResults ) + '<span>%</span></h3><span>Shape</span></li>');
   //reset the buttons
   $( 'button.play').removeAttr('disabled');
   $( 'input.color').attr('disabled', 'disabled');
@@ -407,6 +409,26 @@ function getResults(){
       shapeIncorrect++;
     }
   }
+
+}
+
+function resultsPercentage( propertyResults ){
+
+  var correct = 0;
+  var incorrect = 0;
+
+    for ( var i = 0; i < propertyResults.length; i++ ){
+      if ( propertyResults[i] == true ){
+        correct++;
+      }else if ( propertyResults[i] == false ){
+        incorrect++;
+      }
+    }
+
+    correct = ( correct/(correct + incorrect) )*100;
+    correct = correct.toFixed();
+
+    return correct;
 
 }
 
