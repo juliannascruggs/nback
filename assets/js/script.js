@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 500;
+var trialDuration = 2500;
 
 // * * *  Game Components  * * *
 
@@ -253,7 +253,10 @@ function startCountdown(){
   $( '.game-ready' ).hide();
   $( '.game-start' ).show();
   $( '.controls' ).fadeIn(1000);
-  $( '.counter' ).html( '<h3>Ready?</h3>' );
+  // $( '.cbp-hsmenu' ).addClass( 'disabled' );
+  // $( '.cbp-hsmenu li a' ).addClass( 'disabled' );
+
+  $( '.counter' ).html( '<h3>n=' + n + '</h3>' );
 
   var countdown = setInterval( function(){
 
@@ -261,7 +264,7 @@ function startCountdown(){
     if ( counter > 0 ){
       $( '.counter' ).html( '<h3>' + counter + '</h3>' );
     }else{
-      $( '.counter' ).html( '<h3>GOH!!</h3>' );
+      $( '.counter' ).html( '<h3>Go</h3>' );
     }
 
     if ( counter > -1 ){
@@ -273,7 +276,7 @@ function startCountdown(){
 
     }
 
-  }, 1000 );
+  }, 1500 );
 
 }
 

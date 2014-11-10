@@ -64,6 +64,7 @@
 				if( item.getAttribute( 'data-open' ) === 'open' ) {
 					closeCurrent( item );
 					closePanel();
+					console.log( item );
 				}
 				else {
 					item.setAttribute( 'data-open', 'open' );
