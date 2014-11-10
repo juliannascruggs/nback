@@ -88,6 +88,7 @@ table {
   .large-col-2-2 {
     width: 100%;
   }
+
 }
 /*
   ========================================
@@ -181,9 +182,6 @@ button:disabled {
 header {
   background-color: #e74538;
 }
-.title {
-
-}
 .logo {
   font-family: 'Roboto Slab', serif;
   font-size: 5rem;
@@ -191,9 +189,34 @@ header {
   color: #fff;
   letter-spacing: .3rem;
   padding: 3rem 0 0.5rem 0;
-}
-.slogan {
+  text-align: center;
+  -webkit-transition: padding 0.5s 0.1s;
+  -moz-transition: padding 0.5s 0.1s;
+  transition: padding 0.5s 0.1s;
 
+}
+.logo.collapsed {
+  padding-top: 1rem;
+}
+
+/*.collapsed {
+
+  -webkit-transition: display 0.5s 0.1s;
+  -moz-transition: display 0.5s 0.1s;
+  transition: display 0.5s 0.1s;
+
+}
+
+@media screen and (max-width: 51.4375rem) {
+  .logo.collapsed {
+    padding-top: 1rem;
+  }
+  .slogan.collapsed {
+    display: none;
+  }
+}*/
+.slogan {
+  text-align: center;
 }
 /*
   ========================================

@@ -222,6 +222,14 @@ function resetGame(){
   $( 'button.play').attr('disabled', 'disabled');
   $( 'button.replay').attr('disabled', 'disabled');
 
+  // collapse the header on small and medium devices
+  if ($(window).width() <= 823) {  
+
+    $( '.logo' ).addClass( 'collapsed' );
+    $( '.slogan' ).fadeOut().slideUp();    
+
+  }     
+
 }
 
 function startGame(){
@@ -381,6 +389,13 @@ function endGame(){
   $( '.game-active' ).hide();
   $( '.game-complete' ).show();
   $( '.controls' ).fadeOut(1000);
+
+  if ($(window).width() <= 823) {  
+
+    $( '.logo' ).removeClass( 'collapsed' );
+    $( '.slogan' ).slideDown().fadeIn();
+
+  }
 
 }
 
