@@ -444,15 +444,6 @@ $( 'button.play' ).on('click', function(e){
 
 });
 
-// Listen for a 'Replay' button click
-$( 'button.replay' ).on('click', function(e){
-
-  e.preventDefault();
-  startGame();
-
-});
-
-
 // * * * Game Active * * *
 
 // Listen for user's match guess
@@ -475,6 +466,17 @@ $( 'button.shape' ).on('click', function(e){
   updateScore( buttonClass, 'click' );
 
 });
+
+// * * * Game Complete * * *
+
+// Listen for a 'Replay' button click
+$( 'button.replay' ).on('click', function(e){
+
+  e.preventDefault();
+  startGame();
+
+});
+
 
 // To do:
   // add 'Pause' functionality

@@ -144,10 +144,6 @@ a {
   text-decoration: none;
 }
 
-button:disabled {
-
-}
-
 /*
   ========================================
   Home
@@ -193,10 +189,13 @@ header {
   -webkit-transition: padding 0.5s 0.1s;
   -moz-transition: padding 0.5s 0.1s;
   transition: padding 0.5s 0.1s;
-
+  -webkit-transition: margin 0.5s 0.1s;
+  -moz-transition: margin 0.5s 0.1s;
+  transition: margin 0.5s 0.1s;
 }
 .logo.collapsed {
-  padding-top: 1rem;
+  padding-top: .5rem;
+  margin-bottom: -.75rem;
 }
 
 /*.collapsed {
@@ -246,7 +245,7 @@ header {
 .play,
 .counter,
 .souvenir {
-  line-height: 21rem;
+  line-height: 19rem;
 }
 
 /* * * *  Buttons, Game Ready & Game Complete  * * * */
@@ -289,11 +288,6 @@ button:active {
 button[disabled]:hover {
   opacity: .5;
   cursor: initial;
-}
-
-button:disabled {
-  background-color: Transparent;
-  color: white;
 }
 
 .play-button-label {
@@ -352,6 +346,14 @@ button:disabled {
   line-height: 2rem;
   margin-bottom: 1rem;
   color: black;
+  opacity: .5;
+}
+
+.color:disabled,
+.shape:disabled {
+  background-color: Transparent;
+  color: white;
+  opacity: .5;
 }
 
 /* * * *  Buttons, Game Complete  * * * */
