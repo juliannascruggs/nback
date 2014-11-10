@@ -7,7 +7,7 @@ Game:
 	X compare user selection to object property n # instances ago
 	X deem it right or wrong
 	message that immediately
-	calculate a percentage of how much the user remembered correctly vs. not for each property type
+	X calculate a percentage of how much the user remembered correctly vs. not for each property type
 
 Game settings:
 	X Number of objects to play: trials
@@ -18,7 +18,7 @@ Game settings:
 Properties:
 	X color
 	position[0,0]
-	shape
+	X shape
 	sound
 
 Sequence
@@ -39,8 +39,8 @@ Layout
 		X Game active
 		X Game paused
 		X Game complete	
-	Gameboard
-		Stage
+	X Gameboard
+		X Stage
 		Controls
 	Settings
 		Object property toggle
@@ -99,12 +99,7 @@ X      the user doesn’t click match button, increment score correct
 Adding shapes
 
 X get some shapes by adding font.awesome to my index.html file
-how would I get a shape to occupy the entirety of my gameboard div?
-
-Code refactor:
-I'm storing a match property on the objects in my souvenirs array
-I'm also storing a seperate arrays of results vs. matches of each property type
-There are patterns in how the properties are stored that should be matched in how I evaluate and store my results. Much deleting is in order.
+X how would I get a shape to occupy the entirety of my gameboard div?
 
 To do: 
 X design logic for 1/5 matches
@@ -117,11 +112,11 @@ Design my responsive game board
 Build a responsive gameboard
 Add position
 
-Add shapes
+X Add shapes
 Add sounds
 
-Move settings into their own module
-Split out the play button from the save settings button
+X Move settings into their own module
+X Split out the play button from the save settings button
 Add pause functionality
 Add a tutorial
 

@@ -62,6 +62,7 @@ var shapes = [
 $( '.game-start' ).hide();
 $( '.game-active' ).hide();
 $( '.game-complete' ).hide();
+$( '.controls' ).hide();
 
 // * * *  Game Settings  * * *
 
@@ -242,7 +243,8 @@ function startCountdown(){
 
   // swap the game board
   $( '.game-ready' ).hide();
-  $( '.game-start' ).show(); 
+  $( '.game-start' ).show();
+  $( '.controls' ).fadeIn(1000);
   $( '.counter' ).html( '<h3>Ready?</h3>' );
 
   var countdown = setInterval( function(){
@@ -293,8 +295,8 @@ function runTrials( start, end, interval ) {
       drawObject();
       // enable the match buttons if we've reached n
       if ( currentObject >= n ){
-        $( 'input.color').removeAttr('disabled');
-        $( 'input.shape').removeAttr('disabled');
+        $( 'button.color').removeAttr('disabled');
+        $( 'button.shape').removeAttr('disabled');
       }
 
     }else{
@@ -374,10 +376,11 @@ function endGame(){
   $( '.scoreboard' ).html('<li class="result"><h3>' + resultsPercentage( colorResults ) + '<span>%</span></h3><span>Color</span></li><li class="result"><h3>' + resultsPercentage( shapeResults ) + '<span>%</span></h3><span>Shape</span></li>');
   //reset the buttons
   $( 'button.replay').removeAttr('disabled');
-  $( 'input.color').attr('disabled', 'disabled');
-  $( 'input.shape').attr('disabled', 'disabled');
+  $( 'button.color').attr('disabled', 'disabled');
+  $( 'button.shape').attr('disabled', 'disabled');
   $( '.game-active' ).hide();
   $( '.game-complete' ).show();
+  $( '.controls' ).fadeOut(1000);
 
 }
 
@@ -438,26 +441,25 @@ $( 'button.replay' ).on('click', function(e){
 // * * * Game Active * * *
 
 // Listen for user's match guess
-$( 'input.color' ).on('click', function(e){
+$( 'button.color' ).on('click', function(e){
 
   e.preventDefault();
   $( this ).attr('disabled', 'disabled');
 
-  var inputClass = $( this ).attr( 'class' );
-  updateScore( inputClass, 'click' );
+  var buttonClass = $( this ).attr( 'class' );
+  updateScore( buttonClass, 'click' );
 
 });
 
-$( 'input.shape' ).on('click', function(e){
+$( 'button.shape' ).on('click', function(e){
 
   e.preventDefault();
   $( this ).attr('disabled', 'disabled');
 
-  var inputClass = $( this ).attr( 'class' );
-  updateScore( inputClass, 'click' );
+  var buttonClass = $( this ).attr( 'class' );
+  updateScore( buttonClass, 'click' );
 
 });
 
-// To do: move the play functionality over to it's own button
-  // move settings into it's own module
+// To do:
   // add 'Pause' functionality
