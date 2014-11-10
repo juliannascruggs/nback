@@ -220,7 +220,12 @@ header {
 }
 
 .play {
-  padding-top: 2rem;
+  padding-top: 4rem;
+  font-size: 0rem;
+  margin-bottom: -3rem;
+}
+
+.play span{
   font-size: 10rem;
 }
 
@@ -228,10 +233,12 @@ header {
 .replay {
   background-color: Transparent;
   border: none;
+  outline: none;
+
 /*  text-align: center;
   text-decoration: none;
   width: 100%;*/
-  cursor:pointer;
+  cursor: pointer;
   color: #fff;
   opacity: .5;
   -webkit-transition: opacity 0.5s 0.1s;
@@ -239,14 +246,17 @@ header {
   transition: opacity 0.5s 0.1s;
 }
 
+
 .play:hover,
-.replay:hover {
+.replay:hover,
+.play:active,
+.replay:active {
   opacity: 1;
 }
 
 .play-button-label {
-  top: -5.6rem;
-  left: -1.4rem;
+  top: -4.4rem;
+  left: -1rem;
   color: black;
 }
 
@@ -277,8 +287,8 @@ header {
 
 
 .souvenir {
-  font-size: 15rem;
-  padding-bottom: 2rem;
+  font-size: 12rem;
+  padding-bottom: 1rem;
 }
 
 /*.souvenir,
@@ -296,12 +306,16 @@ header {
 }
 .replay {
   line-height: 16.5rem;
+  font-size: 0rem;
+  margin-bottom: -7.5rem;
+}
+.replay span {
   font-size: 9rem;
-  margin-bottom: -3rem;
+  margin-top: 4rem;
 }
 
 .replay-button-label {
-  top: -4.3rem;
+  top: -3.6rem;
 }
 .result {
   line-height: 7.5rem;
