@@ -59,9 +59,9 @@ var shapes = [
 // * * *  Setup Functions
 // * * * * * * * * * * * * * * * * * * * *
 
-$( '.start' ).hide();
-$( '.active' ).hide();
-$( '.complete' ).hide();
+$( '.game-start' ).hide();
+$( '.game-active' ).hide();
+$( '.game-complete' ).hide();
 
 // * * *  Game Settings  * * *
 
@@ -215,7 +215,7 @@ function resetGame(){
   shuffle(shapes);
 
   // hide the scoreboard
-  $( '.complete' ).hide();
+  $( '.game-complete' ).hide();
 
   // disable the play and replay buttons
   $( 'button.play').attr('disabled', 'disabled');
@@ -241,8 +241,8 @@ function startCountdown(){
   var counter = 3;
 
   // swap the game board
-  $( '.ready' ).hide();
-  $( '.start' ).show(); 
+  $( '.game-ready' ).hide();
+  $( '.game-start' ).show(); 
   $( '.counter' ).html( '<h3>Ready?</h3>' );
 
   var countdown = setInterval( function(){
@@ -272,8 +272,8 @@ function startCountdown(){
 // progress the game at an interval or end the game
 function runTrials( start, end, interval ) {
 
-  $( '.start' ).hide();
-  $( '.active' ).show(); 
+  $( '.game-start' ).hide();
+  $( '.game-active' ).show(); 
   console.log('Game Active');
 
   // draw the first object
@@ -376,8 +376,8 @@ function endGame(){
   $( 'button.replay').removeAttr('disabled');
   $( 'input.color').attr('disabled', 'disabled');
   $( 'input.shape').attr('disabled', 'disabled');
-  $( '.active' ).hide();
-  $( '.complete' ).show();
+  $( '.game-active' ).hide();
+  $( '.game-complete' ).show();
 
 }
 
