@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 2500;
+var trialDuration = 1000;
 
 var tutorial = true;
 
@@ -140,17 +140,16 @@ function generateSouvenirs(){
   }
   console.log( 'We broke of the while loop!! ' + souvenirs );
 
+  addMatches();
+
   if ( tutorial !== true ) {
-    addShapeMatches();
+    // addShapeMatches();
+addTutorialMatches();
+
 
   }else{
-    addTutorialMatches( 'shape' );
-      addColorMatches();
-
-    // addTutorialColorMatches( color )
+    addTutorialMatches();
   }
-
-
 
 }
 
@@ -211,38 +210,112 @@ function addMatchGeneric5000( index, property ){
   object.match = property;
   nBackObject.match = property;
   object[property] = nBackObject[property];
+
 }
 
+// function addTutorialMatches( property ){
+//   var matchCount = 0;
 
-function addTutorialMatches( property ){
-  var matchCount = 0;
+//   while ( matchCount < 5 ){
 
-  while ( matchCount < 5 ){
+//     for ( var p = 0; p < souvenirs.length; p++ ){
 
-    for ( var p = 0; p < souvenirs.length; p++ ){
+//       if ( p == 1 || p == 3){
+//         addMatchGeneric5000( p, property );
+//         matchCount++;
+//       }else if( p == 2 ){
+//         // pass this number
+//       }else if ( p >= 7  && matchCount < 5 ){
+
+//         if ( Math.random() >= 0.8 ){
+
+//           if ( 'match' in souvenirs[p] !== true ){
+
+//             addMatchGeneric5000( p, property );
+//             matchCount++;
+
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+function addMatches(){
+
+  var shapeMatch = 0;
+  var colorMatch = 0;
+
+  // Make the start index variable so while loops will work for the tutorial and regular game
+  var start = 0;
+
+  if ( tutorial == true ) {
+
+    for ( var p = 0; p < 9; p++ ){
 
       if ( p == 1 || p == 3){
 
-        addMatchGeneric5000( p, property );
-        matchCount++;
+        addMatchGeneric5000( p, 'shape' );
+        shapeMatch++;
 
-      }else if( p == 2 ){
-        // pass this number
-      }else if ( p >= 7  && matchCount < 5 ){
+      }else if( p == 2 || p == 4 || p == 6 ){
+        // pass on these numbers
+      }else if( p == 5 ){
+
+        addMatchGeneric5000( p, 'color' );
+        colorMatch++;
+
+      }
+
+      start = p;
+      console.log( 'p equals' + p );
+
+    }
+
+  }
+
+  // add shape matches until we have 5
+  while ( shapeMatch < 5 ){
+
+    for ( var p = start; p < souvenirs.length; p++ ){
+      if ( p >= n && shapeMatch < 5 ){
 
         if ( Math.random() >= 0.8 ){
 
           if ( 'match' in souvenirs[p] !== true ){
 
-            addMatchGeneric5000( p, property );
-            matchCount++;
+            addMatchGeneric5000( p, 'shape' );
+            shapeMatch++;
 
           }
         }
       }
     }
+
   }
+
+  // add color matches until we have 5
+  while ( colorMatch < 5 ){
+
+    for ( var p = start; p < souvenirs.length; p++ ){
+      if ( p >= n && colorMatch < 5 ){
+
+        if ( Math.random() >= 0.8 ){
+
+          if ( 'match' in souvenirs[p] !== true ){
+
+            addMatchGeneric5000( p, 'color' );
+            colorMatch++;
+
+          }
+        }
+      }
+    }
+    
+  }
+
 }
+
 
 
 // * * * * * * * * * * * * * * * * * * * *
@@ -341,7 +414,7 @@ function startCountdown(){
   }else{
 
     // run the tutorial
-    runTutorial( n, trials, 3000 );
+    runTutorial( n, trials, 1000 );
 
   }
 
