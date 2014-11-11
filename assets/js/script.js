@@ -142,14 +142,14 @@ function generateSouvenirs(){
 
   addMatches();
 
-  if ( tutorial !== true ) {
-    // addShapeMatches();
-addTutorialMatches();
+//   if ( tutorial !== true ) {
+//     // addShapeMatches();
+// addTutorialMatches();
 
 
-  }else{
-    addTutorialMatches();
-  }
+//   }else{
+//     addTutorialMatches();
+//   }
 
 }
 
@@ -246,9 +246,10 @@ function addMatches(){
   var shapeMatch = 0;
   var colorMatch = 0;
 
-  // Make the start index variable so while loops will work for the tutorial and regular game
+  // we'll use start' as the while loop start index value, so it will work for the tutorial and regular game
   var start = 0;
 
+  // rig the first few matches
   if ( tutorial == true ) {
 
     for ( var p = 0; p < 9; p++ ){
@@ -417,8 +418,7 @@ function startCountdown(){
     runTutorial( n, trials, 1000 );
 
   }
-
-  
+ 
 }
 
 // * * *  Game Tutorial  * * * 

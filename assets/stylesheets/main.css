@@ -147,14 +147,161 @@ a {
   text-decoration: none;
 }
 
+/* * * *  Shared, Game Ready & Complete  * * * */
+
+.play {
+  padding-top: 4rem;
+  font-size: 0rem;
+  margin-bottom: -3rem;
+}
+
+.play span{
+  font-size: 10rem;
+}
+
+/*.play,
+.replay,
+.color,
+.shape*/
+button {
+  background-color: Transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  opacity: .5;
+  -webkit-transition: opacity 0.5s 0.1s;
+  -moz-transition: opacity 0.5s 0.1s;
+  transition: opacity 0.5s 0.1s;
+}
+
+/*.play:hover,
+.replay:hover,
+.play:active,
+.replay:active,*/
+button:hover,
+button:active {
+  opacity: 1;
+}
+
+button[disabled]:hover {
+  opacity: .5;
+  cursor: initial;
+}
+
+.play-button-label {
+  top: -4.4rem;
+  left: -1rem;
+  color: black;
+}
+
+.play-button-label,
+.replay-button-label,
+.result span,
+.color, 
+.shape {
+  position: relative;
+  font-size: 1.25rem;
+  font-family: 'Open Sans Condensed', sans-serif;
+  line-height: 1rem;
+  font-weight: 600;
+  letter-spacing: .07rem;
+  text-transform: uppercase;
+}
+
+/* * * *  Game Active * * * */
+
+.controls {
+  float: left;
+  text-align: center;
+}
+
+.color,
+.shape {
+  background-color: #a2a2a2;
+  height: 7rem;
+  border: .2rem #a2a2a2 solid;
+  border-radius: .5rem;
+  width: 90%;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+  color: black;
+  opacity: 1;
+}
+
+.color:hover,
+.shape:hover,
+.color:active,
+.shape:active {
+/*  background-color: Transparent;
+  color: white;
+*/  opacity: 1;
+}
+
+.color:disabled,
+.shape:disabled,
+.color[disabled]:hover,
+.shape[disabled]:hover,
+.color[disabled]:active,
+.shape[disabled]:active {
+  background-color: Transparent;
+  color: #a2a2a2;
+  opacity: 1;
+}
+
+
+/* * * *  Game Complete  * * * */
+
+.replay {
+  line-height: 16.5rem;
+  font-size: 0rem;
+  margin-bottom: -8rem;
+}
+.replay span {
+  font-size: 9rem;
+  margin-top: 4rem;
+}
+
+.replay-button-label {
+  top: -3.6rem;
+}
+.result {
+  line-height: 7.5rem;
+  display: inline-block;
+  /* border: orange 3px solid; */
+  width: 48%;
+  margin-bottom: 1rem;
+
+}
+.result h3 {
+  font-size: 5rem;
+  font-weight: 100;
+  text-align: center;
+  letter-spacing: -.2rem;
+}
+.result h3 span {
+  font-size: 1.5rem;
+  font-weight: 100;
+  display: inline;
+  position: initial;
+  padding-left: .1rem;
+}
+
+.result span {
+display: block;
+top: -1rem;
+color: #fff;
+opacity: .85;
+}
+
 /*
   ========================================
   Home
   ========================================
 */
-.hero {
+/*.hero {
   padding: 22px 80px 66px 80px;
-}
+}*/
 /*
   ========================================
   Clearfix
@@ -231,10 +378,6 @@ header {
   margin: 0 auto;
 }
 
-.stage {
-
-}
-
 .game-ready,
 .game-start,
 .game-active,
@@ -257,68 +400,6 @@ header {
   line-height: 1.5rem;
 }
 
-/* * * *  Buttons, Game Ready & Game Complete  * * * */
-
-.play {
-  padding-top: 4rem;
-  font-size: 0rem;
-  margin-bottom: -3rem;
-}
-
-.play span{
-  font-size: 10rem;
-}
-
-/*.play,
-.replay,
-.color,
-.shape*/
-button {
-  background-color: Transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  color: #fff;
-  opacity: .5;
-  -webkit-transition: opacity 0.5s 0.1s;
-  -moz-transition: opacity 0.5s 0.1s;
-  transition: opacity 0.5s 0.1s;
-}
-
-/*.play:hover,
-.replay:hover,
-.play:active,
-.replay:active,*/
-button:hover,
-button:active {
-  opacity: 1;
-}
-
-button[disabled]:hover {
-  opacity: .5;
-  cursor: initial;
-}
-
-.play-button-label {
-  top: -4.4rem;
-  left: -1rem;
-  color: black;
-}
-
-.play-button-label,
-.replay-button-label,
-.result span,
-.color, 
-.shape {
-  position: relative;
-  font-size: 1.25rem;
-  font-family: 'Open Sans Condensed', sans-serif;
-  line-height: 1rem;
-  font-weight: 600;
-  letter-spacing: .07rem;
-  text-transform: uppercase;
-}
-
 /* * * *  Game Start  * * * */
 
 .counter {
@@ -336,91 +417,6 @@ button[disabled]:hover {
 .souvenir {
   font-size: 12rem;
   padding-bottom: 1rem;
-}
-
-/* * * *  Buttons, Game Active * * * */
-
-.controls {
-  float: left;
-  text-align: center;
-}
-
-.color,
-.shape {
-  background-color: #a2a2a2;
-  height: 7rem;
-  border: .2rem #a2a2a2 solid;
-  border-radius: .5rem;
-  width: 90%;
-  line-height: 2rem;
-  margin-bottom: 1rem;
-  color: black;
-  opacity: 1;
-}
-
-.color:hover,
-.shape:hover,
-.color:active,
-.shape:active {
-/*  background-color: Transparent;
-  color: white;
-*/  opacity: 1;
-}
-
-.color:disabled,
-.shape:disabled,
-.color[disabled]:hover,
-.shape[disabled]:hover,
-.color[disabled]:active,
-.shape[disabled]:active {
-  background-color: Transparent;
-  color: #a2a2a2;
-  opacity: 1;
-}
-
-
-/* * * *  Buttons, Game Complete  * * * */
-
-.replay {
-  line-height: 16.5rem;
-  font-size: 0rem;
-  margin-bottom: -8rem;
-}
-.replay span {
-  font-size: 9rem;
-  margin-top: 4rem;
-}
-
-.replay-button-label {
-  top: -3.6rem;
-}
-.result {
-  line-height: 7.5rem;
-  display: inline-block;
-  /* border: orange 3px solid; */
-  width: 48%;
-  margin-bottom: 1rem;
-
-}
-.result h3 {
-  font-size: 5rem;
-  font-weight: 100;
-  text-align: center;
-  letter-spacing: -.2rem;
-}
-.result h3 span {
-  font-size: 1.5rem;
-  font-weight: 100;
-  display: inline;
-  position: initial;
-  padding-left: .1rem;
-}
-
-.result span {
-display: block;
-top: -1rem;
-color: #fff;
-opacity: .85;
 }
 
 /*
