@@ -396,8 +396,8 @@ header {
 
 /* * * *  Game Ready  * * * */
 
-.instructions p {
-  line-height: 1.5rem;
+.tutorial p {
+  padding-bottom: 1rem;
 }
 
 /* * * *  Game Start  * * * */
