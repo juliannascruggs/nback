@@ -7,9 +7,11 @@
 // n is the number of steps back for the n-back game
 var n;
 // the number times the user needs to guess, per game
-var trials = 25;
+var trials;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 2500;
+var trialDuration = 2000;
+
+var tutorial = true;
 
 // * * *  Game Components  * * *
 
@@ -68,6 +70,8 @@ $( '.controls' ).hide();
 
 // apply the user's game settings
 function setSettings(){
+
+  trials = 25;
 
   n = $( '#n-equals' ).html();
   console.log('n equals ' + n);
@@ -135,62 +139,97 @@ function generateSouvenirs(){
 
   }
   console.log( 'We broke of the while loop!! ' + souvenirs );
-  addColorMatches();
-  addShapeMatches();
+
+  addMatches();
 
 }
 
-function addColorMatches(){
-  var colorMatchCount = 0;
+function addMatchGeneric5000( index, property ){
+  
+  var object = souvenirs[index];
+  var nBackObject = souvenirs[index - n];
 
-  while ( colorMatchCount < 5 ){
+  object.match = property;
+  nBackObject.match = property;
+  object[property] = nBackObject[property];
 
-    for ( var j = 0; j < souvenirs.length; j++ ){
-      if ( j >= n && colorMatchCount < 5 ){
-      console.log(colorMatchCount);
+}
+
+function addMatches(){
+
+  var shapeMatch = 0;
+  var colorMatch = 0;
+
+  // 'start' is the while loop start index value, so it will work for the tutorial and regular game
+  var start = 0;
+
+  // rig the first few matches
+  if ( tutorial == true ) {
+
+    for ( var p = 0; p < 9; p++ ){
+
+      if ( p == 1 || p == 3){
+
+        addMatchGeneric5000( p, 'shape' );
+        shapeMatch++;
+
+      }else if( p == 2 || p == 4 || p == 6 ){
+        // pass on these numbers
+      }else if( p == 5 ){
+
+        addMatchGeneric5000( p, 'color' );
+        colorMatch++;
+
+      }
+
+      start = p;
+      console.log( 'p equals' + p );
+
+    }
+
+  }
+
+  // add shape matches until we have 5
+  while ( shapeMatch < 5 ){
+
+    for ( var p = start; p < souvenirs.length; p++ ){
+      if ( p >= n && shapeMatch < 5 ){
 
         if ( Math.random() >= 0.8 ){
 
-          if ( 'match' in souvenirs[j] !== true ){
-//            console.log( souvenirs[j].match );
-            souvenirs[j].match = 'color';
-            souvenirs[j - n].match = 'color';
-            souvenirs[j].color = souvenirs[j - n].color;
-            colorMatchCount++;
+          if ( 'match' in souvenirs[p] !== true ){
+
+            addMatchGeneric5000( p, 'shape' );
+            shapeMatch++;
 
           }
         }
       }
     }
+
   }
-}
 
-function addShapeMatches(){
-  var shapeMatchCount = 0;
+  // add color matches until we have 5
+  while ( colorMatch < 5 ){
 
-  while ( shapeMatchCount < 5 ){
-
-    for ( var l = 0; l < souvenirs.length; l++ ){
-      if ( l >= n && shapeMatchCount < 5 ){
-      console.log(shapeMatchCount);
+    for ( var p = start; p < souvenirs.length; p++ ){
+      if ( p >= n && colorMatch < 5 ){
 
         if ( Math.random() >= 0.8 ){
 
-          if ( 'match' in souvenirs[l] !== true ){
-            souvenirs[l].match = 'shape';
-            souvenirs[l - n].match = 'shape';
-            souvenirs[l].shape = souvenirs[l - n].shape;
-            shapeMatchCount++;
+          if ( 'match' in souvenirs[p] !== true ){
+
+            addMatchGeneric5000( p, 'color' );
+            colorMatch++;
 
           }
         }
       }
     }
+    
   }
+
 }
-
-
-
 
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Game Logic
@@ -206,7 +245,6 @@ function resetGame(){
   shapeResults = [];
 
   currentObject = 0;
-  trials = 25;
 
   // empty souvenirs
   souvenirs = [];
@@ -247,8 +285,6 @@ function startGame(){
 // show a countdown before the timer starts 
 function startCountdown(){
 
-  var counter = 3;
-
   // swap the game board
   $( '.game-ready' ).hide();
   $( '.game-start' ).show();
@@ -256,27 +292,127 @@ function startCountdown(){
   // $( '.cbp-hsmenu' ).addClass( 'disabled' );
   // $( '.cbp-hsmenu li a' ).addClass( 'disabled' );
 
-  $( '.counter' ).html( '<h3>n=' + n + '</h3>' );
+  if ( tutorial !== true ){
 
-  var countdown = setInterval( function(){
+    var counter = 3;
 
-    // show the countdown
-    if ( counter > 0 ){
-      $( '.counter' ).html( '<h3>' + counter + '</h3>' );
+    $( '.counter' ).html( '<h3>n=' + n + '</h3>' );
+
+    var countdown = setInterval( function(){
+
+      // show the countdown
+      if ( counter > 0 ){
+        $( '.counter' ).html( '<h3>' + counter + '</h3>' );
+      }else{
+        $( '.counter' ).html( '<h3>Go</h3>' );
+      }
+
+      if ( counter > -1 ){
+        counter--;
+      }else{
+        // when the countdown ends, call runTrials, passing game settings in as arguments
+        runTrials( n, trials, trialDuration );
+        clearInterval( countdown );
+
+      }
+
+    }, 1500 );
+
+  }else{
+
+    // run the tutorial
+    runTutorial( n, trials, 3000 );
+
+  }
+ 
+}
+
+// * * *  Game Tutorial  * * * 
+
+// progress the game at an interval or end the game
+function runTutorial( start, end, interval ) {
+
+  $( '.game-start' ).hide();
+  $( '.game-active' ).show(); 
+  console.log('Game Active');
+
+  var tutorialStage = 7;
+
+  // start tutorial messages
+  $( '.tutorial' ).html( '<p>Remember the shape...</p>' );
+
+  // draw the first object
+  drawObject();
+  // start the trials timer
+  var timer = setInterval( function(){
+
+    // updateScore here, so we can calculate the current results before moving on to the next object 
+    updateScore( 'color', 'time' );
+    updateScore( 'shape', 'time' );
+
+    // increment currentObject here, so currentObject is always the index of the object on screen
+    currentObject++;
+
+    $( '.counter' ).html( currentObject );
+
+    if ( currentObject < trials ){
+      drawObject();
+      // just enable the shape match button, when we reach 'n'
+      if ( currentObject >= n ){
+
+        $( 'button.shape').removeAttr('disabled');
+        // $( 'button.color').removeAttr('disabled');
+
+        if ( tutorialStage >= 7) {
+
+          $( '.tutorial' ).html( '<p>Does this shape match the previous?</p>' );
+          tutorialStage--;
+
+        }else if ( tutorialStage >= 6) {
+
+          $( '.tutorial' ).html( '<p>Remember each shape...</p>' );
+          tutorialStage--;
+
+        }else if ( tutorialStage >= 5) {
+
+          $( '.tutorial' ).html( '<p>Does it match 1 step before?</p>' );
+          tutorialStage--;
+
+        }else if ( tutorialStage >= 4) {
+
+          $( '.tutorial' ).html( '<p>Now, remember the color...</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }else if ( tutorialStage >= 3) {
+
+          $( '.tutorial' ).html( '<p>Does the color match 1 step before?</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }else if ( tutorialStage >= 2) {
+
+          $( '.tutorial' ).html( '<p>20 more guesses...</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }else{
+
+          $( '.tutorial' ).html( '<p>Does this match 1 before?</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }
+
+      }
+
     }else{
-      $( '.counter' ).html( '<h3>Go</h3>' );
+      endGame();
+      tutorial = false;
+      clearInterval(timer);
     }
 
-    if ( counter > -1 ){
-      counter--;
-    }else{
-      // when the countdown ends, call runTrials, passing game settings in as arguments
-      runTrials( n, trials, trialDuration );
-      clearInterval( countdown );
-
-    }
-
-  }, 1500 );
+  }, interval );
 
 }
 
@@ -321,8 +457,10 @@ function runTrials( start, end, interval ) {
 
 // draw the currentObject on the gameboard
 function drawObject(){
-  $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
-  $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+
+    $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
+    $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+
 }
 
 // check if the currentObject.property is equal to nBackObject.property
@@ -392,6 +530,7 @@ function endGame(){
   $( '.game-active' ).hide();
   $( '.game-complete' ).show();
   $( '.controls' ).fadeOut(1000);
+  $( '.tutorial' ).empty();
 
   if ($(window).width() <= 823) {  
 
@@ -481,5 +620,7 @@ $( 'button.replay' ).on('click', function(e){
 });
 
 
+
 // To do:
+  // add a tutorial
   // add 'Pause' functionality

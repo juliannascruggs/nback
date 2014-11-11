@@ -147,6 +147,7 @@ a {
   text-decoration: none;
 }
 
+<<<<<<< HEAD
 /*
   ========================================
   Home
@@ -252,6 +253,9 @@ header {
 }
 
 /* * * *  Buttons, Game Ready & Game Complete  * * * */
+=======
+/* * * *  Shared, Game Ready & Complete  * * * */
+>>>>>>> develop
 
 .play {
   padding-top: 4rem;
@@ -313,26 +317,7 @@ button[disabled]:hover {
   text-transform: uppercase;
 }
 
-/* * * *  Game Start  * * * */
-
-.counter {
-  font-size: 12rem;
-  font-weight: 100;
-  color: #fff;
-  opacity: .5;
-  -webkit-transition: opacity 0.5s 0.1s;
-  -moz-transition: opacity 0.5s 0.1s;
-  transition: opacity 0.5s 0.1s;
-}
-
 /* * * *  Game Active * * * */
-
-.souvenir {
-  font-size: 12rem;
-  padding-bottom: 1rem;
-}
-
-/* * * *  Buttons, Game Active * * * */
 
 .controls {
   float: left;
@@ -342,7 +327,7 @@ button[disabled]:hover {
 .color,
 .shape {
   background-color: #a2a2a2;
-  height: 7rem;
+  height: 6rem;
   border: .2rem #a2a2a2 solid;
   border-radius: .5rem;
   width: 90%;
@@ -373,7 +358,7 @@ button[disabled]:hover {
 }
 
 
-/* * * *  Buttons, Game Complete  * * * */
+/* * * *  Game Complete  * * * */
 
 .replay {
   line-height: 16.5rem;
@@ -415,6 +400,132 @@ display: block;
 top: -1rem;
 color: #fff;
 opacity: .85;
+}
+
+/*
+  ========================================
+  Home
+  ========================================
+*/
+/*.hero {
+  padding: 22px 80px 66px 80px;
+}*/
+/*
+  ========================================
+  Clearfix
+  ========================================
+*/
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+/*
+  ========================================
+  Primary header
+  ========================================
+*/
+
+header {
+  background-color: #e74538;
+}
+.logo {
+  font-family: 'Roboto Slab', serif;
+  font-size: 5rem;
+  font-weight: 100;
+  color: #fff;
+  letter-spacing: .3rem;
+  padding: 3rem 0 0.5rem 0;
+  text-align: center;
+  -webkit-transition: padding 0.5s 0.1s;
+  -moz-transition: padding 0.5s 0.1s;
+  transition: padding 0.5s 0.1s;
+  -webkit-transition: margin 0.5s 0.1s;
+  -moz-transition: margin 0.5s 0.1s;
+  transition: margin 0.5s 0.1s;
+}
+.logo.collapsed {
+  padding-top: .5rem;
+  margin-bottom: -.75rem;
+}
+
+/*.collapsed {
+
+  -webkit-transition: display 0.5s 0.1s;
+  -moz-transition: display 0.5s 0.1s;
+  transition: display 0.5s 0.1s;
+
+}
+
+@media screen and (max-width: 51.4375rem) {
+  .logo.collapsed {
+    padding-top: 1rem;
+  }
+  .slogan.collapsed {
+    display: none;
+  }
+}*/
+.slogan {
+  text-align: center;
+}
+/*
+  ========================================
+  Gameboard
+  ========================================
+*/
+
+.gameboard {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.game-ready,
+.game-start,
+.game-active,
+.game-complete {
+  text-align: center;
+  -webkit-transition: opacity 0.5s 0.1s;
+  -moz-transition: opacity 0.5s 0.1s;
+  transition: opacity 0.5s 0.1s;
+}
+
+.play,
+.counter,
+.souvenir {
+  line-height: 19rem;
+}
+
+/* * * *  Game Ready  * * * */
+
+.tutorial p {
+  margin-top: -.5rem;
+  padding-bottom: .5rem;
+}
+
+/* * * *  Game Start  * * * */
+
+.counter {
+  font-size: 12rem;
+  font-weight: 100;
+  color: #fff;
+  opacity: .5;
+  -webkit-transition: opacity 0.5s 0.1s;
+  -moz-transition: opacity 0.5s 0.1s;
+  transition: opacity 0.5s 0.1s;
+}
+
+/* * * *  Game Active * * * */
+
+.souvenir {
+  font-size: 12rem;
+  padding-bottom: 1rem;
 }
 
 /*
