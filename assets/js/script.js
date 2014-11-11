@@ -11,7 +11,7 @@ var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
 var trialDuration = 2500;
 
-var tutorial = true;
+var tutorial = false;
 
 // * * *  Game Components  * * *
 
@@ -208,7 +208,12 @@ function resetGame(){
   shapeResults = [];
 
   currentObject = 0;
-  trials = 25;
+
+  if (tutorial !== true){
+    trials = 25;
+  }else{   
+    trials = 10;
+  }
 
   // empty souvenirs
   souvenirs = [];
@@ -285,7 +290,7 @@ function startCountdown(){
   }else {
 
       // run the tutorial
-    runTutorial( 1, 10, trialDuration );
+    runTutorial( 1, trials, trialDuration );
 
   }
 
@@ -301,7 +306,11 @@ function runTutorial( start, end, interval ) {
   $( '.game-active' ).show(); 
   console.log('Game Active');
 
-  $( '.counter' ).html( '<h3>n=' + n + '</h3>' );
+  // for the tutorial, just set the color once, here
+  $( '.souvenir' ).css( 'color', '#a2a2a2' );
+
+  // 
+  $( '.tutorial' ).html( '<p>Remember this shape, okay?</p>' );
 
   // draw the first object
   drawObject();
@@ -318,9 +327,9 @@ function runTutorial( start, end, interval ) {
 
     if ( currentObject < trials ){
       drawObject();
-      // enable the match buttons if we've reached n
+      // just enable the shape match button, when we reach 'n'
       if ( currentObject >= n ){
-        $( 'button.color').removeAttr('disabled');
+
         $( 'button.shape').removeAttr('disabled');
       }
 
@@ -378,8 +387,9 @@ function drawObject(){
     $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
     $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
   }else{
-    $( '.souvenir' ).css( 'color', 'white' );
+
     $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+
   }
 }
 
