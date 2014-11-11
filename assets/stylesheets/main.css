@@ -338,23 +338,37 @@ button[disabled]:hover {
 
 .color,
 .shape {
-  background-color: white;
+  background-color: #a2a2a2;
   height: 7rem;
-  border: .2rem white solid;
+  border: .2rem #a2a2a2 solid;
   border-radius: .5rem;
   width: 90%;
   line-height: 2rem;
   margin-bottom: 1rem;
   color: black;
-  opacity: .5;
+  opacity: 1;
+}
+
+.color:hover,
+.shape:hover,
+.color:active,
+.shape:active {
+/*  background-color: Transparent;
+  color: white;
+*/  opacity: 1;
 }
 
 .color:disabled,
-.shape:disabled {
+.shape:disabled,
+.color[disabled]:hover,
+.shape[disabled]:hover,
+.color[disabled]:active,
+.shape[disabled]:active {
   background-color: Transparent;
-  color: white;
-  opacity: .5;
+  color: #a2a2a2;
+  opacity: 1;
 }
+
 
 /* * * *  Buttons, Game Complete  * * * */
 

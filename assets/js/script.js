@@ -25,7 +25,7 @@ var shapeResults = []
 // my property arrays
 var colors = [
 
-  '#e74538',
+  '#b70707',
   '#e88a25',
   '#f9e14b',
   '#efed89',
