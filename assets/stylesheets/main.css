@@ -219,7 +219,7 @@ button[disabled]:hover {
 .color,
 .shape {
   background-color: #a2a2a2;
-  height: 7rem;
+  height: 6rem;
   border: .2rem #a2a2a2 solid;
   border-radius: .5rem;
   width: 90%;
@@ -397,7 +397,8 @@ header {
 /* * * *  Game Ready  * * * */
 
 .tutorial p {
-  padding-bottom: 1rem;
+  margin-top: -.5rem;
+  padding-bottom: .5rem;
 }
 
 /* * * *  Game Start  * * * */

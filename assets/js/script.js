@@ -9,7 +9,7 @@ var n;
 // the number times the user needs to guess, per game
 var trials;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 1000;
+var trialDuration = 2000;
 
 var tutorial = true;
 
@@ -321,7 +321,7 @@ function startCountdown(){
   }else{
 
     // run the tutorial
-    runTutorial( n, trials, 1000 );
+    runTutorial( n, trials, 3000 );
 
   }
  
