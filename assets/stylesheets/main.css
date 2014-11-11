@@ -251,6 +251,12 @@ header {
   line-height: 19rem;
 }
 
+/* * * *  Game Ready  * * * */
+
+.instructions p {
+  line-height: 1.5rem;
+}
+
 /* * * *  Buttons, Game Ready & Game Complete  * * * */
 
 .play {

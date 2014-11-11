@@ -11,6 +11,8 @@ var trials = 25;
 // the the duration of each trial in ms, defines timer duration in runTrials function
 var trialDuration = 2500;
 
+var tutorial = true;
+
 // * * *  Game Components  * * *
 
 // the global array of objects whose properties the user must try to remember
@@ -247,8 +249,6 @@ function startGame(){
 // show a countdown before the timer starts 
 function startCountdown(){
 
-  var counter = 3;
-
   // swap the game board
   $( '.game-ready' ).hide();
   $( '.game-start' ).show();
@@ -256,27 +256,80 @@ function startCountdown(){
   // $( '.cbp-hsmenu' ).addClass( 'disabled' );
   // $( '.cbp-hsmenu li a' ).addClass( 'disabled' );
 
+  if ( tutorial !== true ){
+
+    var counter = 3;
+
+    $( '.counter' ).html( '<h3>n=' + n + '</h3>' );
+
+    var countdown = setInterval( function(){
+
+      // show the countdown
+      if ( counter > 0 ){
+        $( '.counter' ).html( '<h3>' + counter + '</h3>' );
+      }else{
+        $( '.counter' ).html( '<h3>Go</h3>' );
+      }
+
+      if ( counter > -1 ){
+        counter--;
+      }else{
+        // when the countdown ends, call runTrials, passing game settings in as arguments
+        runTrials( n, trials, trialDuration );
+        clearInterval( countdown );
+
+      }
+
+    }, 1500 );
+
+  }else {
+
+      // run the tutorial
+    runTutorial( 1, 10, trialDuration );
+
+  }
+
+  
+}
+
+// * * *  Game Tutorial  * * * 
+
+// progress the game at an interval or end the game
+function runTutorial( start, end, interval ) {
+
+  $( '.game-start' ).hide();
+  $( '.game-active' ).show(); 
+  console.log('Game Active');
+
   $( '.counter' ).html( '<h3>n=' + n + '</h3>' );
 
-  var countdown = setInterval( function(){
+  // draw the first object
+  drawObject();
+  // start the trials timer
+  var timer = setInterval( function(){
+    // updateScore here, so we can calculate the current results before moving on to the next object 
+    updateScore( 'color', 'time' );
+    updateScore( 'shape', 'time' );
 
-    // show the countdown
-    if ( counter > 0 ){
-      $( '.counter' ).html( '<h3>' + counter + '</h3>' );
+    // increment currentObject here, so currentObject is always the index of the object on screen
+    currentObject++;
+
+    $( '.counter' ).html( currentObject );
+
+    if ( currentObject < trials ){
+      drawObject();
+      // enable the match buttons if we've reached n
+      if ( currentObject >= n ){
+        $( 'button.color').removeAttr('disabled');
+        $( 'button.shape').removeAttr('disabled');
+      }
+
     }else{
-      $( '.counter' ).html( '<h3>Go</h3>' );
+      endGame();
+      clearInterval(timer);
     }
 
-    if ( counter > -1 ){
-      counter--;
-    }else{
-      // when the countdown ends, call runTrials, passing game settings in as arguments
-      runTrials( n, trials, trialDuration );
-      clearInterval( countdown );
-
-    }
-
-  }, 1500 );
+  }, interval );
 
 }
 
@@ -321,8 +374,13 @@ function runTrials( start, end, interval ) {
 
 // draw the currentObject on the gameboard
 function drawObject(){
-  $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
-  $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+  if ( tutorial !== true ){
+    $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
+    $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+  }else{
+    $( '.souvenir' ).css( 'color', 'white' );
+    $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+  }
 }
 
 // check if the currentObject.property is equal to nBackObject.property
@@ -481,5 +539,7 @@ $( 'button.replay' ).on('click', function(e){
 });
 
 
+
 // To do:
+  // add a tutorial
   // add 'Pause' functionality
