@@ -184,7 +184,7 @@ header {
 .logo {
   font-family: 'Roboto Slab', serif;
   font-size: 5rem;
-  font-weight: 100;
+  font-weight: 100; /*Could specify <h2> in HTML to decrease lines of code*/
   color: #fff;
   letter-spacing: .3rem;
   padding: 3rem 0 0.5rem 0;
@@ -399,7 +399,7 @@ button[disabled]:hover {
 .result h3 {
   font-size: 5rem;
   font-weight: 100;
-  text-align: center;
+  /*text-align: center;*/
   letter-spacing: -.2rem;
 }
 .result h3 span {
