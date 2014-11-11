@@ -7,11 +7,11 @@
 // n is the number of steps back for the n-back game
 var n;
 // the number times the user needs to guess, per game
-var trials = 25;
+var trials;
 // the the duration of each trial in ms, defines timer duration in runTrials function
 var trialDuration = 2500;
 
-var tutorial = false;
+var tutorial = true;
 
 // * * *  Game Components  * * *
 
@@ -70,6 +70,8 @@ $( '.controls' ).hide();
 
 // apply the user's game settings
 function setSettings(){
+
+  trials = 25;
 
   n = $( '#n-equals' ).html();
   console.log('n equals ' + n);
@@ -137,8 +139,15 @@ function generateSouvenirs(){
 
   }
   console.log( 'We broke of the while loop!! ' + souvenirs );
+
+  if ( tutorial !== true ) {
+    addShapeMatches();
+  }else{
+    addTutorialShapeMatches();
+  }
+
   addColorMatches();
-  addShapeMatches();
+
 
 }
 
@@ -191,8 +200,48 @@ function addShapeMatches(){
   }
 }
 
+function addTutorialShapeMatches(){
+  var matchCount = 0;
 
+  while ( matchCount < 5 ){
 
+    for ( var p = 0; p < souvenirs.length; p++ ){
+      if ( p >= n && matchCount < 5 ){
+      console.log(matchCount);
+
+        // var tutorialMatchGenerator = 2;
+        if ( p == 1 ){
+
+          souvenirs[p].match = 'shape';
+          souvenirs[p - n].match = 'shape';
+          souvenirs[p].shape = souvenirs[p - n].shape;
+          matchCount++;
+
+        }else if( p == 3 ){
+
+          souvenirs[p].match = 'shape';
+          souvenirs[p - n].match = 'shape';
+          souvenirs[p].shape = souvenirs[p - n].shape;
+          matchCount++;
+
+        }else{
+
+          if ( Math.random() >= 0.8 ){
+
+            if ( 'match' in souvenirs[p] !== true ){
+
+              souvenirs[p].match = 'shape';
+              souvenirs[p - n].match = 'shape';
+              souvenirs[p].shape = souvenirs[p - n].shape;
+              matchCount++;
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Game Logic
@@ -209,11 +258,11 @@ function resetGame(){
 
   currentObject = 0;
 
-  if (tutorial !== true){
-    trials = 25;
-  }else{   
-    trials = 10;
-  }
+  // if (tutorial !== true){
+  //   trials = 25;
+  // }else{   
+  //   trials = 15;
+  // }
 
   // empty souvenirs
   souvenirs = [];
@@ -287,10 +336,10 @@ function startCountdown(){
 
     }, 1500 );
 
-  }else {
+  }else{
 
-      // run the tutorial
-    runTutorial( 1, trials, trialDuration );
+    // run the tutorial
+    runTutorial( n, trials, trialDuration );
 
   }
 
@@ -306,16 +355,16 @@ function runTutorial( start, end, interval ) {
   $( '.game-active' ).show(); 
   console.log('Game Active');
 
-  // for the tutorial, just set the color once, here
-  $( '.souvenir' ).css( 'color', '#a2a2a2' );
+  var tutorialStage = 7;
 
-  // 
-  $( '.tutorial' ).html( '<p>Remember this shape, okay?</p>' );
+  // start tutorial messages
+  $( '.tutorial' ).html( '<p><br><br>Remember this shape, okay?</p>' );
 
   // draw the first object
   drawObject();
   // start the trials timer
   var timer = setInterval( function(){
+
     // updateScore here, so we can calculate the current results before moving on to the next object 
     updateScore( 'color', 'time' );
     updateScore( 'shape', 'time' );
@@ -331,10 +380,54 @@ function runTutorial( start, end, interval ) {
       if ( currentObject >= n ){
 
         $( 'button.shape').removeAttr('disabled');
+        // $( 'button.color').removeAttr('disabled');
+
+        if ( tutorialStage >= 7) {
+
+          $( '.tutorial' ).html( '<p><br><br>Does this shape match the previous?</p>' );
+          tutorialStage--;
+
+        }else if ( tutorialStage >= 6) {
+
+          $( '.tutorial' ).html( '<p><br><br>If this shape is the same as 1 before...</p>' );
+          tutorialStage--;
+
+        }else if ( tutorialStage >= 5) {
+
+          $( '.tutorial' ).html( '<p><br><br>...then we have a match!</p>' );
+          tutorialStage--;
+
+        }else if ( tutorialStage >= 4) {
+
+          $( '.tutorial' ).html( '<p><br><br>Now how about the color?</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }else if ( tutorialStage >= 3) {
+
+          $( '.tutorial' ).html( '<p><br><br>Guess if the color is the same as 1 before.</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }else if ( tutorialStage >= 2) {
+
+          $( '.tutorial' ).html( '<p><br><br>You will guess 20 more times.</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }else{
+
+          $( '.tutorial' ).html( '<p><br><br>Then we will calculate your score.</p>' );
+          tutorialStage--;
+          $( 'button.color').removeAttr('disabled');
+
+        }
+
       }
 
     }else{
       endGame();
+      tutorial = false;
       clearInterval(timer);
     }
 
@@ -383,14 +476,10 @@ function runTrials( start, end, interval ) {
 
 // draw the currentObject on the gameboard
 function drawObject(){
-  if ( tutorial !== true ){
+
     $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
     $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
-  }else{
 
-    $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
-
-  }
 }
 
 // check if the currentObject.property is equal to nBackObject.property
