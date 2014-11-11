@@ -142,11 +142,14 @@ function generateSouvenirs(){
 
   if ( tutorial !== true ) {
     addShapeMatches();
+
   }else{
-    addTutorialShapeMatches();
+    addTutorialMatches( 'shape' );
+      addColorMatches();
+
+    // addTutorialColorMatches( color )
   }
 
-  addColorMatches();
 
 
 }
@@ -200,48 +203,47 @@ function addShapeMatches(){
   }
 }
 
-function addTutorialShapeMatches(){
+function addMatchGeneric5000( index, property ){
+  
+  var object = souvenirs[index];
+  var nBackObject = souvenirs[index - n];
+
+  object.match = property;
+  nBackObject.match = property;
+  object[property] = nBackObject[property];
+}
+
+
+function addTutorialMatches( property ){
   var matchCount = 0;
 
   while ( matchCount < 5 ){
 
     for ( var p = 0; p < souvenirs.length; p++ ){
-      if ( p >= n && matchCount < 5 ){
-      console.log(matchCount);
 
-        // var tutorialMatchGenerator = 2;
-        if ( p == 1 ){
+      if ( p == 1 || p == 3){
 
-          souvenirs[p].match = 'shape';
-          souvenirs[p - n].match = 'shape';
-          souvenirs[p].shape = souvenirs[p - n].shape;
-          matchCount++;
+        addMatchGeneric5000( p, property );
+        matchCount++;
 
-        }else if( p == 3 ){
+      }else if( p == 2 ){
+        // pass this number
+      }else if ( p >= 7  && matchCount < 5 ){
 
-          souvenirs[p].match = 'shape';
-          souvenirs[p - n].match = 'shape';
-          souvenirs[p].shape = souvenirs[p - n].shape;
-          matchCount++;
+        if ( Math.random() >= 0.8 ){
 
-        }else{
+          if ( 'match' in souvenirs[p] !== true ){
 
-          if ( Math.random() >= 0.8 ){
+            addMatchGeneric5000( p, property );
+            matchCount++;
 
-            if ( 'match' in souvenirs[p] !== true ){
-
-              souvenirs[p].match = 'shape';
-              souvenirs[p - n].match = 'shape';
-              souvenirs[p].shape = souvenirs[p - n].shape;
-              matchCount++;
-
-            }
           }
         }
       }
     }
   }
 }
+
 
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Game Logic
@@ -339,7 +341,7 @@ function startCountdown(){
   }else{
 
     // run the tutorial
-    runTutorial( n, trials, trialDuration );
+    runTutorial( n, trials, 3000 );
 
   }
 
@@ -358,7 +360,7 @@ function runTutorial( start, end, interval ) {
   var tutorialStage = 7;
 
   // start tutorial messages
-  $( '.tutorial' ).html( '<p><br><br>Remember this shape, okay?</p>' );
+  $( '.tutorial' ).html( '<p>Remember the shape...</p>' );
 
   // draw the first object
   drawObject();
@@ -384,40 +386,40 @@ function runTutorial( start, end, interval ) {
 
         if ( tutorialStage >= 7) {
 
-          $( '.tutorial' ).html( '<p><br><br>Does this shape match the previous?</p>' );
+          $( '.tutorial' ).html( '<p>Does this shape match the previous?</p>' );
           tutorialStage--;
 
         }else if ( tutorialStage >= 6) {
 
-          $( '.tutorial' ).html( '<p><br><br>If this shape is the same as 1 before...</p>' );
+          $( '.tutorial' ).html( '<p>Remember each shape...</p>' );
           tutorialStage--;
 
         }else if ( tutorialStage >= 5) {
 
-          $( '.tutorial' ).html( '<p><br><br>...then we have a match!</p>' );
+          $( '.tutorial' ).html( '<p>Does it match 1 step before?</p>' );
           tutorialStage--;
 
         }else if ( tutorialStage >= 4) {
 
-          $( '.tutorial' ).html( '<p><br><br>Now how about the color?</p>' );
+          $( '.tutorial' ).html( '<p>Now, remember the color...</p>' );
           tutorialStage--;
           $( 'button.color').removeAttr('disabled');
 
         }else if ( tutorialStage >= 3) {
 
-          $( '.tutorial' ).html( '<p><br><br>Guess if the color is the same as 1 before.</p>' );
+          $( '.tutorial' ).html( '<p>Does the color match 1 step before?</p>' );
           tutorialStage--;
           $( 'button.color').removeAttr('disabled');
 
         }else if ( tutorialStage >= 2) {
 
-          $( '.tutorial' ).html( '<p><br><br>You will guess 20 more times.</p>' );
+          $( '.tutorial' ).html( '<p>20 more guesses...</p>' );
           tutorialStage--;
           $( 'button.color').removeAttr('disabled');
 
         }else{
 
-          $( '.tutorial' ).html( '<p><br><br>Then we will calculate your score.</p>' );
+          $( '.tutorial' ).html( '<p>Does this shape or color match the 1 before?</p>' );
           tutorialStage--;
           $( 'button.color').removeAttr('disabled');
 
