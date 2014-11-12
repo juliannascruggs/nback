@@ -289,6 +289,9 @@ function startCountdown(){
   $( '.game-ready' ).hide();
   $( '.game-start' ).show();
   $( '.controls' ).fadeIn(1000);
+  $( '.color' ).addClass( 'not-ready' );
+  $( '.shape' ).addClass( 'not-ready' );
+
   // $( '.cbp-hsmenu' ).addClass( 'disabled' );
   // $( '.cbp-hsmenu li a' ).addClass( 'disabled' );
 
@@ -320,7 +323,6 @@ function startCountdown(){
 
   }else{
 
-    // run the tutorial
     runTutorial( n, trials, 3000 );
 
   }
@@ -329,22 +331,115 @@ function startCountdown(){
 
 // * * *  Game Tutorial  * * * 
 
-// progress the game at an interval or end the game
-function runTutorial( start, end, interval ) {
+function tutorialStageOne(){
+
+  // show tutorial instructions
+  var counter = 3;
+  $( '.counter' ).html( '<p>Here&rsquo;s how to play...</p>' );
+
+  var stageOne = setInterval( function(){
+
+    if ( counter >= 3 ){
+      $( '.counter' ).html( '<p>We&rsquo;ll show you a shape.</p>' );
+      counter--;
+    }else if ( counter >= 2 ){
+      $( '.counter' ).html( '<p>You&rsquo;ll guess if it matches the one before.</p>' );
+      counter--;
+    }else if ( counter >= 1 ){
+      $( '.counter' ).html( '<p>Let&rsquo;s try it out...</p>' );
+      counter--;
+    }else{
+      clearInterval( stageOne );
+      tutorialStageTwo();
+    }
+
+  }, 3000 );
+
+}
+
+function tutorialStageTwo(){
 
   $( '.game-start' ).hide();
   $( '.game-active' ).show(); 
-  console.log('Game Active');
 
   var tutorialStage = 7;
-
-  // start tutorial messages
-  $( '.tutorial' ).html( '<p>Remember the shape...</p>' );
-
-  // draw the first object
+  $( '.tutorial' ).html( '<p>Check out this shape...</p>' );
   drawObject();
-  // start the trials timer
-  var timer = setInterval( function(){
+
+  var stageTwo = setInterval( function(){
+
+    // updateScore here, so we can calculate the current results before moving on to the next object 
+    updateScore( 'color', 'time' );
+    updateScore( 'shape', 'time' );
+
+    // increment currentObject here, so currentObject is always the index of the object on screen
+    currentObject++;
+    //      $( '.counter' ).html( currentObject );
+
+    drawObject();
+
+    // just enable the shape match button, when we reach 'n'
+    if ( currentObject >= n ){
+      $( 'button.shape' ).removeAttr( 'disabled' );
+      $( 'button.shape' ).removeClass( 'not-ready' );
+    }
+
+    // show some tutorial messages
+    if ( tutorialStage >= 7 ) {
+      $( '.tutorial' ).html( '<p>Press &ldquo;SHAPE MATCH&rdquo; if it matches the one before.</p>' );
+      tutorialStage--;
+    }else if ( tutorialStage >= 6 ){
+      $( '.tutorial' ).html( '<p>Look at each shape...</p>' );
+      tutorialStage--;
+    }else if ( tutorialStage >= 5) {
+      $( '.tutorial' ).html( '<p>Guess if it matches one step before.</p>' );
+      tutorialStage--;
+    }else{
+      clearInterval( stageTwo );
+      tutorialStageThree()
+    }
+
+  }, 3000 );
+
+}
+
+function tutorialStageThree(){
+
+  $( '.game-start' ).show();
+  $( '.game-active' ).hide(); 
+
+  var counter = 3;
+  $( '.counter' ).html( '<p>Now, let&rsquo;s talk about color.</p>' );
+
+  var stageThree = setInterval( function(){
+
+    if ( counter >= 3 ){
+      $( '.counter' ).html( '<p>We&rsquo;re going to show a colored shape.</p>' );
+      counter--;
+    }else if ( counter >= 2 ){
+      $( '.counter' ).html( '<p>Guess if the shape or color matches the one before.</p>' );
+      counter--;
+    }else if ( counter >= 1 ){
+      $( '.counter' ).html( '<p>Let&rsquo;s try it out...</p>' );
+      counter--;
+    }else{
+      clearInterval( stageThree );
+    }
+
+  }, 3000 );
+
+}
+
+function tutorialStageFour(){
+
+  $( '.game-start' ).hide();
+  $( '.game-active' ).show(); 
+
+  var tutorialStage = 3;
+  $( '.tutorial' ).html( '<p>Now, remember the color and shape...</p>' );
+  drawObject();
+
+  var stageFour = setInterval( function(){
 
     // updateScore here, so we can calculate the current results before moving on to the next object 
     updateScore( 'color', 'time' );
@@ -353,68 +448,43 @@ function runTutorial( start, end, interval ) {
     // increment currentObject here, so currentObject is always the index of the object on screen
     currentObject++;
 
-    $( '.counter' ).html( currentObject );
+    // $( '.counter' ).html( currentObject );
 
-    if ( currentObject < trials ){
-      drawObject();
-      // just enable the shape match button, when we reach 'n'
-      if ( currentObject >= n ){
+    drawObject();
 
-        $( 'button.shape').removeAttr('disabled');
-        // $( 'button.color').removeAttr('disabled');
+    // enable the shape and color buttons this time
+    if ( currentObject >= n ){
 
-        if ( tutorialStage >= 7) {
+      $( 'button.shape').removeAttr('disabled');
+      $( 'button.color').removeAttr('disabled');
+      $( 'button.color' ).removeClass( 'not-ready' );
+    }
 
-          $( '.tutorial' ).html( '<p>Does this shape match the previous?</p>' );
-          tutorialStage--;
-
-        }else if ( tutorialStage >= 6) {
-
-          $( '.tutorial' ).html( '<p>Remember each shape...</p>' );
-          tutorialStage--;
-
-        }else if ( tutorialStage >= 5) {
-
-          $( '.tutorial' ).html( '<p>Does it match 1 step before?</p>' );
-          tutorialStage--;
-
-        }else if ( tutorialStage >= 4) {
-
-          $( '.tutorial' ).html( '<p>Now, remember the color...</p>' );
-          tutorialStage--;
-          $( 'button.color').removeAttr('disabled');
-
-        }else if ( tutorialStage >= 3) {
-
-          $( '.tutorial' ).html( '<p>Does the color match 1 step before?</p>' );
-          tutorialStage--;
-          $( 'button.color').removeAttr('disabled');
-
-        }else if ( tutorialStage >= 2) {
-
-          $( '.tutorial' ).html( '<p>20 more guesses...</p>' );
-          tutorialStage--;
-          $( 'button.color').removeAttr('disabled');
-
-        }else{
-
-          $( '.tutorial' ).html( '<p>Does this match 1 before?</p>' );
-          tutorialStage--;
-          $( 'button.color').removeAttr('disabled');
-
-        }
-
-      }
-
+    if ( tutorialStage >= 3 ) {
+      $( '.tutorial' ).html( '<p>If there is a match, press the button.</p>' );
+      tutorialStage--;
+    }else if ( tutorialStage >= 2) {
+      $( '.tutorial' ).html( '<p>Look at color and shape...</p>' );
+      tutorialStage--;
+    }else if ( tutorialStage >= 1) {
+      $( '.tutorial' ).html( '<p>Guess if color or shape match one step before.</p>' );
+      tutorialStage--;
     }else{
       endGame();
       tutorial = false;
-      clearInterval(timer);
     }
+  }, 3000 );
+}
 
-  }, interval );
+
+// progress the game at an interval or end the game
+function runTutorial( start, end, interval ) {
+
+  console.log('Game Active, Start Tutorial');
+  tutorialStageOne();
 
 }
+
 
 // * * *  Game Active  * * * 
 
