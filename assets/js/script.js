@@ -541,9 +541,6 @@ function runTrials( start, end, interval ) {
   $( '.game-start' ).hide();
   $( '.game-active' ).show(); 
   console.log('Game Active');
-  $( 'button.color' ).removeClass( 'not-ready' );
-  $( 'button.shape' ).removeClass( 'not-ready' );
-
 
   // draw the first object
   drawObject();
@@ -564,6 +561,9 @@ function runTrials( start, end, interval ) {
       if ( currentObject >= n ){
         $( 'button.color').removeAttr('disabled');
         $( 'button.shape').removeAttr('disabled');
+        $( 'button.color' ).removeClass( 'not-ready' );
+        $( 'button.shape' ).removeClass( 'not-ready' );
+
       }
 
     }else{
