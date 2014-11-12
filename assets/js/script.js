@@ -402,9 +402,9 @@ function tutorialStageTwo(){
   var tutorialTwoStrings = [
 
     '<p>Hark! A nefarious beetle.</p>',
-    '<p>And his <em>matching</em> beetle bro...</p>',
-    '<p>Try on your own now...</p>',
-    '<p></p>'
+    '<p>Press the button if this shape matches the one before.</p>',
+    '<p>Look for shapes that match the one before.</p>',
+    '<p>Look for shapes that match the one before.</p>'
 
   ];
 
@@ -438,7 +438,7 @@ function tutorialStageTwo(){
       tutorialStageThree();
     }
 
-  }, 2500 );
+  }, 3000 );
 
 }
 
@@ -449,27 +449,28 @@ function tutorialStageThree(){
   $( 'button.shape').attr('disabled', 'disabled');
   $( 'button.shape' ).addClass( 'not-ready' );
 
+  var tutorialThreeStrings = [
 
-  var counter = 3;
-  $( '.counter' ).html( '<p>Child&rsquo;s play, right?</p>' );
+    '<p>Child&rsquo;s play, right?</p>',
+    '<p>Let&rsquo;s add color to the mix.</p>',
+    '<p>This time, watch for color and shape matches.</p>',
+    '<p>Let&rsquo;s try it out...</p>',
 
-  var stageThree = setInterval( function(){
+  ];
 
-    if ( counter >= 3 ){
-      $( '.counter' ).html( '<p>Let&rsquo;s add color to the mix.</p>' );
-      counter--;
-    }else if ( counter >= 2 ){
-      $( '.counter' ).html( '<p>This time, watch for color matches too.</p>' );
-      counter--;
-    }else if ( counter >= 1 ){
-      $( '.counter' ).html( '<p>Let&rsquo;s try it out...</p>' );
-      counter--;
+  var i = 0;
+  $( '.counter' ).html( tutorialThreeStrings[i] );
+
+  var tutorialThree = setInterval( function(){
+    i++
+    if ( i < tutorialThreeStrings.length ) {
+      $( '.counter' ).html( tutorialThreeStrings[i] );
     }else{
-      clearInterval( stageThree );
+      clearInterval( tutorialThree );
       tutorialStageFour();
     }
 
-  }, 3000 );
+  }, 2500 );
 
 }
 
