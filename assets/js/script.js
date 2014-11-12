@@ -369,20 +369,6 @@ function tutorialHint( button ){
 // basic shape instructions
 function tutorialStageOne(){
 
-  var i = 0;
-  $( '.counter' ).html( tutorialOneStrings[i] );
-
-    var tutorialOne = setInterval( function(){
-      i++
-      if ( i < tutorialOneStrings.length ) {
-        $( '.counter' ).html( tutorialOneStrings[i] );
-      }else{
-        clearInterval( tutorialOne );
-        tutorialStageTwo();
-      }
-
-    }, 2500 );
-
   var tutorialOneStrings = [
 
     '<p>So, you want to be a genius?</p>',
@@ -392,84 +378,67 @@ function tutorialStageOne(){
 
   ];
 
+  var i = 0;
+  $( '.counter' ).html( tutorialOneStrings[i] );
+
+  var tutorialOne = setInterval( function(){
+    i++
+    if ( i < tutorialOneStrings.length ) {
+      $( '.counter' ).html( tutorialOneStrings[i] );
+    }else{
+      clearInterval( tutorialOne );
+      tutorialStageTwo();
+    }
+
+  }, 2500 );
+
 }
-
-var tutorialOneStrings = [
-
-  '<p>So, you want to be a genius?</p>',
-  '<p>Step 1:<br>We show you some shapes.</p>',
-  '<p>Step 2:<br>Tell us when you see a match.</p>',
-  '<p>Let&rsquo;s try it...</p>',
-
-];
-
-
 
 function tutorialStageTwo(){
 
   $( '.game-start' ).hide();
   $( '.game-active' ).show(); 
 
-  var tutorialStage = 7;
-  $( '.tutorial' ).html( '<p>Hark! A nefarious beetle.</p>' );
+  var tutorialTwoStrings = [
+
+    '<p>Hark! A nefarious beetle.</p>',
+    '<p>And his <em>matching</em> beetle bro...</p>',
+    '<p>Try on your own now...</p>',
+    '<p></p>'
+
+  ];
+
+  var i = 0;
+  $( '.tutorial' ).html( tutorialTwoStrings[i] );
   drawObject();
 
-  var stageTwo = setInterval( function(){
+  var tutorialTwo = setInterval( function(){
 
-    // updateScore here, so we can calculate the current results before moving on to the next object 
+    i++
     updateScore( 'color', 'time' );
     updateScore( 'shape', 'time' );
-
-    // increment currentObject here, so currentObject is always the index of the object on screen
     currentObject++;
-    //      $( '.counter' ).html( currentObject );
-
     drawObject();
 
-    // just enable the shape match button, when we reach 'n'
+    // enable the shape match button when we reach 'n'
     if ( currentObject >= n ){
       $( 'button.shape' ).removeAttr( 'disabled' );
       $( 'button.shape' ).removeClass( 'not-ready' );
     }
 
-    // show some tutorial messages
-    if ( tutorialStage >= 7 ) {
-      $( '.tutorial' ).html( '<p>And his <em>matching</em> beetle bro...</p>' );
+    if ( i < tutorialTwoStrings.length ) {
+      $( '.tutorial' ).html( tutorialTwoStrings[i] );
 
-      $( 'button.shape' ).on('click', function(e){
-      });
-
-      tutorialHint( $( 'button.shape' ) );
-
-      tutorialStage--;
-    }else if ( tutorialStage >= 6 ){
-      $( '.tutorial' ).html( '<p>A puzzling new shape.</p>' );
-      tutorialStage--;
-
-
-    }else if ( tutorialStage >= 5) {
-      $( '.tutorial' ).html( '<p>Put it together, genius...</p>' );
-      tutorialStage--;
-
-      setTimeout( function(){
-        if ( $( 'button.shape').attr('disabled') !== 'disabled' ){
-          $( 'button.shape span' ).fadeIn( 500, function(){
-            var nudge = $( this );
-            nudge.animate({opacity: '0.2'}, 'fast');
-            nudge.animate({opacity: '1.0'}, 'fast');
-            nudge.animate({opacity: '0.2'}, 'fast');
-            nudge.animate({opacity: '1.0'}, 'fast');
-            $( this ).fadeOut();
-          });
-        }
-      }, 1500 )
+      if ( i == 1 || i == 3 ){
+        tutorialHint( $( 'button.shape' ) );
+      }
 
     }else{
-      clearInterval( stageTwo );
-      tutorialStageThree()
+      clearInterval( tutorialTwo );
+      tutorialStageThree();
     }
 
-  }, 3000 );
+  }, 2500 );
 
 }
 
