@@ -366,39 +366,44 @@ function tutorialHint( button ){
 }
 
 
-// welcome the user
+// basic shape instructions
 function tutorialStageOne(){
 
-  // show tutorial instructions
-  var counter = 5;
-  $( '.counter' ).html( '<p>So, you want to be a genius.<br></p>' );
+  var i = 0;
+  $( '.counter' ).html( tutorialOneStrings[i] );
 
-  var stageOne = setInterval( function(){
-    if ( counter >= 5 ){
-      $( '.counter p' ).append( 'You&rsquo;ve come to the right place.' );
+    var tutorialOne = setInterval( function(){
+      i++
+      if ( i < tutorialOneStrings.length ) {
+        $( '.counter' ).html( tutorialOneStrings[i] );
+      }else{
+        clearInterval( tutorialOne );
+        tutorialStageTwo();
+      }
 
-      $( '.counter' ).html( 'Step 1: We show you some shapes.' );
-      counter--;
-    }else if ( counter >= 4 ){
-      $( '.counter p' ).append( 'We show you some shapes.' );
-      counter--;
-    }else if ( counter >= 3 ){
-      $( '.counter' ).html( '<p>Step 2:<br></p>' );
-      counter--;
-    }else if ( counter >= 2 ){
-      $( '.counter p' ).append( 'Tell us when you see a match.' );
-      counter--;
-    }else if ( counter >= 1 ){
-      $( '.counter' ).html( '<p>Easy! Let&rsquo;s get started...</p>' );
-      counter--;
-    }else{
-      clearInterval( stageOne );
-      tutorialStageTwo();
-    }
+    }, 2500 );
 
-  }, 2500 );
+  var tutorialOneStrings = [
+
+    '<p>So, you want to be a genius?</p>',
+    '<p>Step 1:<br>We show you some shapes.</p>',
+    '<p>Step 2:<br>Tell us when you see a match.</p>',
+    '<p>Let&rsquo;s try it...</p>',
+
+  ];
 
 }
+
+var tutorialOneStrings = [
+
+  '<p>So, you want to be a genius?</p>',
+  '<p>Step 1:<br>We show you some shapes.</p>',
+  '<p>Step 2:<br>Tell us when you see a match.</p>',
+  '<p>Let&rsquo;s try it...</p>',
+
+];
+
+
 
 function tutorialStageTwo(){
 
