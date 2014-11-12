@@ -344,19 +344,46 @@ function startCountdown(){
 
 // * * *  Game Tutorial  * * * 
 
+// animate match button hint arrow
+function hintArrow( nudge ){
+  nudge.animate({opacity: '0.2'}, 'fast');
+  nudge.animate({opacity: '1.0'}, 'fast');
+  nudge.fadeOut();
+}
+
+// queue match button hint arrow
+function tutorialHint( button ){
+
+  setTimeout( function(){
+    if ( button.attr('disabled') !== 'disabled' ){
+      var arrow = button.find( 'span' );
+      arrow.fadeIn( 500, function(){
+        hintArrow( arrow );
+      });
+    }
+  }, 1500 )
+
+}
+
+
+// welcome the user
 function tutorialStageOne(){
 
   // show tutorial instructions
-  var counter = 4;
-  $( '.counter' ).html( '<p>Step 1 to becoming a genius:  </p>' );
+  var counter = 5;
+  $( '.counter' ).html( '<p>So, you want to be a genius.<br></p>' );
 
   var stageOne = setInterval( function(){
+    if ( counter >= 5 ){
+      $( '.counter p' ).append( 'You&rsquo;ve come to the right place.' );
 
-    if ( counter >= 4 ){
+      $( '.counter' ).html( 'Step 1: We show you some shapes.' );
+      counter--;
+    }else if ( counter >= 4 ){
       $( '.counter p' ).append( 'We show you some shapes.' );
       counter--;
     }else if ( counter >= 3 ){
-      $( '.counter' ).html( '<p>Step 2:  </p>' );
+      $( '.counter' ).html( '<p>Step 2:<br></p>' );
       counter--;
     }else if ( counter >= 2 ){
       $( '.counter p' ).append( 'Tell us when you see a match.' );
@@ -369,7 +396,7 @@ function tutorialStageOne(){
       tutorialStageTwo();
     }
 
-  }, 3000 );
+  }, 2500 );
 
 }
 
@@ -379,7 +406,7 @@ function tutorialStageTwo(){
   $( '.game-active' ).show(); 
 
   var tutorialStage = 7;
-  $( '.tutorial' ).html( '<p>Hark! A nefarious beetle...</p>' );
+  $( '.tutorial' ).html( '<p>Hark! A nefarious beetle.</p>' );
   drawObject();
 
   var stageTwo = setInterval( function(){
@@ -402,14 +429,36 @@ function tutorialStageTwo(){
 
     // show some tutorial messages
     if ( tutorialStage >= 7 ) {
-      $( '.tutorial' ).html( '<p>...and his <em>matching</em> beetle brethren!</p>' );
+      $( '.tutorial' ).html( '<p>And his <em>matching</em> beetle bro...</p>' );
+
+      $( 'button.shape' ).on('click', function(e){
+      });
+
+      tutorialHint( $( 'button.shape' ) );
+
       tutorialStage--;
     }else if ( tutorialStage >= 6 ){
-      $( '.tutorial' ).html( '<p>A puzzling new shape...</p>' );
+      $( '.tutorial' ).html( '<p>A puzzling new shape.</p>' );
       tutorialStage--;
+
+
     }else if ( tutorialStage >= 5) {
-      $( '.tutorial' ).html( '<p>...put it together, genius.</p>' );
+      $( '.tutorial' ).html( '<p>Put it together, genius...</p>' );
       tutorialStage--;
+
+      setTimeout( function(){
+        if ( $( 'button.shape').attr('disabled') !== 'disabled' ){
+          $( 'button.shape span' ).fadeIn( 500, function(){
+            var nudge = $( this );
+            nudge.animate({opacity: '0.2'}, 'fast');
+            nudge.animate({opacity: '1.0'}, 'fast');
+            nudge.animate({opacity: '0.2'}, 'fast');
+            nudge.animate({opacity: '1.0'}, 'fast');
+            $( this ).fadeOut();
+          });
+        }
+      }, 1500 )
+
     }else{
       clearInterval( stageTwo );
       tutorialStageThree()
@@ -422,7 +471,10 @@ function tutorialStageTwo(){
 function tutorialStageThree(){
 
   $( '.game-start' ).show();
-  $( '.game-active' ).hide(); 
+  $( '.game-active' ).hide();
+  $( 'button.shape').attr('disabled', 'disabled');
+  $( 'button.shape' ).addClass( 'not-ready' );
+
 
   var counter = 3;
   $( '.counter' ).html( '<p>Child&rsquo;s play, right?</p>' );
@@ -453,7 +505,7 @@ function tutorialStageFour(){
   $( '.game-active' ).show(); 
 
   var tutorialStage = 3;
-  $( '.tutorial' ).html( '<p>A blue leaf - weird.</p>' );
+  $( '.tutorial' ).html( '<p>A blue leaf &mdash; weird.</p>' );
   drawObject();
 
   var stageFour = setInterval( function(){
@@ -480,12 +532,42 @@ function tutorialStageFour(){
     if ( tutorialStage >= 3 ) {
       $( '.tutorial' ).html( '<p>And a blue drop. Aha!</p>' );
       tutorialStage--;
+
+      setTimeout( function(){
+        if ( $( 'button.color').attr('disabled') !== 'disabled' ){
+          $( 'button.color span' ).fadeIn( 500, function(){
+            var nudge = $( 'button.color span' );
+            nudge.animate({opacity: '0.2'}, 'fast');
+            nudge.animate({opacity: '1.0'}, 'fast');
+            nudge.animate({opacity: '0.2'}, 'fast');
+            nudge.animate({opacity: '1.0'}, 'fast');
+            $( this ).fadeOut();
+          });
+        }
+      }, 1500 )
+
     }else if ( tutorialStage >= 2) {
       $( '.tutorial' ).html( '<p>Some green thing...</p>' );
       tutorialStage--;
     }else if ( tutorialStage >= 1) {
       $( '.tutorial' ).html( '<p>Some other thing...</p>' );
       tutorialStage--;
+
+      setTimeout( function(){
+        if ( $( 'button.color').attr('disabled') !== 'disabled' ){
+          $( 'button.color span' ).fadeIn( 500, function(){
+            var nudge = $( 'button.color span' );
+            nudge.animate({opacity: '0.2'}, 'fast');
+            nudge.animate({opacity: '1.0'}, 'fast');
+            nudge.animate({opacity: '0.2'}, 'fast');
+            nudge.animate({opacity: '1.0'}, 'fast');
+            $( this ).fadeOut();
+          });
+        }
+      }, 1500 )
+
+
+
     }else{
       endGame();
       clearInterval( stageFour );
