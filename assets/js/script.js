@@ -371,7 +371,7 @@ function tutorialStageOne(){
 
   var tutorialOneStrings = [
 
-    '<p>So, you want to be a genius?</p>',
+    '<p>So, you want to be a genius.</p>',
     '<p>Step 1:<br>We show you some shapes.</p>',
     '<p>Step 2:<br>Tell us when you see a match.</p>',
     '<p>Let&rsquo;s try it...</p>',
