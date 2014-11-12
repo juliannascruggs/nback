@@ -479,78 +479,50 @@ function tutorialStageFour(){
   $( '.game-start' ).hide();
   $( '.game-active' ).show(); 
 
-  var tutorialStage = 3;
-  $( '.tutorial' ).html( '<p>A blue leaf &mdash; weird.</p>' );
+  var tutorialFourStrings = [
+
+    '<p>A blue leaf &mdash; weird.</p>',
+    '<p>And a blue drop. Aha!</p>',
+    '<p>Look for colors and shapes that match the one before.</p>',
+    '<p>Look for colors and shapes that match the one before.</p>'
+
+  ];
+
+  var i = 0;
+  $( '.tutorial' ).html( tutorialFourStrings[i] );
   drawObject();
 
-  var stageFour = setInterval( function(){
+  var tutorialFour = setInterval( function(){
 
-    // updateScore here, so we can calculate the current results before moving on to the next object 
+    i++
     updateScore( 'color', 'time' );
     updateScore( 'shape', 'time' );
-
-    // increment currentObject here, so currentObject is always the index of the object on screen
     currentObject++;
-
-    // $( '.counter' ).html( currentObject );
-
     drawObject();
 
-    // enable the shape and color buttons this time
+    // enable the color match button when we reach 'n'
     if ( currentObject >= n ){
-
       $( 'button.shape').removeAttr('disabled');
       $( 'button.color').removeAttr('disabled');
       $( 'button.color' ).removeClass( 'not-ready' );
     }
 
-    if ( tutorialStage >= 3 ) {
-      $( '.tutorial' ).html( '<p>And a blue drop. Aha!</p>' );
-      tutorialStage--;
+    if ( i < tutorialFourStrings.length ) {
+      $( '.tutorial' ).html( tutorialFourStrings[i] );
 
-      setTimeout( function(){
-        if ( $( 'button.color').attr('disabled') !== 'disabled' ){
-          $( 'button.color span' ).fadeIn( 500, function(){
-            var nudge = $( 'button.color span' );
-            nudge.animate({opacity: '0.2'}, 'fast');
-            nudge.animate({opacity: '1.0'}, 'fast');
-            nudge.animate({opacity: '0.2'}, 'fast');
-            nudge.animate({opacity: '1.0'}, 'fast');
-            $( this ).fadeOut();
-          });
-        }
-      }, 1500 )
-
-    }else if ( tutorialStage >= 2) {
-      $( '.tutorial' ).html( '<p>Some green thing...</p>' );
-      tutorialStage--;
-    }else if ( tutorialStage >= 1) {
-      $( '.tutorial' ).html( '<p>Some other thing...</p>' );
-      tutorialStage--;
-
-      setTimeout( function(){
-        if ( $( 'button.color').attr('disabled') !== 'disabled' ){
-          $( 'button.color span' ).fadeIn( 500, function(){
-            var nudge = $( 'button.color span' );
-            nudge.animate({opacity: '0.2'}, 'fast');
-            nudge.animate({opacity: '1.0'}, 'fast');
-            nudge.animate({opacity: '0.2'}, 'fast');
-            nudge.animate({opacity: '1.0'}, 'fast');
-            $( this ).fadeOut();
-          });
-        }
-      }, 1500 )
-
-
+      if ( i == 1 || i == 3 ){
+        tutorialHint( $( 'button.color' ) );
+      }
 
     }else{
       endGame();
-      clearInterval( stageFour );
+      clearInterval( tutorialFour );
       tutorial = false;
     }
-  }, 3000 );
-}
 
+  }, 3000 );
+
+}
 
 // progress the game at an interval or end the game
 function runTutorial( start, end, interval ) {
@@ -675,6 +647,9 @@ function endGame(){
   $( 'button.replay').removeAttr('disabled');
   $( 'button.color').attr('disabled', 'disabled');
   $( 'button.shape').attr('disabled', 'disabled');
+  $( 'button.color' ).addClass( 'not-ready' );
+  $( 'button.shape' ).addClass( 'not-ready' );
+
   $( '.game-active' ).hide();
   $( '.game-complete' ).show();
   $( '.controls' ).fadeOut(1000);
