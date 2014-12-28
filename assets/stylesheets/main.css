@@ -556,8 +556,13 @@ header {
 /* * * *  Game Active * * * */
 
 .souvenir {
-  font-size: 12rem;
-  padding-bottom: 1rem;
+  font-size: 7rem;
+}
+
+@media screen and (min-width: 51.4375rem){
+  .souvenir {
+    font-size: 12rem;
+  }
 }
 
 /*

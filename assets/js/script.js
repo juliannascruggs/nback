@@ -9,7 +9,8 @@ var n;
 // the number times the user needs to guess, per game
 var trials;
 // the the duration of each trial in ms, defines timer duration in runTrials function
-var trialDuration = 2000;
+var trialDuration = 2500;
+var trialDisplay = 1700;
 var tutorial = true;
 
 // * * *  Game Components  * * *
@@ -254,9 +255,9 @@ function addMatches(){
         // pass on these numbers
       }else if( p == 5 ){
 
-        souvenirs[4].shape = 'heart-o';
+        souvenirs[4].shape = 'sun-o';
         souvenirs[4].color = '#55bdff';
-        souvenirs[5].shape = 'circle-thin';
+        souvenirs[5].shape = 'moon-o';
         addMatchGeneric5000( p, 'color' );
         colorMatch++;
       }else if( p == 7 ){
@@ -404,7 +405,7 @@ function tutorialStageOne(){
 
     '<p>So, you want to be a genius.</p>',
     '<p>Step 1:<br>We show you some shapes.</p>',
-    '<p>Step 2:<br>Tell us when you see a match.</p>',
+    '<p>Step 2:<br>You tell us when you see a match.</p>',
     '<p>Let&rsquo;s try it...</p>',
 
   ];
@@ -432,7 +433,7 @@ function tutorialStageTwo(){
 
   var tutorialTwoStrings = [
 
-    '<p>Hark! A nefarious beetle.</p>',
+    '<p>Hark! A shining star.</p>',
     '<p>Press the button if this shape matches the one before.</p>',
     '<p>Look for shapes that match the one before.</p>',
     '<p>Look for shapes that match the one before.</p>'
@@ -512,8 +513,8 @@ function tutorialStageFour(){
 
   var tutorialFourStrings = [
 
-    '<p>A blue leaf &mdash; weird.</p>',
-    '<p>And a blue drop. Aha!</p>',
+    '<p>A blue sun...</p>',
+    '<p>And a blue moon. Aha!</p>',
     '<p>Look for colors and shapes that match the one before.</p>',
     '<p>Look for colors and shapes that match the one before.</p>'
 
@@ -608,9 +609,14 @@ function runTrials( start, end, interval ) {
 
 // draw the currentObject on the gameboard
 function drawObject(){
-
-    $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
-    $( '.souvenir .fa' ).removeClass().addClass('fa fa-' + souvenirs[currentObject].shape );
+      
+  $( '.souvenir' ).animate({ opacity: 1.0 }, 300);
+  $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
+  $( '.souvenir .fa' ).removeClass().addClass('fa fa-' + souvenirs[currentObject].shape );
+  
+  setTimeout( function(){
+    $( '.souvenir' ).animate({ opacity: 0.0 }, 300);
+  }, trialDisplay );
 
 }
 

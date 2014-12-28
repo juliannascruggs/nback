@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="assets/stylesheets/menu.css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300|Open+Sans:400italic,400,700,300,600|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
-    <script src="assets/js/modernizr.custom.js"></script>
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
   </head>
   <body>
       <!-- Header -->
@@ -49,9 +49,6 @@
         </div>
       </nav>
     </header>
-
-
-
     <!-- This is where the game magic happens -->
     <div class="group gameboard">
       <div class="stage columns small-col-3-3 large-col-2-3">
@@ -82,8 +79,8 @@
         <div class="game-complete">
           <!-- Users get a replay button -->
           <button type="button" class="replay" value="play">
-              <span class="fa fa-lg fa-repeat">
-                <div class="replay-button-label">Replay</div>
+              <span class="fa fa-lg fa-repeat fa-flip-horizontal">
+                <div class="replay-button-label fa-flip-horizontal">Replay</div>
               </span>
           </button>
           <!-- And their epic score -->
@@ -124,14 +121,20 @@
       </div>
     </div>
 
-    <!-- JavaScripts -->
+    <!-- JS Assets -->
+    <script src="assets/js/modernizr.custom.js"></script>
+    <script type='application/javascript' src='assets/js/fastclick.js'></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/script.js"></script>
-<!--    <script type="text/javascript" src="assets/js/menu.js"></script> -->
     <script type="text/javascript" src="assets/js/menu.js"></script>
     <script src="assets/js/cbpHorizontalSlideOutMenu.js"></script>
+
     <script>
-      var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
+      var menu = new cbpHorizontalSlideOutMenu(document.getElementById('cbp-hsmenu-wrapper'));
+
+      $(function() {
+        FastClick.attach(document.body);
+      });
     </script>
   </body>
 </html>
