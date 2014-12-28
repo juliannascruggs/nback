@@ -10,7 +10,6 @@ var n;
 var trials;
 // the the duration of each trial in ms, defines timer duration in runTrials function
 var trialDuration = 2000;
-
 var tutorial = true;
 
 // * * *  Game Components  * * *
@@ -25,37 +24,66 @@ var colorResults = [];
 var shapeResults = []
 
 // my property arrays
-var colors = [
 
-  '#b70707',
-  '#e88a25',
-  '#f9e14b',
-  '#efed89',
-  '#7abf66',
-  '#099fb0',
-  '#b87272',
-  '#6a4a3d',
-  '#273540',
-  '#d6f5ec',
-  '#ff8a84'
+var colors = [];
+var colorSet = { 
+  highContrast: [
+    '#ff0000',
+    '#ff7e00',
+    '#ffff53',
+    '#60ff00',
+    '#00927c',
+    '#55bdff',
+    '#5723ff',
+    '#d957ff',
+    '#ff278d',
+    '#ffffff',
+    '#fcfcfc'
+  ], 
+  colorBlind: [
+    '#b70707',
+    '#e88a25',
+    '#f9e14b',
+    '#efed89',
+    '#7abf66',
+    '#099fb0',
+    '#b87272',
+    '#6a4a3d',
+    '#273540',
+    '#d6f5ec',
+    '#ff8a84'
+  ]
+};
 
-];
-
-var shapes = [
-
-  'bug',
-  'rocket',
-  'bomb',
-  'send',
-  'puzzle-piece',
-  'quote-right',
-  'leaf',
-  'paw',
-  'tint',
-  'truck',
-  'flash'
-
-];
+var shapes = [];
+var shapeSet = { 
+  line: [
+    'circle-thin',
+    'heart-o',
+    'moon-o',
+    'bicycle',
+    'paperclip',
+    'star-o',
+    'square-o',
+    'bell-o',
+    'lightbulb-o',
+    'sun-o',
+    'umbrella'
+  ],
+  fill: [
+    'bug',
+    'rocket',
+    'bomb',
+    'send',
+    'puzzle-piece',
+    'quote-right',
+    'leaf',
+    'paw',
+    'tint',
+    'truck',
+    'flash'
+  ]
+};
 
 // * * * * * * * * * * * * * * * * * * * *
 // * * *  Setup Functions
@@ -68,17 +96,56 @@ $( '.controls' ).hide();
 
 // * * *  Game Settings  * * *
 
-// apply the user's game settings
-function setSettings(){
+// reset all the variables, stage the gameboard, apply the user's game settings
+function resetGame(){
 
+  // reset the counters
+  colorResults = [];
+  shapeResults = [];
+  currentObject = 0;
+  // empty souvenirs
+  souvenirs = [];
+
+  // collapse the header on small and medium devices
+  if ($(window).width() <= 823) {  
+
+    $( '.logo' ).addClass( 'collapsed' );
+    $( '.slogan' ).fadeOut().slideUp();    
+
+  }     
+  
+  // hide the scoreboard
+  $( '.game-complete' ).hide();
+  // disable the play and replay buttons
+  $( 'button.play').attr('disabled', 'disabled');
+  $( 'button.replay').attr('disabled', 'disabled');
+  // swap the game board
+  $( '.game-ready' ).hide();
+  $( '.game-start' ).show();
+  $( '.controls' ).fadeIn(1000);
+  $( '.color' ).addClass( 'not-ready' );
+  $( '.shape' ).addClass( 'not-ready' );
+
+  // Apply the user's game settings
   trials = 25;
-
   n = $( '#n-equals' ).html();
-  console.log('n equals ' + n);
   n = parseInt( n );
-  trials += n
+  trials += n;
+
+  if ( n >= 2 ) {
+    tutorial = false;
+  }
+
+  colors = colorSet.highContrast;
+  shapes = shapeSet.line;
+
+  generateSouvenirs();
 
 }
+
+// **** Moved to resetGame
+// function setSettings(){
+// }
 
 // a souvenir object constructor, which will later have it's own settings 
 function Souvenir( color, shape ) {
@@ -86,7 +153,7 @@ function Souvenir( color, shape ) {
     this.shape = shape;
 }
 
-// a function used to shuffle the colors array
+// a function used to shuffle the colors & shapes arrays
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -111,6 +178,10 @@ function shuffle(array) {
 
 // generate the souvenirs array
 function generateSouvenirs(){
+
+  // shuffle the colors and shapes arrays
+  shuffle(colors);
+  shuffle(shapes);
 
   // seed the souvenir pool with one object of each color
   for ( var i = 0; i < colors.length; i++ ){
@@ -144,6 +215,7 @@ function generateSouvenirs(){
 
 }
 
+// **** What is this? Clean it up.
 function addMatchGeneric5000( index, property ){
   
   var object = souvenirs[index];
@@ -160,7 +232,7 @@ function addMatches(){
   var shapeMatch = 0;
   var colorMatch = 0;
 
-  // 'start' is the while loop start index value, so it will work for the tutorial and regular game
+  // 'start' is the while loop start index value, which is used to  for the tutorial and regular game
   var start = 0;
 
   // rig the first few matches if it's the tutorial
@@ -170,26 +242,26 @@ function addMatches(){
 
       if ( p == 1){
 
-        souvenirs[0].shape = 'bug';
+        souvenirs[0].shape = 'star-o';
         addMatchGeneric5000( p, 'shape' );
         shapeMatch++;
 
       }else if( p == 3 ){
-        souvenirs[2].shape = 'puzzle-piece';
+        souvenirs[2].shape = 'bicycle';
         addMatchGeneric5000( p, 'shape' );
         shapeMatch++;
       }else if( p == 2 || p == 4 || p == 6 ){
         // pass on these numbers
       }else if( p == 5 ){
 
-        souvenirs[4].shape = 'leaf';
-        souvenirs[4].color = '#099fb0';
-        souvenirs[5].shape = 'tint';
+        souvenirs[4].shape = 'heart-o';
+        souvenirs[4].color = '#55bdff';
+        souvenirs[5].shape = 'circle-thin';
         addMatchGeneric5000( p, 'color' );
         colorMatch++;
       }else if( p == 7 ){
 
-        souvenirs[6].color = '#7ABF66';
+        souvenirs[6].color = '#60ff00';
         addMatchGeneric5000( p, 'color' );
         colorMatch++;
 
@@ -250,66 +322,25 @@ function addMatches(){
 
 // * * *  Game Start  * * *
 
-// reset all the variables and setup the game
-function resetGame(){
-
-  // reset the counters
-  colorResults = [];
-  shapeResults = [];
-
-  currentObject = 0;
-
-  // empty souvenirs
-  souvenirs = [];
-
-  // shuffle the colors and shapes arrays
-  shuffle(colors);
-  shuffle(shapes);
-
-  // hide the scoreboard
-  $( '.game-complete' ).hide();
-
-  // disable the play and replay buttons
-  $( 'button.play').attr('disabled', 'disabled');
-  $( 'button.replay').attr('disabled', 'disabled');
-
-  // collapse the header on small and medium devices
-  if ($(window).width() <= 823) {  
-
-    $( '.logo' ).addClass( 'collapsed' );
-    $( '.slogan' ).fadeOut().slideUp();    
-
-  }     
-
-}
-
-function startGame(){
-
-  resetGame();
-
-  // Get the settings, generate the objects and start the countdown
-  setSettings();
-  generateSouvenirs();
-  startCountdown();
-  console.log('Game Start');
-
-}
+// **** Merged with startGame
+// function startCountdown(){
+//}
 
 // show a countdown before the timer starts 
-function startCountdown(){
+function startGame(){
 
-  // swap the game board
-  $( '.game-ready' ).hide();
-  $( '.game-start' ).show();
-  $( '.controls' ).fadeIn(1000);
-  $( '.color' ).addClass( 'not-ready' );
-  $( '.shape' ).addClass( 'not-ready' );
+  // Get the settings, generate the objects and start the countdown
 
+  resetGame();
+  console.log('Game Start');
+
+  //  setSettings();
+  //  startCountdown();
   // $( '.cbp-hsmenu' ).addClass( 'disabled' );
   // $( '.cbp-hsmenu li a' ).addClass( 'disabled' );
 
   if ( tutorial !== true ){
-
+    // start countdown
     var counter = 3;
 
     $( '.counter' ).html( '<h3>n=' + n + '</h3>' );
@@ -579,7 +610,7 @@ function runTrials( start, end, interval ) {
 function drawObject(){
 
     $( '.souvenir' ).css( 'color', souvenirs[currentObject].color );
-    $( '.souvenir .fa' ).removeClass().addClass('fa fa-lg fa-' + souvenirs[currentObject].shape );
+    $( '.souvenir .fa' ).removeClass().addClass('fa fa-' + souvenirs[currentObject].shape );
 
 }
 
