@@ -212,12 +212,12 @@ function generateSouvenirs(){
   }
   console.log( 'We broke of the while loop!! ' + souvenirs );
 
-  addMatches();
+  insertMatches();
 
 }
 
-// **** What is this? Clean it up.
-function addMatchGeneric5000( index, property ){
+// **** What is this? Clean it up. addMatchGeneric5000
+function createMatch( index, property ){
   
   var object = souvenirs[index];
   var nBackObject = souvenirs[index - n];
@@ -228,7 +228,7 @@ function addMatchGeneric5000( index, property ){
 
 }
 
-function addMatches(){
+function insertMatches(){
 
   var shapeMatch = 0;
   var colorMatch = 0;
@@ -244,12 +244,12 @@ function addMatches(){
       if ( p == 1){
 
         souvenirs[0].shape = 'star-o';
-        addMatchGeneric5000( p, 'shape' );
+        createMatch( p, 'shape' );
         shapeMatch++;
 
       }else if( p == 3 ){
         souvenirs[2].shape = 'bicycle';
-        addMatchGeneric5000( p, 'shape' );
+        createMatch( p, 'shape' );
         shapeMatch++;
       }else if( p == 2 || p == 4 || p == 6 ){
         // pass on these numbers
@@ -258,12 +258,12 @@ function addMatches(){
         souvenirs[4].shape = 'sun-o';
         souvenirs[4].color = '#55bdff';
         souvenirs[5].shape = 'moon-o';
-        addMatchGeneric5000( p, 'color' );
+        createMatch( p, 'color' );
         colorMatch++;
       }else if( p == 7 ){
 
         souvenirs[6].color = '#60ff00';
-        addMatchGeneric5000( p, 'color' );
+        createMatch( p, 'color' );
         colorMatch++;
 
       }
@@ -285,7 +285,7 @@ function addMatches(){
 
           if ( 'match' in souvenirs[p] !== true ){
 
-            addMatchGeneric5000( p, 'shape' );
+            createMatch( p, 'shape' );
             shapeMatch++;
 
           }
@@ -305,7 +305,7 @@ function addMatches(){
 
           if ( 'match' in souvenirs[p] !== true ){
 
-            addMatchGeneric5000( p, 'color' );
+            createMatch( p, 'color' );
             colorMatch++;
 
           }
