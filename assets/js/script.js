@@ -285,7 +285,7 @@ function insertMatches(){
         if ( Math.random() >= 0.8 ){
           // if ( 'match' in souvenirs[p] !== true ){
 
-          if ( souvenirs[p].match.indexOf('shape') === -1 ){
+          if ( souvenirs[p-n].match.indexOf('shape') === -1 ){
 
             createMatch( p, 'shape' );
             shapeMatch++;
@@ -305,7 +305,7 @@ function insertMatches(){
 
         if ( Math.random() >= 0.8 ){
 
-          if ( souvenirs[p].match.indexOf('color') === -1 ){
+          if ( souvenirs[p-n].match.indexOf('color') === -1 ){
 
             createMatch( p, 'color' );
             colorMatch++;
