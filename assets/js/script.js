@@ -152,6 +152,7 @@ function resetGame(){
 function Souvenir( color, shape ) {
     this.color = color;
     this.shape = shape;
+    this.match = [];
 }
 
 // a function used to shuffle the colors & shapes arrays
@@ -222,8 +223,8 @@ function createMatch( index, property ){
   var object = souvenirs[index];
   var nBackObject = souvenirs[index - n];
 
-  object.match = property;
-  nBackObject.match = property;
+  object.match.push( property );
+  nBackObject.match.push( property );
   object[property] = nBackObject[property];
 
 }
@@ -282,8 +283,9 @@ function insertMatches(){
       if ( p >= n && shapeMatch < 5 ){
 
         if ( Math.random() >= 0.8 ){
+          // if ( 'match' in souvenirs[p] !== true ){
 
-          if ( 'match' in souvenirs[p] !== true ){
+          if ( souvenirs[p].match.indexOf('shape') === -1 ){
 
             createMatch( p, 'shape' );
             shapeMatch++;
@@ -303,7 +305,7 @@ function insertMatches(){
 
         if ( Math.random() >= 0.8 ){
 
-          if ( 'match' in souvenirs[p] !== true ){
+          if ( souvenirs[p].match.indexOf('color') === -1 ){
 
             createMatch( p, 'color' );
             colorMatch++;
